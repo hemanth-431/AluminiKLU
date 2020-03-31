@@ -3,6 +3,7 @@ package com.example.aluminiklu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ import java.util.List;
 public class ImagesActivity extends AppCompatActivity implements image_adapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private image_adapter mAdapter;
+    private ImageView upload;
 private TextView uploading;
     private ProgressBar mProgressCircle;
 private FirebaseAuth firebaseAuth;
@@ -62,7 +64,14 @@ try {
 
 }
 uploading=findViewById(R.id.upload123);
-
+upload=findViewById(R.id.upload);
+upload.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent i=new Intent(ImagesActivity.this,home.class);
+        startActivity(i);
+    }
+});
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -171,12 +180,7 @@ uploading=findViewById(R.id.upload123);
         mDatabaseRef.removeEventListener(mDBListener);
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent i=new Intent(ImagesActivity.this,home.class);
-        startActivity(i);
-    }
+
 
 
 

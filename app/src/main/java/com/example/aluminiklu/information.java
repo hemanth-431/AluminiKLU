@@ -34,7 +34,10 @@ textView=findViewById(R.id.paragraph);
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
               try {
                   String data = dataSnapshot.child("mData").getValue().toString();
-                  textView.setText(data);
+                  if(data!="Default")
+                  { textView.setText(data);}else {
+                      textView.setText("There is no description added");
+                  }
               }
               catch (Exception e)
               {
