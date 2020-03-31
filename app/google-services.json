@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "795673558516",
+    "firebase_url": "https://aluminiklu.firebaseio.com",
+    "project_id": "aluminiklu",
+    "storage_bucket": "aluminiklu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795673558516:android:02714a93f34afe912a4da1",
+        "android_client_info": {
+          "package_name": "com.example.aluminiklu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "795673558516-nokfkpsoqaqntfchjuolrio16eedd8mc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.aluminiklu",
+            "certificate_hash": "a5f85f0b6238296b9e41eb3d862884ab32033aac"
+          }
+        },
+        {
+          "client_id": "795673558516-6sqe2eftjavtrk5ns0i774nbiv3ep5ri.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD14ki7uNps7Ta4w3F8Y4Bfdxo0AM8HAAY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "795673558516-6sqe2eftjavtrk5ns0i774nbiv3ep5ri.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/group8"
+
+    tools:context=".Login">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="40dp"
+android:gravity="center"
+
+        android:orientation="vertical">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="180dp"
+    android:orientation="horizontal">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="6dp"
+        android:background="@drawable/mail1"></TextView>
+
+        <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/maillog"
+        android:layout_width="305dp"
+        android:layout_height="44dp"
+        android:hint="Email Id"
+            android:textAlignment="center"
+android:layout_marginLeft="5dp"
+       android:layout_marginTop="10dp"
+        android:inputType="textEmailAddress"
+        android:background="@drawable/maillo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.358" />
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="113dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:background="@drawable/password"></TextView>
+
+        <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/passwordlog"
+        android:layout_width="260dp"
+            android:layout_marginLeft="5dp"
+android:textAlignment="center"
+        android:layout_height="44dp"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+android:background="@drawable/maillo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+android:layout_marginLeft="90dp"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/remember"></ImageView>
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+
+
+            android:textColor="@drawable/circle" />
+    </LinearLayout>
+        <Button
+
+            android:id="@+id/buttonlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="50dp"
+
+android:background="@drawable/group1"
+
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <Button
+
+            android:id="@+id/button4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="50dp"
+
+            android:background="@drawable/group7"
+
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+
+
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="45dp"
+            android:layout_marginEnd="30dp"
+
+            android:background="@drawable/forget"
+            android:elevation="0dp"
+
+            />
+    </LinearLayout>
+
+</RelativeLayout>

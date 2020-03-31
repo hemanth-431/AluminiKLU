@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">AluminiKLU</string>
+
+    <string-array name="countries">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Bihar</item>
+        <item>Andorra</item>
+        <item>India</item>
+
+    </string-array>
+    <string-array name="Dates">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Bihar</item>
+        <item>Andorra</item>
+        <item>India</item>
+
+    </string-array>
+
+    <string-array name="Dates1">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Bihar</item>
+        <item>Andorra</item>
+        <item>India</item>
+
+    </string-array>
+    <string-array name="courses">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Bihar</item>
+        <item>Andorra</item>
+        <item>India</item>
+
+    </string-array>
+    <string-array name="Branch">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Bihar</item>
+        <item>Andorra</item>
+        <item>India</item>
+
+    </string-array>
+    <string-array name="specilization">
+        <item>Afghanistan</item>
+        <item>Albania</item>
+        <item>Bihar</item>
+        <item>Andorra</item>
+        <item>India</item>
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
