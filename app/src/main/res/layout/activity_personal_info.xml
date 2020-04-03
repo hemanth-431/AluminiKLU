@@ -11,7 +11,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+<ImageView
+    android:layout_marginTop="10dp"
+    android:layout_marginLeft="55dp"
+    android:layout_width="300dp"
+    android:layout_height="200dp"
 
+    android:id="@+id/profiledp"></ImageView>
         <TextView
             android:hint="Branch"
             android:layout_marginTop="30dp"

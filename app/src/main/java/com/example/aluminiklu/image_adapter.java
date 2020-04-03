@@ -1,24 +1,21 @@
 package com.example.aluminiklu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
-import android.view.animation.Animation;
-import android.view.animation.AnimationSet;
-import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,24 +24,23 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.logging.Handler;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewHolder> {
-private TextView textView;
+    private TextView textView;
     private Context mContext;
     private List<upload> mUploads;
-    private CircleImageView circleImageView;
+    public CircleImageView circleImageView;
     private OnItemClickListener mListener;
     private FirebaseAuth firebaseAuth;
     String boom=null;
-    public   ImageView unfill,fill;
+
     public    String check="unfill";
-    public   TextView like;
+
     public int count=0;
-    private Handler myhandler;
-private DatabaseReference databaseReference,getnam;
+
+    private DatabaseReference databaseReference,getnam;
     public image_adapter(Context context, List<upload> uploads) {
         mContext = context;
         mUploads = uploads;
@@ -59,17 +55,17 @@ private DatabaseReference databaseReference,getnam;
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         upload uploadCurrent = mUploads.get(position);
-        holder.textViewName.setText(uploadCurrent.getName());
+      try{  holder.textViewName.setText(uploadCurrent.getName());}catch (Exception e){}
         firebaseAuth=FirebaseAuth.getInstance();
 
-       // String s=firebaseAuth.getCurrentUser().getUid();
+        // String s=firebaseAuth.getCurrentUser().getUid();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("uploads").child(uploadCurrent.getKey());
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
 
-         /////////////////////////////////////////////////////////////////////////////////////////
+                /////////////////////////////////////////////////////////////////////////////////////////
                 try {
                     synchronized(this){
                         wait(300);
@@ -78,11 +74,12 @@ private DatabaseReference databaseReference,getnam;
                 catch(InterruptedException ex){
                 }
 
-    try {
-        boom = dataSnapshot.child("key").getValue().toString();   /////////////////////////////error
-    } catch (Exception e) {
+                try {
+                    boom = dataSnapshot.child("key").getValue().toString();   /////////////////////////////error
+                } catch (Exception e) {
 
-    }
+
+                }
                 try {
                     synchronized(this){
                         wait(300);
@@ -91,37 +88,37 @@ private DatabaseReference databaseReference,getnam;
                 catch(InterruptedException ex){
                 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-           /*     textView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                     String s=boom;
-                        Toast.makeText(v.getContext(),s,Toast.LENGTH_LONG).show();
-                    }
-                });
 
-            */
+
+
+
+
+
+
+/*
+
 
                 unfill.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                            if(check.equals("unfill") && position==1)
-                            {count++;
-                                animateHeart(fill);
-                               fill.setVisibility(View.VISIBLE);
-                                unfill.setVisibility(View.GONE);
-                            }
-                            String s=Integer.toString(count);
-                            like.setText(s);
-                            String pos=Integer.toString(position);
-                            Snackbar.make(v,pos,Snackbar.LENGTH_LONG).setAction("Action",null).show();
-                           // check="fill";
+                        if(check.equals("unfill"))
+                        {count++;
+                            animateHeart(fill);
+                            fill.setVisibility(View.VISIBLE);
+                            unfill.setVisibility(View.GONE);
+                        }
+                        String s=Integer.toString(count);
+                        like.setText(s);
+                        String pos=Integer.toString(position);
+                        Snackbar.make(v,pos,Snackbar.LENGTH_LONG).setAction("Action",null).show();
+                         check="fill";
 
                     }
                 });
 
 
-          /*    fill.setOnClickListener(new View.OnClickListener() {
+              fill.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
@@ -141,7 +138,9 @@ private DatabaseReference databaseReference,getnam;
                     }
                 });
 
-              */
+            */
+
+
 
 
                 getnam = FirebaseDatabase.getInstance().getReference().child("Users1").child(boom);
@@ -159,15 +158,41 @@ private DatabaseReference databaseReference,getnam;
 
                     }
                 });
+
+                textView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(mContext, personal_info.class);
+                        intent.putExtra("STRING_I_NEED",boom);
+                        mContext.startActivity(intent);
+                    }
+                });
+
+                circleImageView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent=new Intent(mContext, personal_info.class);
+                        intent.putExtra("STRING_I_NEED",boom);
+                        mContext.startActivity(intent);
+                    }
+                });
+
+
+
+
+
+
             }
 
 
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+            }
+
+
+        });
 
 
 
@@ -187,8 +212,8 @@ private DatabaseReference databaseReference,getnam;
 */
 
 
-      //  Picasso.with(mContext).load(user.getImageUrl()).into(circleImageView);
-       // textView
+        //  Picasso.with(mContext).load(user.getImageUrl()).into(circleImageView);
+        // textView
 
         Picasso.with(mContext)
                 .load(uploadCurrent.getImageUrl())
@@ -196,8 +221,45 @@ private DatabaseReference databaseReference,getnam;
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
+islikes(uploadCurrent.getKey(),holder.like);
+nrLikes(holder.likes,uploadCurrent.getKey());
+getComments(uploadCurrent.getKey(),holder.comments);
+        FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+holder.like.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        if(holder.like.getTag().equals("Like")){
+            FirebaseDatabase.getInstance().getReference().child("Likes").child(uploadCurrent.getKey()).child(firebaseUser.getUid()).setValue(true);
+        }
+        else
+        {
+            FirebaseDatabase.getInstance().getReference().child("Likes").child(uploadCurrent.getKey()).child(firebaseUser.getUid()).removeValue();
+
+        }
+    }
+});
 
 
+holder.comment.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        Intent intent=new Intent(mContext,Comments.class);
+        intent.putExtra("postid",uploadCurrent.getKey());
+
+        intent.putExtra("publisherid",boom);
+        mContext.startActivity(intent);
+    }
+});
+        holder.comments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mContext,Comments.class);
+                intent.putExtra("postid",uploadCurrent.getKey());
+
+                intent.putExtra("publisherid",boom);
+                mContext.startActivity(intent);
+            }
+        });
 
     }
     @Override
@@ -207,20 +269,21 @@ private DatabaseReference databaseReference,getnam;
 
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        public TextView textViewName;
-        public ImageView imageView;
+        public TextView textViewName,likes,comments;
+        public ImageView imageView,like,comment;
 
 
         public ImageViewHolder(View itemView) {
             super(itemView);
 
-            unfill=itemView.findViewById(R.id.unfill);
-            fill=itemView.findViewById(R.id.filled);
-            like=itemView.findViewById(R.id.likes);
-            textViewName = itemView.findViewById(R.id.textview_name);
+            like=itemView.findViewById(R.id.unfill);
+comment=itemView.findViewById(R.id.comment);
+comments=itemView.findViewById(R.id.comments);
+            likes=itemView.findViewById(R.id.likes);
+            textViewName = itemView.findViewById(R.id.username);
             imageView = itemView.findViewById(R.id.image_view_up);
             circleImageView=itemView.findViewById(R.id.upload_profile);
-textView=itemView.findViewById(R.id.nameupload);
+            textView=itemView.findViewById(R.id.nameupload);
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -278,50 +341,61 @@ textView=itemView.findViewById(R.id.nameupload);
     }
 
 
-
-
-    private static Animation prepareAnimationn(Animation animation){
-        animation.setRepeatCount(0);
-        animation.setRepeatMode(Animation.REVERSE);
-        return animation;
-    }
-
-    private static void dislikeheart(final ImageView view){
-        ScaleAnimation scaleAnimation=new ScaleAnimation(0.0f,1.0f,0.0f,1.0f, Animation.RELATIVE_TO_SELF,0.5f
-                ,Animation.RELATIVE_TO_SELF,0.5f);
-        prepareAnimationn(scaleAnimation);
-        AlphaAnimation alphaAnimation=new AlphaAnimation(0.0f,1.0f);
-        prepareAnimationn(alphaAnimation);
-        AnimationSet animation=new AnimationSet(true);
-        animation.addAnimation(alphaAnimation);
-        animation.addAnimation(scaleAnimation);
-        animation.setDuration(700);
-        view.startAnimation(animation);
-
-
-    }
-
-    public static void animateHeart(final ImageView view)
+    private void getComments(String postid,TextView comments)
     {
-        ScaleAnimation scaleAnimation=new ScaleAnimation(0.0f,1.0f,0.0f,1.0f,
-                Animation.RELATIVE_TO_SELF,0.5f,Animation.RELATIVE_TO_SELF,0.5f);
-        prepareAnimation(scaleAnimation);
-        AlphaAnimation alphaAnimation=new AlphaAnimation(0.0f,1.0f);
-        prepareAnimation(alphaAnimation);
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Comments").child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                comments.setText("View All "+dataSnapshot.getChildrenCount() +" Comments");
 
-        AnimationSet animation=new AnimationSet(true);
-        animation.addAnimation(alphaAnimation);
-        animation.addAnimation(scaleAnimation);
-        animation.setDuration(500);
-        view.startAnimation(animation);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
-    public static Animation prepareAnimation(Animation animation)
+    public void islikes(String postid,final ImageView imageView)
     {
-        animation.setRepeatCount(2);
-        animation.setRepeatMode(Animation.REVERSE);
-        return animation;
+        final FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Likes").child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.child(firebaseUser.getUid()).exists()) {
+                    imageView.setImageResource(R.drawable.fillred);
+                    imageView.setTag("Liked");
+                }
+                else {
+                    imageView.setImageResource(R.drawable.unfillheart);
+                    imageView.setTag("Like");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
+    private void nrLikes(TextView likes,String postid)
+    {
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference().child("Likes").child(postid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+likes.setText(dataSnapshot.getChildrenCount()+" likes");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
 
 }

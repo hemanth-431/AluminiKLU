@@ -5,6 +5,8 @@ public class upload {
     private String mImageUrl;
     private String mKey;
     private String mData;
+
+
     public upload() {
         //empty constructor needed
     }

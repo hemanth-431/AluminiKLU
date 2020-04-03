@@ -1,6 +1,8 @@
 package com.example.aluminiklu;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,16 +13,20 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class personal_info extends AppCompatActivity {
 TextView a,b,c,d,e,f,g,h;
-DatabaseReference databaseReference;
+ImageView imageView;
+Context context;
+DatabaseReference databaseReference,reference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
         a=findViewById(R.id.branch);
         b=findViewById(R.id.country);
+        imageView=findViewById(R.id.profiledp);
         c=findViewById(R.id.course);
         d=findViewById(R.id.name);
         e=findViewById(R.id.graduated);
@@ -28,10 +34,13 @@ DatabaseReference databaseReference;
         g=findViewById(R.id.mailid);
         h=findViewById(R.id.specialization);
         Bundle bundle = getIntent().getExtras();
+        String path=null;
+       try{ path=bundle.getString("STRING_I_NEED").toString();}
+       catch (Exception e){
 
-        String path=bundle.getString("STRING_I_NEED").toString();
+       }
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(path);
-
+      reference=FirebaseDatabase.getInstance().getReference().child("Users1").child(path);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -52,6 +61,19 @@ DatabaseReference databaseReference;
                 String data7=dataSnapshot.child("Specialization").getValue().toString();
                 h.setText(data7);
 
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String data=dataSnapshot.child("imageUrl").getValue().toString();
+                Picasso.with(context).load(data).into(imageView);
             }
 
             @Override

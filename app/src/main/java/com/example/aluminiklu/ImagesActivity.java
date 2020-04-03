@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +34,7 @@ public class ImagesActivity extends AppCompatActivity implements image_adapter.O
 private TextView uploading;
     private ProgressBar mProgressCircle;
 private FirebaseAuth firebaseAuth;
+SwipeRefreshLayout swipeRefreshLayout;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
@@ -44,6 +46,9 @@ int count=0;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_images);
+
+
+
 
         firebaseAuth=FirebaseAuth.getInstance();
 
@@ -72,9 +77,12 @@ upload.setOnClickListener(new View.OnClickListener() {
         startActivity(i);
     }
 });
+
         mRecyclerView = findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+
 
         mProgressCircle = findViewById(R.id.progress_circle);
 
@@ -134,7 +142,10 @@ upload.setOnClickListener(new View.OnClickListener() {
             }
         });
 
+
+
     }
+    /////////
 
     @Override
     public void onItemClick(int position) {
@@ -178,6 +189,9 @@ upload.setOnClickListener(new View.OnClickListener() {
     protected void onDestroy() {
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
+
+
+
     }
 
 
