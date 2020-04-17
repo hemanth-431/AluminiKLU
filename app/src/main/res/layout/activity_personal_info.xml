@@ -18,62 +18,184 @@
     android:layout_height="200dp"
 
     android:id="@+id/profiledp"></ImageView>
-        <TextView
-            android:hint="Branch"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/branch"></TextView>
-        <TextView
-            android:hint="country"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/country"></TextView>
-        <TextView
-            android:hint="course"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/course"></TextView>
-        <TextView
-            android:hint="name"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/name"></TextView>
-        <TextView
-            android:hint="Graduated Year"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/graduated"></TextView>
-        <TextView
-            android:hint="Join Date"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/join"></TextView>
-        <TextView
-            android:hint="MailId"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/mailid"></TextView>
-        <TextView
-            android:hint="Specilaiztion"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="180dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/specialization"></TextView>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Branch:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+
+                    android:hint="Branch"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/branch"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Country:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="country"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/country"></TextView>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Course:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="course"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/course"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Name:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="name"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/name"></TextView>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Graduated Year:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="Graduated Year"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/graduated"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Join Date:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="Join Date"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/join"></TextView>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+
+                    android:text="Mail Id:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="MailId"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/mailid"></TextView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+
+                    android:text="Specilaiztion:"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="70dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    ></TextView>
+                <TextView
+                    android:hint="Specilaiztion"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/specialization"></TextView>
+            </LinearLayout>
+
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

@@ -29,10 +29,10 @@
 <Button
     android:id="@+id/add"
     android:layout_marginLeft="160dp"
-    android:layout_marginTop="660dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:hint="add"></Button>
+    android:layout_marginTop="665dp"
+    android:layout_width="110dp"
+    android:layout_height="45dp"
+    android:background="@drawable/addimg"></Button>
 
     <TextView
         android:id="@+id/skip"

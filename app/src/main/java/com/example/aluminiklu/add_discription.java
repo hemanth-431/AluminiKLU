@@ -29,7 +29,7 @@ public class add_discription extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(add_discription.this,home.class);
+                Intent i=new Intent(add_discription.this,ImagesActivity.class);
                 startActivity(i);
             }
         });
@@ -43,7 +43,12 @@ public class add_discription extends AppCompatActivity {
 
                 if (bundle.getString("STRING_I_NEED") != null) {
                     firebaseDatabase = FirebaseDatabase.getInstance().getReference().child("uploads").child(bundle.getString("STRING_I_NEED")).child("mData").setValue(s);
+
+
                     Toast.makeText(add_discription.this, bundle.getString("STRING_I_NEED"), Toast.LENGTH_LONG).show();
+
+                    Intent i=new Intent(add_discription.this,ImagesActivity.class);
+                    startActivity(i);
                 }
             }
 

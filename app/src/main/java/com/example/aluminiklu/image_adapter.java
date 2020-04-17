@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,15 +24,18 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewHolder> {
-    private TextView textView;
+
     private Context mContext;
     private List<upload> mUploads;
-    public CircleImageView circleImageView;
+
     private OnItemClickListener mListener;
     private FirebaseAuth firebaseAuth;
     String boom=null;
@@ -59,11 +63,27 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
         firebaseAuth=FirebaseAuth.getInstance();
 
         // String s=firebaseAuth.getCurrentUser().getUid();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("uploads").child(uploadCurrent.getKey());
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("uploads").child(uploadCurrent.getKey());//*****
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy   HH:mm:ss", Locale.getDefault());
+                String currentDateandTime = sdf.format(new Date());
+String time=currentDateandTime;
+String name="no name";
 
+try {
+    time = dataSnapshot.child("mtime").getValue().toString();
+    name=dataSnapshot.child("name").getValue().toString();
+}
+catch (Exception e)
+{
+
+}
+             try{  holder.time.setText(time);
+             holder.nameofpic.setText(name);}catch (Exception e){
+
+             }
 
                 /////////////////////////////////////////////////////////////////////////////////////////
                 try {
@@ -91,7 +111,12 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
 
 
 
-
+                holder.nameofpic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(v.getContext(),boom,Toast.LENGTH_LONG).show();
+                    }
+                });
 
 
 
@@ -148,9 +173,10 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         String data1 = dataSnapshot.child("username").getValue().toString();
-                        textView.setText(data1);
+                        holder.textView.setText(data1);
                         String data2 = dataSnapshot.child("imageUrl").getValue().toString();
-                        Picasso.with(mContext).load(data2).into(circleImageView);
+                        Picasso.with(mContext).load(data2).into(holder.circleImageView);
+
                     }
 
                     @Override
@@ -159,7 +185,9 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                     }
                 });
 
-                textView.setOnClickListener(new View.OnClickListener() {
+
+
+                holder.textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Intent intent=new Intent(mContext, personal_info.class);
@@ -168,9 +196,10 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                     }
                 });
 
-                circleImageView.setOnClickListener(new View.OnClickListener() {
+                holder.circleImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        Toast.makeText(v.getContext(),boom,Toast.LENGTH_LONG).show();
                         Intent intent=new Intent(mContext, personal_info.class);
                         intent.putExtra("STRING_I_NEED",boom);
                         mContext.startActivity(intent);
@@ -269,10 +298,10 @@ holder.comment.setOnClickListener(new View.OnClickListener() {
 
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        public TextView textViewName,likes,comments;
+        public TextView textViewName,likes,comments,time,nameofpic;
         public ImageView imageView,like,comment;
-
-
+        public CircleImageView circleImageView;
+        private TextView textView;
         public ImageViewHolder(View itemView) {
             super(itemView);
 
@@ -280,6 +309,8 @@ holder.comment.setOnClickListener(new View.OnClickListener() {
 comment=itemView.findViewById(R.id.comment);
 comments=itemView.findViewById(R.id.comments);
             likes=itemView.findViewById(R.id.likes);
+            time=itemView.findViewById(R.id.time);
+            nameofpic=itemView.findViewById(R.id.name_of_profile);
             textViewName = itemView.findViewById(R.id.username);
             imageView = itemView.findViewById(R.id.image_view_up);
             circleImageView=itemView.findViewById(R.id.upload_profile);
@@ -301,7 +332,7 @@ comments=itemView.findViewById(R.id.comments);
         @Override
         public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
             menu.setHeaderTitle("Select Action");
-            MenuItem doWhatever = menu.add(Menu.NONE, 1, 1, "Do whatever");
+            MenuItem doWhatever = menu.add(Menu.NONE, 1, 1, "Share");
             MenuItem delete = menu.add(Menu.NONE, 2, 2, "Delete");
 
             doWhatever.setOnMenuItemClickListener(this);
@@ -347,7 +378,7 @@ comments=itemView.findViewById(R.id.comments);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                comments.setText("View All "+dataSnapshot.getChildrenCount() +" Comments");
+                comments.setText("view all "+dataSnapshot.getChildrenCount() +" comments");
 
             }
 

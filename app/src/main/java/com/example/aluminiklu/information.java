@@ -32,12 +32,11 @@ textView=findViewById(R.id.paragraph);
             databaseReference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
               try {
                   String data = dataSnapshot.child("mData").getValue().toString();
-                  if(data!="Default")
-                  { textView.setText(data);}else {
-                      textView.setText("There is no description added");
-                  }
+                  Toast.makeText(information.this,bundle.getString("STRING_I_NEED"),Toast.LENGTH_LONG).show();
+               textView.setText(data);
               }
               catch (Exception e)
               {

@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        for (int i = 1990; i <= 2018; i++) {
+        int s= Calendar.getInstance().get(Calendar.YEAR);
+        for (int i = 1990; i <= s; i++) {
             Entry1.add(i);
             graduation1.add(String.valueOf(i));
         }

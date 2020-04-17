@@ -30,10 +30,15 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class home extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 private TextView logout;
     private Button mButtonChooseImage;
+private ProgressBar progressBar;
     private Button mButtonUpload;
     private TextView mTextViewShowUploads;
     private EditText mEditTextFileName;
@@ -41,7 +46,7 @@ private TextView logout;
     private ProgressBar mProgressBar;
     private FirebaseAuth mAuth;
     private Uri mImageUri;
-
+private ImageView imageView;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
 private TextView adddis;
@@ -51,17 +56,17 @@ private TextView adddis;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-
-
+        progressBar = findViewById(R.id.progress_circle);
+        progressBar.setVisibility(View.INVISIBLE);
 
 logout=findViewById(R.id.logout);
         mButtonChooseImage = findViewById(R.id.button3);
         mButtonUpload = findViewById(R.id.button_upload);
         mTextViewShowUploads = findViewById(R.id.text_view_uploads);
         mEditTextFileName = findViewById(R.id.edit_text);
-
+imageView=findViewById(R.id.imageing);
         mImageView = findViewById(R.id.image_view);
-        mProgressBar = findViewById(R.id.progress_bar);
+        mProgressBar = findViewById(R.id.progress_circle);
         mAuth = FirebaseAuth.getInstance();
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
@@ -80,6 +85,8 @@ logout.setOnClickListener(new View.OnClickListener() {
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                imageView.setVisibility(View.GONE);
                 openFileChooser();
             }
         });
@@ -87,9 +94,10 @@ logout.setOnClickListener(new View.OnClickListener() {
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+progressBar.setVisibility(View.VISIBLE);
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
                     Toast.makeText(home.this, "Upload in progress", Toast.LENGTH_LONG).show();
+                    progressBar.setVisibility(View.GONE);
                 } else {
                     uploadFile();
                 }
@@ -164,13 +172,16 @@ logout.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) { Uri downloadUri = task.getResult();
-                            String S="Default";
+                            String S="There is noDescription added...";
                                 String s1=mAuth.getCurrentUser().getUid();
                                 Toast.makeText(home.this,s1,Toast.LENGTH_LONG).show();
-                                upload upload = new upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),S,s1);
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy\nHH:mm:ss", Locale.getDefault());
+                                String currentDateandTime = sdf.format(new Date());
                                 String s = mDatabaseRef.push().getKey();
-                                mDatabaseRef.child(s).setValue(upload);
+                                upload upload = new upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),S,s1,currentDateandTime,s);
 
+                                mDatabaseRef.child(s).setValue(upload);
+                                progressBar.setVisibility(View.GONE);
 
                                Intent i = new Intent(home.this, add_discription.class);
 

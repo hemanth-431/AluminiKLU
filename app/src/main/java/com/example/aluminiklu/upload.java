@@ -5,13 +5,15 @@ public class upload {
     private String mImageUrl;
     private String mKey;
     private String mData;
+    private String mtime;
+    private String s;
 
 
     public upload() {
         //empty constructor needed
     }
 
-    public upload(String name, String imageUrl,String data,String key) {
+    public upload(String name, String imageUrl,String data,String key,String time,String ms) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
@@ -20,7 +22,26 @@ public class upload {
         mImageUrl = imageUrl;
         mData=data;
        mKey=key;
+       mtime=time;
+       s=ms;
 
+    }
+
+    public String getS() {
+        return mtime;
+    }
+
+    public void setS(String mtime) {
+        this.mtime = mtime;
+    }
+
+
+    public String getMtime() {
+        return mtime;
+    }
+
+    public void setMtime(String mtime) {
+        this.mtime = mtime;
     }
 
     public String getmData() {

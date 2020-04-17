@@ -46,8 +46,9 @@ public class ProfileFragment extends Fragment {
 
     CircleImageView imageprofile;
     TextView username;
-DatabaseReference reference;
+DatabaseReference reference,databaseReference;
 FirebaseUser fuser;
+private TextView a,b,c,d,e,f,g,h;
 StorageReference storageReference;
 private static final int IMAGE_REQUEST=1;
 private Uri imageUri;
@@ -60,10 +61,45 @@ private StorageTask uploadTask;
 
         imageprofile=view.findViewById(R.id.profile_image);
         username=view.findViewById(R.id.username);
+        a=view.findViewById(R.id.branch);
+        b=view.findViewById(R.id.country);
+        c=view.findViewById(R.id.course);
+        d=view.findViewById(R.id.name);
+        e=view.findViewById(R.id.graduated);
+        f=view.findViewById(R.id.join);
+        g=view.findViewById(R.id.mailid);
+        h=view.findViewById(R.id.specialization);
 
         storageReference= FirebaseStorage.getInstance().getReference("uploads1");
 
 fuser= FirebaseAuth.getInstance().getCurrentUser();
+databaseReference=FirebaseDatabase.getInstance().getReference("Users").child(fuser.getUid());
+databaseReference.addValueEventListener(new ValueEventListener() {
+    @Override
+    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+String a1=dataSnapshot.child("Branch").getValue().toString();
+a.setText(a1);
+        String b1=dataSnapshot.child("Country").getValue().toString();
+        b.setText(b1);
+        String c1=dataSnapshot.child("Course").getValue().toString();
+        c.setText(c1);
+        String d1=dataSnapshot.child("FullName").getValue().toString();
+        d.setText(d1);
+        String e1=dataSnapshot.child("Graduation Year").getValue().toString();
+        e.setText(e1);
+        String f1=dataSnapshot.child("Join Date").getValue().toString();
+        f.setText(f1);
+        String g1=dataSnapshot.child("MailId").getValue().toString();
+        g.setText(g1);
+        String h1=dataSnapshot.child("Specialization").getValue().toString();
+        h.setText(h1);
+    }
+
+    @Override
+    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+    }
+});
 reference= FirebaseDatabase.getInstance().getReference("Users1").child(fuser.getUid());
 reference.addValueEventListener(new ValueEventListener() {
     @Override

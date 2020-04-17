@@ -36,6 +36,8 @@
                 android:text="UserName"
                 android:textColor="#fff"></TextView>
 
+
+
             <TextView
                 android:id="@+id/information"
                 android:layout_marginLeft="180dp"
