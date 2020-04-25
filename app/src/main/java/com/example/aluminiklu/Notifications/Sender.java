@@ -8,7 +8,7 @@ public class Sender {
 
   //  }
 
-    public Sender(com.example.aluminiklu.Notifications.data data, String to) {
+    public Sender(data data, String to) {
         this.data = data;
         this.to = to;
     }

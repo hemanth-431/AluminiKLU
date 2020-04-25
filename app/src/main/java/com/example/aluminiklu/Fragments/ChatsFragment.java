@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.aluminiklu.Adapter.UserAdapter;
 import com.example.aluminiklu.Model.chat;
 import com.example.aluminiklu.Model.user;
+import com.example.aluminiklu.Notifications.token;
 import com.example.aluminiklu.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,8 +90,16 @@ private List<String> userlist;  //<ChatList>
 
            }
        });
-
+updatetoken(FirebaseInstanceId.getInstance().getToken());
         return view;
+    }
+
+    private void updatetoken(String token)
+    {
+        DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Tokens");
+      token token1=new token(token);
+
+        reference.child(fuser.getUid()).setValue(token1);
     }
 
 

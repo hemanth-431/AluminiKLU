@@ -21,6 +21,10 @@
         <activity android:name=".ChatBox" />
         <activity android:name=".Forget_password" />
         <activity android:name=".Login">
+
+
+
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +34,30 @@
         <activity android:name=".ImagesActivity" />
         <activity android:name=".home" />
         <activity android:name=".MainActivity" />
+
+
+
+
+        <service android:name=".Notifications.MyFirebaseService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+            </intent-filter>
+
+        </service>
+
+
+
+        <service android:name=".Notifications.MyFirebaseMessaging"
+            android:exported="true"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+            </intent-filter>
+        </service>
+
     </application>
 <uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
+
 </manifest>
