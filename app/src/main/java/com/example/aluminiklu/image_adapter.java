@@ -396,16 +396,20 @@ comments=itemView.findViewById(R.id.comments);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.child(firebaseUser.getUid()).exists()) {
-                    imageView.setImageResource(R.drawable.fillred);
-                    imageView.setTag("Liked");
-                }
-                else {
-                    imageView.setImageResource(R.drawable.unfillheart);
-                    imageView.setTag("Like");
+                try {
+
+                    if (dataSnapshot.child(firebaseUser.getUid()).exists()) {
+                        imageView.setImageResource(R.drawable.fillred);
+                        imageView.setTag("Liked");
+                    } else {
+                        imageView.setImageResource(R.drawable.unfillheart);
+                        imageView.setTag("Like");
+                    }
+
+                } catch (Exception e) {
+
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 

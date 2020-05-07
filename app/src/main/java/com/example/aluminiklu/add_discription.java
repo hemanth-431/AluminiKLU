@@ -47,8 +47,8 @@ public class add_discription extends AppCompatActivity {
 
                     Toast.makeText(add_discription.this, bundle.getString("STRING_I_NEED"), Toast.LENGTH_LONG).show();
 
-                    Intent i=new Intent(add_discription.this,ImagesActivity.class);
-                    startActivity(i);
+                  //  Intent i=new Intent(add_discription.this,ImagesActivity.class);
+                  //  startActivity(i);
                 }
             }
 

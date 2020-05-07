@@ -9,13 +9,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,7 +37,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ImagesActivity extends AppCompatActivity implements image_adapter.OnItemClickListener {
+public class ImagesActivity extends Fragment implements image_adapter.OnItemClickListener {
     private RecyclerView mRecyclerView;
     private ImageView logout;
     private image_adapter mAdapter;
@@ -54,16 +56,17 @@ int count=0;
     private List<upload> mUploads;
     ArrayList<String> soop=new ArrayList();
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_images);
+        View view=inflater.inflate(R.layout.activity_images,container,false);
 
 
 
 
         firebaseAuth=FirebaseAuth.getInstance();
 
-        Bundle bundle = getIntent().getExtras();
+        Bundle bundle =getActivity().getIntent().getExtras();
 try {
 
     if (bundle.getString("STRING_I_NEED") != null) {
@@ -79,42 +82,48 @@ try {
 {
 
 }
-logout=findViewById(R.id.Logout_1);
-uploading=findViewById(R.id.upload123);
-upload=findViewById(R.id.upload);
-imageView=findViewById(R.id.image_view_up);
+logout=view.findViewById(R.id.Logout_1);
+uploading=view.findViewById(R.id.upload123);
+upload=view.findViewById(R.id.upload);
+imageView=view.findViewById(R.id.image_view_up);
 
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseAuth.getInstance().signOut();
-                sendToStart();
+try {
+    logout.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            FirebaseAuth.getInstance().signOut();
+            sendToStart();
 
 
+        }
+    });
+}catch (Exception e){
 
-            }
-        });
+}
 
 
-upload.setOnClickListener(new View.OnClickListener() {
+try{upload.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        Intent i=new Intent(ImagesActivity.this,home.class);
+        Intent i=new Intent(getActivity(),home.class);
         startActivity(i);
     }
-});
+});}
+catch (Exception e){
 
-        mRecyclerView = findViewById(R.id.recycler);
+}
+
+        mRecyclerView = view.findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
 
 
 
-        mProgressCircle = findViewById(R.id.progress_circle);
+        mProgressCircle = view.findViewById(R.id.progress_circle);
 
         mUploads = new ArrayList<>();
-        mAdapter = new image_adapter(ImagesActivity.this, mUploads);
+        mAdapter = new image_adapter(getActivity(), mUploads);
 
         mRecyclerView.setAdapter(mAdapter);
 
@@ -126,15 +135,19 @@ upload.setOnClickListener(new View.OnClickListener() {
 
 
 
-    uploading.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent i=new Intent(ImagesActivity.this,ChatBox.class);
-            startActivity(i);
-          //  String s=firebaseAuth.getCurrentUser().getUid();
-         //   Toast.makeText(ImagesActivity.this, s, Toast.LENGTH_LONG).show();
-        }
-    });
+   try {
+       uploading.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               Intent i = new Intent(getActivity(), ChatBox.class);
+               startActivity(i);
+               //  String s=firebaseAuth.getCurrentUser().getUid();
+               //   Toast.makeText(ImagesActivity.this, s, Toast.LENGTH_LONG).show();
+           }
+       });
+   }catch (Exception e){
+
+   }
 
 
        mDBListener=mDatabaseRef.addValueEventListener(new ValueEventListener() {
@@ -168,20 +181,21 @@ upload.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(ImagesActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
 
                 mProgressCircle.setVisibility(View.INVISIBLE);
             }
         });
 
 
-
+return  view;
     }
 
+
     private void sendToStart() {
-        Intent start=new Intent(ImagesActivity.this,Login.class);
+        Intent start=new Intent(getActivity(),Login.class);
         startActivity(start);
-        finish();
+        //finish();
     }
     /////////
 
@@ -189,10 +203,10 @@ upload.setOnClickListener(new View.OnClickListener() {
     public void onItemClick(int position) {
 
 
-        Toast.makeText(this, path + soop.get(position), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), path + soop.get(position), Toast.LENGTH_SHORT).show();
 
 
-        Intent i = new Intent(ImagesActivity.this, information.class);
+        Intent i = new Intent(getActivity(), information.class);
 
         i.putExtra("STRING_I_NEED", soop.get(position));
         startActivity(i);
@@ -212,7 +226,7 @@ mDatabaseRef.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
         String data12=dataSnapshot.child(selectedKey).child("imageUrl").getValue().toString();
-        Toast.makeText(ImagesActivity.this, data12, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), data12, Toast.LENGTH_SHORT).show();
 
         Intent sendIntend=new Intent();
         sendIntend.setAction(Intent.ACTION_SEND);
@@ -241,7 +255,7 @@ mDatabaseRef.addValueEventListener(new ValueEventListener() {
 
         Bitmap bitmap=((BitmapDrawable)imageView.getDrawable()).getBitmap();
         try{
-            File file=new File(this.getExternalCacheDir(),"logicchip.png");
+            File file=new File(getActivity().getExternalCacheDir(),"logicchip.png");
             FileOutputStream fout=new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.PNG,100,fout);
             fout.flush();
@@ -283,14 +297,14 @@ Bitmap returnBitmap=Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.
             @Override
             public void onSuccess(Void aVoid) {
                 mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(ImagesActivity.this, "Item deleted", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
             }
         });
     }
 
 
     @Override
-    protected void onDestroy() {
+    public void onDestroy() {
         super.onDestroy();
         mDatabaseRef.removeEventListener(mDBListener);
 
@@ -299,8 +313,8 @@ Bitmap returnBitmap=Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.
     }
 
     public void onClick (){
-        Intent intent = getIntent();
-        finish();
+        Intent intent = getActivity().getIntent();
+
         startActivity(intent);
     }
 

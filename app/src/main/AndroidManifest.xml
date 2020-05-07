@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:allowBackup="true"
@@ -13,51 +14,46 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Comments"></activity>
-        <activity android:name=".personal_info" />
-        <activity android:name=".information" />
-        <activity android:name=".add_discription" />
-        <activity android:name=".MessageActivity" />
-        <activity android:name=".ChatBox" />
-        <activity android:name=".Forget_password" />
-        <activity android:name=".Login">
-
-
-
-
+        <activity android:name=".Events"></activity>
+        <activity android:name=".Notifications.changeData" />
+        <activity android:name=".Fragments.threeFragment" />
+        <activity android:name=".Fragments.twoFragment" />
+        <activity android:name=".Fragments.oneFragment" />
+        <activity android:name=".HomeScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Comments" />
+        <activity android:name=".personal_info" />
+        <activity android:name=".information" />
+        <activity android:name=".add_discription" />
+        <activity android:name=".MessageActivity" />
+        <activity android:name=".ChatBox" />
+        <activity android:name=".Forget_password" />
+        <activity android:name=".Login" />
         <activity android:name=".ImagesActivity" />
         <activity android:name=".home" />
         <activity android:name=".MainActivity" />
 
-
-
-
-        <service android:name=".Notifications.MyFirebaseService"
+        <service
+            android:name=".Notifications.MyFirebaseService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"></action>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-
         </service>
-
-
-
-        <service android:name=".Notifications.MyFirebaseMessaging"
-            android:exported="true"
-            android:enabled="true">
+        <service
+            android:name=".Notifications.MyFirebaseMessaging"
+            android:enabled="true"
+            android:exported="true">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"></action>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
     </application>
-<uses-permission android:name="android.permission.CALL_PHONE"></uses-permission>
 
 </manifest>

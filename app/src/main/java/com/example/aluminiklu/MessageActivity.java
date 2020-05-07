@@ -1,16 +1,23 @@
 package com.example.aluminiklu;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -45,18 +52,19 @@ import retrofit2.Response;
 public class MessageActivity extends AppCompatActivity implements MessageAdapter.OnitemclickListener {
 CircleImageView profile_image;
 TextView username;
+private static final int REQUEST_CALL=1;
 private ValueEventListener mdblistener;
 FirebaseUser firebaseUser;
 TextView info;
 ImageButton btn_send;
 EditText text_send;
-
+ImageView phone;
 DatabaseReference reference;
 MessageAdapter messageAdapter;
 MessageActivity messageActivity;
 List<chat> mchat;
 RecyclerView recyclerView;
-DatabaseReference databaseReference;
+DatabaseReference databaseReference,getDatabaseReference;
 Intent intent;
 ValueEventListener seenListener;
 APIServer apiService;
@@ -66,17 +74,27 @@ boolean notify=false;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message);
+        phone=findViewById(R.id.image_call);
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+phone.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        final String User123=intent.getStringExtra("userid");
+        makePhoneCall(User123);
+    }
+});
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // finish();
-                startActivity(new Intent(MessageActivity.this,ChatBox.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+              //  Fragment fragment = new ChatBox();
+              //  FragmentManager fragmentManager = getSupportFragmentManager();
+             //   fragmentManager.beginTransaction().replace(R.id.v, fragment).commit();
+              //  startActivity(new Intent(MessageActivity.this,ChatBox.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -154,6 +172,37 @@ databaseReference.addValueEventListener(new ValueEventListener() {
 });
 seenMessage(userid);
     }
+
+    private void makePhoneCall(String User123){
+//Toast.makeText(MessageActivity.this,User123,Toast.LENGTH_LONG).show();
+getDatabaseReference=FirebaseDatabase.getInstance().getReference("Users").child(User123);
+        getDatabaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String  data=dataSnapshot.child("Call").getValue().toString();
+                Toast.makeText(MessageActivity.this,"calling "+data,Toast.LENGTH_LONG).show();
+                if(data.trim().length() > 0){
+
+                    if(ContextCompat.checkSelfPermission(MessageActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                        ActivityCompat.requestPermissions(MessageActivity.this,new String[]{Manifest.permission.CALL_PHONE},REQUEST_CALL);
+                    }else {
+                        String dial="tel:"+data;
+                        startActivity(new Intent(Intent.ACTION_CALL, Uri.parse(dial)));
+                    }
+
+                }else {
+                    Toast.makeText(MessageActivity.this,"Number Changed...",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        }
+
 
     private void seenMessage(final String userid){
         reference=FirebaseDatabase.getInstance().getReference("Chats");
@@ -308,6 +357,12 @@ messageAdapter.notifyDataSetChanged();
         databaseReference.removeEventListener(mdblistener);
     }
 
+    private void currentUser(String userid){
+        SharedPreferences.Editor editor=getSharedPreferences("PREFS",MODE_PRIVATE).edit();
+        editor.putString("currentuser",userid);
+        editor.apply();
+    }
+
     private void  status(String status)
     {
         databaseReference=FirebaseDatabase.getInstance().getReference("Users1").child(firebaseUser.getUid());
@@ -320,6 +375,8 @@ messageAdapter.notifyDataSetChanged();
     protected void onResume() {
         super.onResume();
         status("online");
+        String userid=intent.getStringExtra("userid");
+        currentUser(userid);
     }
 
     @Override
@@ -327,6 +384,8 @@ messageAdapter.notifyDataSetChanged();
         super.onPause();
         reference.removeEventListener(seenListener);
         status("offline");
+        String userid=intent.getStringExtra("userid");
+        currentUser("none");
     }
 
     @Override
@@ -338,4 +397,15 @@ messageAdapter.notifyDataSetChanged();
         Toast.makeText(MessageActivity.this,"deletetsuccess",Toast.LENGTH_LONG).show();
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+       if(requestCode == REQUEST_CALL){
+           if(grantResults.length > 0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+               final String User123=intent.getStringExtra("userid");
+               makePhoneCall(User123);
+           }else {
+               Toast.makeText(this,"Permission DENIED",Toast.LENGTH_SHORT).show();
+           }
+       }
+    }
 }

@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Notifications.changeData">
+<ImageView
+    android:id="@+id/save"
+    android:layout_marginLeft="340dp"
+    android:layout_marginTop="40dp"
+    android:layout_width="40dp"
+    android:layout_height="30dp"
+    android:src="@drawable/ic_save">
+    ></ImageView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"
+
+        android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginLeft="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:background="@drawable/name"></TextView>
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/NameUser"
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:textAlignment="center"
+            android:hint="User Name"
+
+            android:background="@drawable/maillo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.466"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.245" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="26dp"
+            android:background="@drawable/mailre"></TextView>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/mail"
+            android:layout_width="280dp"
+            android:layout_height="44dp"
+            android:hint="Email Id"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:inputType="textEmailAddress"
+            android:background="@drawable/maillo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.473"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.358" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="0dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/passwordre"></TextView>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+            android:layout_width="210dp"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            android:layout_height="44dp"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/maillo"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/entry"
+                >
+
+            </TextView>
+            <Spinner
+                android:id="@+id/date"
+                android:layout_width="wrap_content"
+                android:layout_marginLeft="0dp"
+                android:layout_marginTop="10dp"
+                android:spinnerMode="dialog"
+                android:background="@drawable/rectangle14"
+                android:layout_marginRight="10dp"
+                android:layout_height="44dp">
+            </Spinner>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/graduated">
+
+            </TextView>
+            <Spinner
+                android:id="@+id/date1"
+                android:spinnerMode="dialog"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="0dp"
+                android:background="@drawable/rectangle14"
+                android:layout_width="match_parent"
+                android:layout_height="44dp">
+            </Spinner>
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/branch"></TextView>
+        <Spinner
+
+            android:id="@+id/branch"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:background="@drawable/rectangle14"
+            android:layout_height="44dp">
+        </Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/course"></TextView>
+        <Spinner
+            android:id="@+id/course"
+            android:background="@drawable/rectangle14"
+            android:layout_marginTop="10dp"
+            android:layout_width="110dp"
+            android:autofillHints="course"
+            android:layout_height="44dp">
+        </Spinner>
+    </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:layout_marginLeft="10dp"
+               android:hint="PhoneNumber"></TextView>
+       <EditText
+           android:id="@+id/number"
+           android:background="@drawable/name"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="enter a number..."
+           android:inputType="number"
+           ></EditText>
+        </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/specialization"></TextView>
+        <Spinner
+            android:layout_marginTop="10dp"
+            android:id="@+id/specialisation"
+            android:layout_width="155dp"
+            android:background="@drawable/rectangle14"
+            android:layout_height="50dp">
+        </Spinner>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@drawable/country"></TextView>
+
+        <AutoCompleteTextView
+            android:id="@+id/actv"
+            android:layout_marginTop="10dp"
+            android:layout_width="250dp"
+            android:layout_height="44dp"
+            android:completionHint="Select a country"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:completionThreshold="1"
+            android:background="@drawable/maillo"
+            android:hint="Select a country"
+            />
+    </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>

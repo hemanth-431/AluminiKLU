@@ -2,8 +2,12 @@ package com.example.aluminiklu;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +22,7 @@ import androidx.viewpager.widget.ViewPager;
 import com.example.aluminiklu.Fragments.ChatsFragment;
 import com.example.aluminiklu.Fragments.ProfileFragment;
 import com.example.aluminiklu.Fragments.UsersFragment;
+import com.example.aluminiklu.Model.chat;
 import com.example.aluminiklu.Model.user;
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,7 +39,7 @@ import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ChatBox extends AppCompatActivity {
+public class ChatBox extends Fragment {
 CircleImageView profile;
 
 TextView textView;
@@ -44,29 +49,31 @@ FirebaseUser firebaseUser;
 DatabaseReference databaseReference;
 
     @Override
-    protected void onStart() {
+    public void onStart() {
         super.onStart();
         firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
         if(firebaseUser == null){
-Intent i=new Intent(ChatBox.this,Login.class);
+Intent i=new Intent(getActivity(),Login.class);
             startActivity(i);
-            finish();
+
         }
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chat_box);
-
-        Toolbar toolbar=findViewById(R.id.toolbar);
-      setSupportActionBar(toolbar);
-      getSupportActionBar().setTitle("");
+        View view=inflater.inflate(R.layout.activity_chat_box,container,false);
 
 
+        Toolbar toolbar=view.findViewById(R.id.toolbar);
+        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
 
-        profile=findViewById(R.id.profile_image);
-        username=findViewById(R.id.user);
+
+
+        profile=view.findViewById(R.id.profile_image);
+        username=view.findViewById(R.id.user);
         firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
 
 
@@ -83,7 +90,7 @@ Intent i=new Intent(ChatBox.this,Login.class);
 
                    profile.setImageResource(R.mipmap.ic_launcher);
                } else {
-                   Picasso.with(getApplicationContext()).load(user.getImageUrl()).into(profile);
+                   Picasso.with(getActivity().getApplicationContext()).load(user.getImageUrl()).into(profile);
                }
            }
            catch (Exception e){
@@ -101,20 +108,52 @@ Intent i=new Intent(ChatBox.this,Login.class);
 
      username.setText("Hemanth");
 
-        TabLayout tabLayout=findViewById(R.id.tab_layout);
-        ViewPager viewPager=findViewById(R.id.viewpager);
-        ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
-        viewPagerAdapter.addFragment(new UsersFragment(),"Users");
-        viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
+        final TabLayout tabLayout=view.findViewById(R.id.tab_layout);
+       final ViewPager viewPager=view.findViewById(R.id.viewpager);
+
+        databaseReference=FirebaseDatabase.getInstance().getReference("Chats");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+         try{       ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getActivity().getSupportFragmentManager());
+                int unread=0;
+                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
+                {
+                    chat chat=dataSnapshot1.getValue(com.example.aluminiklu.Model.chat.class);
+                    if(chat.getReceiver().equals(firebaseUser.getUid()) && !chat.isIsseen()){
+                        unread++;
+                    }
+                }
+                if(unread == 0)
+                {
+                    viewPagerAdapter.addFragment(new ChatsFragment(),"Chats");
+                }
+                else {
+                    viewPagerAdapter.addFragment(new ChatsFragment(),"("+unread+") Chats");
+                }
+
+                viewPagerAdapter.addFragment(new UsersFragment(),"Users");
+                viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
+                viewPager.setAdapter(viewPagerAdapter);
+                tabLayout.setupWithViewPager(viewPager);}catch (Exception e){
+
+         }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+return view;
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-       getMenuInflater().inflate(R.menu.menu,menu);
-       return true;
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.menu, menu);
+        super.onCreateOptionsMenu(menu,inflater);
     }
 
     @Override
@@ -122,7 +161,7 @@ Intent i=new Intent(ChatBox.this,Login.class);
         switch (item.getItemId()){
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(ChatBox.this,Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                startActivity(new Intent(getActivity(),Login.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
               //  finish();
                 return true;
         }
@@ -166,13 +205,13 @@ ViewPagerAdapter(FragmentManager fm)
     }
 
     @Override
-    protected void onResume() {
+    public void onResume() {
         super.onResume();
         status("online");
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         status("offline");
     }

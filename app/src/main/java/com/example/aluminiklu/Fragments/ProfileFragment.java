@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -16,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.aluminiklu.Model.user;
+import com.example.aluminiklu.Notifications.changeData;
 import com.example.aluminiklu.R;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,7 +45,7 @@ import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
 
-
+ImageView change;
     CircleImageView imageprofile;
     TextView username;
 DatabaseReference reference,databaseReference;
@@ -68,7 +70,16 @@ private StorageTask uploadTask;
         e=view.findViewById(R.id.graduated);
         f=view.findViewById(R.id.join);
         g=view.findViewById(R.id.mailid);
+        change=view.findViewById(R.id.change);
         h=view.findViewById(R.id.specialization);
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(getActivity(), changeData.class);
+                startActivity(i);
+            }
+        });
 
         storageReference= FirebaseStorage.getInstance().getReference("uploads1");
 

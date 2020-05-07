@@ -59,6 +59,7 @@
         android:layout_height="wrap_content"
 
         android:orientation="horizontal">
+
         <TextView
 
             android:text="Branch:"
@@ -75,6 +76,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/branch"></TextView>
+
+        <ImageView
+            android:id="@+id/change"
+            android:layout_marginLeft="130dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/modify"></ImageView>
+
     </LinearLayout>
 
     <LinearLayout

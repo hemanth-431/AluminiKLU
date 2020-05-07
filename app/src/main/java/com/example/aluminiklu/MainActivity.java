@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             "CSE", "ECE", "BBA", "CIVIL", "MEC","None"
     };
     private static final String[] course1 = new String[]{
-         "Faculty","B.Tech", "B.Arch", "M.B.A", "M.Tech", "Diploma"
+            "Faculty","B.Tech", "B.Arch", "M.B.A", "M.Tech", "Diploma"
     };
     private static final String[] specialization1 = new String[]{
             "ComputerNetworks", "I.O.T", "AI", "Ds", "BigData","None"
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             Entry1.add(i);
             graduation1.add(String.valueOf(i));
         }
-graduation1.add("On Going");
+        graduation1.add("On Going");
         mAuth = FirebaseAuth.getInstance();
         button = findViewById(R.id.button3);
         specialisation = findViewById(R.id.specialisation);
@@ -154,7 +154,7 @@ graduation1.add("On Going");
 
 
 
-                 //  Toast.makeText(MainActivity.this,name1+" "+mail1+" "+country1+" "+special+" "+cour+" "+bran+" "+ge+" "+ye, Toast.LENGTH_LONG).show();
+                    //  Toast.makeText(MainActivity.this,name1+" "+mail1+" "+country1+" "+special+" "+cour+" "+bran+" "+ge+" "+ye, Toast.LENGTH_LONG).show();
                 }else {
                     Toast.makeText(MainActivity.this,"Please fill all the details!",Toast.LENGTH_LONG).show();
                 }
@@ -175,7 +175,7 @@ graduation1.add("On Going");
 
 
                             user=mAuth.getCurrentUser().getUid();
-database=fstore.getReference("Users").child(user);
+                            database=fstore.getReference("Users").child(user);
 
 
                             Map<String,Object> users=new HashMap<>();
@@ -189,25 +189,25 @@ database=fstore.getReference("Users").child(user);
                             users.put("Branch",bran);
                             users.put("Graduation Year",ge);
                             users.put("Join Date",ye);
-database.setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
-    @Override
-    public void onSuccess(Void aVoid) {
+                            database.setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
 
-        database1=fstore.getReference("Users1").child(user);
-        Map<String,Object> users1=new HashMap<>();
-        users1.put("id",user);
-        users1.put("imageUrl","default");
-        users1.put("username",name1);
-        users1.put("status","offline");
-        users1.put("search",name1.toLowerCase());
-        database1.setValue(users1);
+                                    database1=fstore.getReference("Users1").child(user);
+                                    Map<String,Object> users1=new HashMap<>();
+                                    users1.put("id",user);
+                                    users1.put("imageUrl","default");
+                                    users1.put("username",name1);
+                                    users1.put("status","offline");
+                                    users1.put("search",name1.toLowerCase());
+                                    database1.setValue(users1);
 
-        Toast.makeText(MainActivity.this, "Success.", Toast.LENGTH_LONG).show();
-    }
-});
+                                    Toast.makeText(MainActivity.this, "Success.", Toast.LENGTH_LONG).show();
+                                }
+                            });
 
                             process.dismiss();
-                           checkemail();
+                            checkemail();
 
 
 

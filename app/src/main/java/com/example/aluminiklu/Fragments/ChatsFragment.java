@@ -34,6 +34,7 @@ private RecyclerView recyclerView;
 private List<user> musers;
 private FirebaseUser fuser;
 DatabaseReference reference;
+//private ProgressDialog process;
 private List<String> userlist;  //<ChatList>
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

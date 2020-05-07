@@ -13,19 +13,32 @@
       android:layout_width="wrap_content"
       android:layout_height="30dp"
       android:background="@drawable/upload"></Button>
-    <EditText
+  
+  <com.google.android.material.textfield.TextInputLayout
+      android:id="@+id/textinput_counter"
+      android:layout_width="395dp"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="110dp"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+
+      style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_text"
         android:maxLines="3"
-
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/button3"
         android:hint="Enter Name..."
-        android:layout_marginStart="16dp"></EditText>
+        android:layout_marginStart="16dp"
+        ></com.google.android.material.textfield.TextInputEditText>
+  </com.google.android.material.textfield.TextInputLayout>
 
   <FrameLayout
       android:layout_width="match_parent"
-      android:layout_below="@+id/edit_text"
+      android:layout_below="@+id/textinput_counter"
       android:layout_above="@+id/progress_circle"
       android:layout_alignParentTop="true"
       android:layout_centerHorizontal="true"
@@ -34,7 +47,7 @@
     <ImageView
         android:id="@+id/imageing"
         android:layout_width="300dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="38dp"
         android:layout_height="300dp"
         android:layout_above="@id/progress_circle"
 
@@ -44,6 +57,7 @@
 
     <ImageView
         android:id="@+id/image_view"
+
         android:layout_width="match_parent"
         android:layout_height="550dp"
         android:layout_above="@id/progress_circle"
@@ -67,13 +81,7 @@
       android:layout_marginBottom="16dp" />
 
 
-  <TextView
-      android:id="@+id/logout"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:layout_marginTop="10dp"
-      android:layout_marginLeft="305dp"
-      android:text="LogOut"></TextView>
+
 
     <Button
         android:id="@+id/button_upload"
@@ -86,15 +94,5 @@
 
        android:background="@drawable/ok"></Button>
 
-  <TextView
-        android:id="@+id/text_view_uploads"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button_upload"
-        android:layout_alignBottom="@+id/button_upload"
-        android:layout_marginStart="25dp"
-        android:layout_toEndOf="@+id/button_upload"
-        android:text="Show Uploads"
-        android:textSize="16sp"
-        android:gravity="center"></TextView>
+
 </RelativeLayout>
