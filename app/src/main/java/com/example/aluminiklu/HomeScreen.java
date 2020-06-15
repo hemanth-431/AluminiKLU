@@ -80,7 +80,7 @@ fragmentClass= ImagesActivity.class;
                     }
                     case 4:{
 
-                        fragmentClass = Events.class;
+                        fragmentClass = eventRecycler.class;
                         break;
                     }
                     case 5:{

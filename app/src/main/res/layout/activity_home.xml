@@ -7,18 +7,20 @@
     android:padding="16dp"
     tools:context=".home">
 
-  <Button
+  <ImageButton
       android:id="@+id/button3"
-      android:layout_marginTop="5dp"
-      android:layout_width="wrap_content"
-      android:layout_height="30dp"
-      android:background="@drawable/upload"></Button>
+
+      android:layout_width="40dp"
+      android:background="#f8fbf8"
+      android:layout_height="40dp"
+    android:src="@drawable/gallery1"></ImageButton>
   
   <com.google.android.material.textfield.TextInputLayout
       android:id="@+id/textinput_counter"
-      android:layout_width="395dp"
-      android:layout_height="wrap_content"
-      android:layout_marginStart="110dp"
+      android:layout_width="500dp"
+      android:layout_marginTop="5dp"
+      android:layout_height="60dp"
+      android:layout_marginStart="80dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
@@ -28,10 +30,12 @@
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/edit_text"
         android:maxLines="3"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toEndOf="@+id/button3"
         android:hint="Enter Name..."
+
         android:layout_marginStart="16dp"
         ></com.google.android.material.textfield.TextInputEditText>
   </com.google.android.material.textfield.TextInputLayout>
@@ -83,16 +87,13 @@
 
 
 
-    <Button
-        android:id="@+id/button_upload"
-        android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="15dp"
-
-
-       android:background="@drawable/ok"></Button>
-
-
+  <ImageButton
+      android:id="@+id/button_upload"
+      android:layout_marginBottom="10dp"
+      android:layout_width="50dp"
+      android:background="#f8fbf8"
+      android:layout_centerHorizontal="true"
+      android:layout_alignParentBottom="true"
+      android:layout_height="50dp"
+      android:src="@drawable/upload1"></ImageButton>
 </RelativeLayout>

@@ -6,6 +6,7 @@ public class upload {
     private String mKey;
     private String mData;
     private String mtime;
+    private String mSNme;
     private String s;
 
 
@@ -13,7 +14,7 @@ public class upload {
         //empty constructor needed
     }
 
-    public upload(String name, String imageUrl,String data,String key,String time,String ms) {
+    public upload(String name, String imageUrl,String data,String key,String time,String ms,String sname) {
         if (name.trim().equals("")) {
             name = "No Name";
         }
@@ -22,9 +23,18 @@ public class upload {
         mImageUrl = imageUrl;
         mData=data;
        mKey=key;
+       mSNme=sname;
        mtime=time;
        s=ms;
 
+    }
+
+    public String getmSNme() {
+        return mSNme;
+    }
+
+    public void setmSNme(String mSNme) {
+        this.mSNme = mSNme;
     }
 
     public String getS() {

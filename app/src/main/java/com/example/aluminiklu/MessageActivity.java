@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -49,7 +50,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MessageActivity extends AppCompatActivity implements MessageAdapter.OnitemclickListener {
+public class MessageActivity extends AppCompatActivity implements MessageAdapter.OnitemclickListener, FragmentManager.OnBackStackChangedListener {
 CircleImageView profile_image;
 TextView username;
 private static final int REQUEST_CALL=1;
@@ -91,10 +92,11 @@ phone.setOnClickListener(new View.OnClickListener() {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  Fragment fragment = new ChatBox();
-              //  FragmentManager fragmentManager = getSupportFragmentManager();
-             //   fragmentManager.beginTransaction().replace(R.id.v, fragment).commit();
-              //  startActivity(new Intent(MessageActivity.this,ChatBox.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
+                onBackStackChanged();
+        //        Fragment fragment = new ChatBox();
+        //        FragmentManager fragmentManager = getSupportFragmentManager();
+        //        fragmentManager.beginTransaction().replace(messageActivity., fragment).commit();
+      //          startActivity(new Intent(MessageActivity.this,ChatBox.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP));
             }
         });
 
@@ -397,6 +399,8 @@ messageAdapter.notifyDataSetChanged();
         Toast.makeText(MessageActivity.this,"deletetsuccess",Toast.LENGTH_LONG).show();
     }
 
+
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
        if(requestCode == REQUEST_CALL){
@@ -407,5 +411,12 @@ messageAdapter.notifyDataSetChanged();
                Toast.makeText(this,"Permission DENIED",Toast.LENGTH_SHORT).show();
            }
        }
+    }
+
+
+    @Override
+    public void onBackStackChanged() {
+FragmentManager fm=getSupportFragmentManager();
+fm.addOnBackStackChangedListener(this);
     }
 }

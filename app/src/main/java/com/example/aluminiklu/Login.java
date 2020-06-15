@@ -64,7 +64,7 @@ try {
         FirebaseUser user=mAuth.getCurrentUser();
         if(user!=null) {
             finish();
-            startActivity(new Intent(Login.this, HomeScreen.class));
+            startActivity(new Intent(Login.this, Side_drawer.class));
         }
             button2=findViewById(R.id.button2);
             button4=findViewById(R.id.button4);
@@ -133,7 +133,7 @@ try {
                             {
                                 process.dismiss();
 
-                                Intent intent = new Intent(Login.this, HomeScreen.class);
+                                Intent intent = new Intent(Login.this, Side_drawer.class);
 
 
 

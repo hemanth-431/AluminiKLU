@@ -3,5 +3,11 @@
     <color name="colorPrimary">#000</color>
     <color name="colorPrimaryDark">#8B4513</color>
     <color name="colorAccent">#8B4513</color>
+    <color name="primary">#795548</color>
+
+    <color name="primarydark">#5D4037</color>
+    <color name="white">#ffff</color>
+    <color name="darkgray">#6c6c6c</color>
     <color name="matrl_textinput_default_box_stroke_color" tools:override="true">#D81B60</color>
+
 </resources>

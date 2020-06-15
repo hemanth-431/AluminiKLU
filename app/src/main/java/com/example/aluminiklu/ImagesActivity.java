@@ -1,3 +1,4 @@
+
 package com.example.aluminiklu;
 
 import android.content.Context;
@@ -10,13 +11,19 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,27 +44,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class ImagesActivity extends Fragment implements image_adapter.OnItemClickListener {
+public class ImagesActivity extends Fragment implements image_adapter.OnItemClickListener{
     private RecyclerView mRecyclerView;
     private ImageView logout;
+    private DrawerLayout mNavDrawer;
     private image_adapter mAdapter;
     private ImageView upload;
-private ImageView uploading;
-Context context;
+    private ImageView uploading;
+    Context context;
 
     private ProgressBar mProgressCircle;
-private FirebaseAuth firebaseAuth;
-private ImageView imageView;
+    private FirebaseAuth firebaseAuth;
+    private ImageView imageView;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
     private ValueEventListener mDBListener;
-String str,stri="hjnc",path;
-int count=0;
+    String str,stri="hjnc",path;
+    int count=0;
     private List<upload> mUploads;
+
     ArrayList<String> soop=new ArrayList();
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
         View view=inflater.inflate(R.layout.activity_images,container,false);
 
@@ -67,52 +78,24 @@ int count=0;
         firebaseAuth=FirebaseAuth.getInstance();
 
         Bundle bundle =getActivity().getIntent().getExtras();
-try {
+        try {
 
-    if (bundle.getString("STRING_I_NEED") != null) {
-        str = bundle.getString("STRING_I_NEED");
-        if(count==0)
-        { path=str;
-        count=1;}
-        else
-        {path=path;}
-        // Toast.makeText(ImagesActivity.this,bundle.getString("STRING_I_NEED"),Toast.LENGTH_LONG).show();
-    }
-}catch (Exception e)
-{
-
-}
-logout=view.findViewById(R.id.Logout_1);
-uploading=view.findViewById(R.id.upload123);
-upload=view.findViewById(R.id.upload);
-imageView=view.findViewById(R.id.image_view_up);
-
-
-try {
-    logout.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            FirebaseAuth.getInstance().signOut();
-            sendToStart();
-
+            if (bundle.getString("STRING_I_NEED") != null) {
+                str = bundle.getString("STRING_I_NEED");
+                if(count==0)
+                { path=str;
+                    count=1;}
+                else
+                {path=path;}
+                // Toast.makeText(ImagesActivity.this,bundle.getString("STRING_I_NEED"),Toast.LENGTH_LONG).show();
+            }
+        }catch (Exception e)
+        {
 
         }
-    });
-}catch (Exception e){
 
-}
+        imageView=view.findViewById(R.id.image_view_up);
 
-
-try{upload.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent i=new Intent(getActivity(),home.class);
-        startActivity(i);
-    }
-});}
-catch (Exception e){
-
-}
 
         mRecyclerView = view.findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
@@ -123,6 +106,7 @@ catch (Exception e){
         mProgressCircle = view.findViewById(R.id.progress_circle);
 
         mUploads = new ArrayList<>();
+
         mAdapter = new image_adapter(getActivity(), mUploads);
 
         mRecyclerView.setAdapter(mAdapter);
@@ -135,7 +119,7 @@ catch (Exception e){
 
 
 
-   try {
+ /*  try {
        uploading.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -149,8 +133,10 @@ catch (Exception e){
 
    }
 
+  */
 
-       mDBListener=mDatabaseRef.addValueEventListener(new ValueEventListener() {
+
+        mDBListener=mDatabaseRef.addValueEventListener(new ValueEventListener() {
 
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -165,14 +151,16 @@ catch (Exception e){
 
                     Collections.reverse(soop);
 
-                      //  Toast.makeText(ImagesActivity.this,s.get(0).toString(),Toast.LENGTH_LONG).show();
+                    //  Toast.makeText(ImagesActivity.this,s.get(0).toString(),Toast.LENGTH_LONG).show();
 
 
 
                     mUploads.add(upload);
                 }
-                Collections.reverse(mUploads);
 
+                Collections.reverse(mUploads);
+          //     mAdapter=new image_adapter(mUploads);
+mAdapter.image_adapter1(mUploads);
                 mAdapter.notifyDataSetChanged();
 
                 mProgressCircle.setVisibility(View.INVISIBLE);
@@ -188,7 +176,7 @@ catch (Exception e){
         });
 
 
-return  view;
+        return  view;
     }
 
 
@@ -209,7 +197,7 @@ return  view;
         Intent i = new Intent(getActivity(), information.class);
 
         i.putExtra("STRING_I_NEED", soop.get(position));
-        startActivity(i);
+        //    startActivity(i);
 
 
     }
@@ -218,40 +206,35 @@ return  view;
 
     @Override
     public void onWhatEverClick(int position) {
-      //  sharecontent(position);
+        //  sharecontent(position);
         upload selectedItem = mUploads.get(position);
-           final String selectedKey = selectedItem.getKey();
+        final String selectedKey = selectedItem.getKey();
 
-mDatabaseRef.addValueEventListener(new ValueEventListener() {
-    @Override
-    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-        String data12=dataSnapshot.child(selectedKey).child("imageUrl").getValue().toString();
-        Toast.makeText(getActivity(), data12, Toast.LENGTH_SHORT).show();
+        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                try {
+                    String data12 = dataSnapshot.child(selectedKey).child("imageUrl").getValue().toString();
+                    Toast.makeText(getActivity(), data12, Toast.LENGTH_SHORT).show();
 
-        Intent sendIntend=new Intent();
-        sendIntend.setAction(Intent.ACTION_SEND);
-        sendIntend.putExtra(Intent.EXTRA_TEXT,data12);
-        sendIntend.setType("text/plain");
-        startActivity(sendIntend);
-    }
+                    Intent sendIntend = new Intent();
+                    sendIntend.setAction(Intent.ACTION_SEND);
+                    sendIntend.putExtra(Intent.EXTRA_TEXT, data12);
+                    sendIntend.setType("text/plain");
+                    startActivity(sendIntend);
+                }catch (Exception e){
 
-    @Override
-    public void onCancelled(@NonNull DatabaseError databaseError) {
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-    }
-});
+            }
+        });
 
-
-     //   sharecontent(str);
-       // Toast.makeText(this, "Whatever click at position: " + position, Toast.LENGTH_SHORT).show();
     }
 
     private void sharecontent(String position) {
-      //  upload selectedItem = mUploads.get(position);
-     //   final String selectedKey = selectedItem.getKey();
-
-     //   StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
-      //  Picasso.with(context).load(String.valueOf(imageRef)).into(imageView);
 
         Bitmap bitmap=((BitmapDrawable)imageView.getDrawable()).getBitmap();
         try{
@@ -270,12 +253,12 @@ mDatabaseRef.addValueEventListener(new ValueEventListener() {
 
         }catch (Exception e)
         {
-e.printStackTrace();
+            e.printStackTrace();
         }
     }
     private Bitmap getBitmap(View view)
     {
-Bitmap returnBitmap=Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.Config.ARGB_8888);
+        Bitmap returnBitmap=Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.Config.ARGB_8888);
         Canvas canvas =new Canvas(returnBitmap);
         Drawable drawable=view.getBackground();
         if(drawable!=null)
@@ -289,6 +272,7 @@ Bitmap returnBitmap=Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.
 
     @Override
     public void onDeleteClick(int position) {
+        Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
         upload selectedItem = mUploads.get(position);
         final String selectedKey = selectedItem.getKey();
 
@@ -318,11 +302,32 @@ Bitmap returnBitmap=Bitmap.createBitmap(view.getWidth(),view.getHeight(),Bitmap.
         startActivity(intent);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.main_menu1, menu);
+        MenuItem item=menu.findItem(R.id.action_search);
+        SearchView searchView=(SearchView) item.getActionView();
+        searchView.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query)
+            {
 
 
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
 
 
+                       mAdapter.getFilter().filter(newText);
 
+                return false;
+            }
+        });
 
-
+        super.onCreateOptionsMenu(menu,inflater);
+    }
 }
+

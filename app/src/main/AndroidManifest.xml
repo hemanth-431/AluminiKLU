@@ -14,18 +14,26 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Events"></activity>
-        <activity android:name=".Notifications.changeData" />
-        <activity android:name=".Fragments.threeFragment" />
-        <activity android:name=".Fragments.twoFragment" />
-        <activity android:name=".Fragments.oneFragment" />
-        <activity android:name=".HomeScreen">
+
+        <activity
+            android:name=".Side_drawer"
+            android:label="KLU Alumini"
+            
+
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".eventRecycler" />
+        <activity android:name=".Events" />
+        <activity android:name=".Notifications.changeData" />
+        <activity android:name=".Fragments.threeFragment" />
+        <activity android:name=".Fragments.twoFragment" />
+        <activity android:name=".Fragments.oneFragment" />
+        <activity android:name=".HomeScreen"></activity>
         <activity android:name=".Comments" />
         <activity android:name=".personal_info" />
         <activity android:name=".information" />
@@ -54,6 +62,10 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

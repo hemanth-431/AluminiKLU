@@ -1,3 +1,5 @@
+
+
 package com.example.aluminiklu;
 
 import android.content.Context;
@@ -8,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,17 +29,18 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewHolder> {
+public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewHolder> implements Filterable {
 
     private Context mContext;
     private List<upload> mUploads;
-
+    private List<upload> getmUploads;
     private OnItemClickListener mListener;
     private FirebaseAuth firebaseAuth;
     String boom=null;
@@ -46,8 +51,18 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
 
     private DatabaseReference databaseReference,getnam;
     public image_adapter(Context context, List<upload> uploads) {
+
+
         mContext = context;
         mUploads = uploads;
+
+
+
+
+    }
+
+    void  image_adapter1(List<upload> uploads){
+        getmUploads=new ArrayList<>(uploads);
     }
 
     @Override
@@ -59,7 +74,7 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         upload uploadCurrent = mUploads.get(position);
-      try{  holder.textViewName.setText(uploadCurrent.getName());}catch (Exception e){}
+        try{  holder.textViewName.setText(uploadCurrent.getName());}catch (Exception e){}
         firebaseAuth=FirebaseAuth.getInstance();
 
         // String s=firebaseAuth.getCurrentUser().getUid();
@@ -67,23 +82,27 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy   HH:mm:ss", Locale.getDefault());
+                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String currentDateandTime = sdf.format(new Date());
-String time=currentDateandTime;
-String name="no name";
+                String time=currentDateandTime;
+                String name="no name";
+                String desc="no";
+                try {
 
-try {
-    time = dataSnapshot.child("mtime").getValue().toString();
-    name=dataSnapshot.child("name").getValue().toString();
-}
-catch (Exception e)
-{
+                    time = dataSnapshot.child("mtime").getValue().toString();
+                    name=dataSnapshot.child("name").getValue().toString();
+                    desc=dataSnapshot.child("mData").getValue().toString();
+                }
+                catch (Exception e)
+                {
 
-}
-             try{  holder.time.setText(time);
-             holder.nameofpic.setText(name);}catch (Exception e){
+                }
+                try{  holder.time.setText(time);
+                    holder.nameofpic.setText(name);}catch (Exception e){
 
-             }
+                }
+
+                holder.descrip.setText(desc);
 
                 /////////////////////////////////////////////////////////////////////////////////////////
                 try {
@@ -190,10 +209,20 @@ catch (Exception e)
                 holder.textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Intent intent=new Intent(mContext, personal_info.class);
-                        intent.putExtra("STRING_I_NEED",boom);
+                        Intent intent = new Intent(mContext, personal_info.class);
+                        intent.putExtra("STRING_I_NEED", boom);
                         mContext.startActivity(intent);
-                    }
+
+                            int len = getmUploads.size();
+                            String s22 = String.valueOf(len);
+                            if (s22 == null) {
+                                Toast.makeText(v.getContext(), "No", Toast.LENGTH_LONG).show();
+                            } else {
+                                Toast.makeText(v.getContext(), s22, Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
                 });
 
                 holder.circleImageView.setOnClickListener(new View.OnClickListener() {
@@ -250,35 +279,35 @@ catch (Exception e)
                 .fit()
                 .centerCrop()
                 .into(holder.imageView);
-islikes(uploadCurrent.getKey(),holder.like);
-nrLikes(holder.likes,uploadCurrent.getKey());
-getComments(uploadCurrent.getKey(),holder.comments);
+        islikes(uploadCurrent.getKey(),holder.like);
+        nrLikes(holder.likes,uploadCurrent.getKey());
+        getComments(uploadCurrent.getKey(),holder.comments);
         FirebaseUser firebaseUser=FirebaseAuth.getInstance().getCurrentUser();
-holder.like.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        if(holder.like.getTag().equals("Like")){
-            FirebaseDatabase.getInstance().getReference().child("Likes").child(uploadCurrent.getKey()).child(firebaseUser.getUid()).setValue(true);
-        }
-        else
-        {
-            FirebaseDatabase.getInstance().getReference().child("Likes").child(uploadCurrent.getKey()).child(firebaseUser.getUid()).removeValue();
+        holder.like.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(holder.like.getTag().equals("Like")){
+                    FirebaseDatabase.getInstance().getReference().child("Likes").child(uploadCurrent.getKey()).child(firebaseUser.getUid()).setValue(true);
+                }
+                else
+                {
+                    FirebaseDatabase.getInstance().getReference().child("Likes").child(uploadCurrent.getKey()).child(firebaseUser.getUid()).removeValue();
 
-        }
-    }
-});
+                }
+            }
+        });
 
 
-holder.comment.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        Intent intent=new Intent(mContext,Comments.class);
-        intent.putExtra("postid",uploadCurrent.getKey());
+        holder.comment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(mContext,Comments.class);
+                intent.putExtra("postid",uploadCurrent.getKey());
 
-        intent.putExtra("publisherid",boom);
-        mContext.startActivity(intent);
-    }
-});
+                intent.putExtra("publisherid",boom);
+                mContext.startActivity(intent);
+            }
+        });
         holder.comments.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -296,9 +325,47 @@ holder.comment.setOnClickListener(new View.OnClickListener() {
         return mUploads.size();
     }
 
+
+    @Override
+    public Filter getFilter() {
+        return exampleFilter;
+    }
+
+    private Filter exampleFilter=new Filter() {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+            List<upload> filteredList=new ArrayList<>();
+            if(constraint == null || constraint.length() ==0){
+                filteredList.addAll(getmUploads);
+            }
+            else {
+                String filterpattern=constraint.toString().toLowerCase().trim();
+                for (upload item: getmUploads){
+                    if(item.getmSNme().toLowerCase().contains(filterpattern)){
+                        filteredList.add(item);
+                    }
+                }
+            }
+            FilterResults results=new FilterResults();
+            results.values=filteredList;
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            mUploads.clear();
+            mUploads.addAll((List) results.values);
+            notifyDataSetChanged();
+        }
+    };
+
+
+
+
+
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        public TextView textViewName,likes,comments,time,nameofpic;
+        public TextView textViewName,likes,comments,time,nameofpic,descrip;
         public ImageView imageView,like,comment;
         public CircleImageView circleImageView;
         private TextView textView;
@@ -306,15 +373,16 @@ holder.comment.setOnClickListener(new View.OnClickListener() {
             super(itemView);
 
             like=itemView.findViewById(R.id.unfill);
-comment=itemView.findViewById(R.id.comment);
-comments=itemView.findViewById(R.id.comments);
+            comment=itemView.findViewById(R.id.comment);
+            comments=itemView.findViewById(R.id.comments);
             likes=itemView.findViewById(R.id.likes);
             time=itemView.findViewById(R.id.time);
             nameofpic=itemView.findViewById(R.id.name_of_profile);
+            descrip=itemView.findViewById(R.id.paragraph1);
             textViewName = itemView.findViewById(R.id.username);
             imageView = itemView.findViewById(R.id.image_view_up);
             circleImageView=itemView.findViewById(R.id.upload_profile);
-            textView=itemView.findViewById(R.id.nameupload);
+            textView=itemView.findViewById(R.id.nameupload);           //     -------------------------
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
@@ -423,7 +491,7 @@ comments=itemView.findViewById(R.id.comments);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-likes.setText(dataSnapshot.getChildrenCount()+" likes");
+                likes.setText(dataSnapshot.getChildrenCount()+" likes");
             }
 
             @Override
@@ -432,5 +500,7 @@ likes.setText(dataSnapshot.getChildrenCount()+" likes");
             }
         });
     }
+
+
 
 }

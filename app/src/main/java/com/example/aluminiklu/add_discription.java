@@ -29,7 +29,7 @@ public class add_discription extends AppCompatActivity {
         skip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(add_discription.this,ImagesActivity.class);
+                Intent i=new Intent(add_discription.this,Side_drawer.class);
                 startActivity(i);
             }
         });
@@ -49,6 +49,8 @@ public class add_discription extends AppCompatActivity {
 
                   //  Intent i=new Intent(add_discription.this,ImagesActivity.class);
                   //  startActivity(i);
+                    Intent i=new Intent(add_discription.this,Side_drawer.class);
+                    startActivity(i);
                 }
             }
 

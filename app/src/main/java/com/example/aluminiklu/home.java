@@ -8,7 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -24,8 +24,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.StorageTask;
@@ -41,24 +44,26 @@ import static android.app.Activity.RESULT_OK;
 public class home extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    private Button mButtonChooseImage;
+    private ImageButton mButtonChooseImage;
 private ProgressBar progressBar;
-    private Button mButtonUpload;
+    private ImageButton mButtonUpload;
     private TextView mTextViewShowUploads;
     private TextInputEditText mEditTextFileName;
     private ImageView mImageView;
+    String sname;
     private ProgressBar mProgressBar;
     private FirebaseAuth mAuth;
     private Uri mImageUri;
 private ImageView imageView;
     private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef,nameDta;
 private TextView adddis;
     private StorageTask mUploadTask;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         View view=inflater.inflate(R.layout.activity_home,container,false);
         super.onCreate(savedInstanceState);
 
@@ -77,7 +82,18 @@ imageView=view.findViewById(R.id.imageing);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        nameDta = FirebaseDatabase.getInstance().getReference().child("Users1").child(mAuth.getUid());
+        nameDta.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+               sname=dataSnapshot.child("username").getValue().toString();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 /*logout.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
@@ -93,8 +109,8 @@ imageView=view.findViewById(R.id.imageing);
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                imageView.setVisibility(View.GONE);
+//Toast.makeText(getActivity(),s,Toast.LENGTH_LONG).show();
+               imageView.setVisibility(View.GONE);
                 openFileChooser();
             }
         });
@@ -186,10 +202,10 @@ progressBar.setVisibility(View.VISIBLE);
                             String S="There is noDescription added...";
                                 String s1=mAuth.getCurrentUser().getUid();
                                 Toast.makeText(getActivity(),s1,Toast.LENGTH_LONG).show();
-                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy\nHH:mm:ss", Locale.getDefault());
+                                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                                 String currentDateandTime = sdf.format(new Date());
                                 String s = mDatabaseRef.push().getKey();
-                                upload upload = new upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),S,s1,currentDateandTime,s);
+                                upload upload = new upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),S,s1,currentDateandTime,s,sname);
 
                                 mDatabaseRef.child(s).setValue(upload);
                                 progressBar.setVisibility(View.GONE);
@@ -225,4 +241,6 @@ progressBar.setVisibility(View.VISIBLE);
 
         startActivity(intent);
     }
-}
+
+
+    }

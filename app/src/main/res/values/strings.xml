@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">AluminiKLU</string>
-
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string-array name="countries">
         <item>Afghanistan</item>
         <item>Albania</item>

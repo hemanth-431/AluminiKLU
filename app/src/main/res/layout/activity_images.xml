@@ -8,47 +8,6 @@
     tools:context=".ImagesActivity">
 
 
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-    <FrameLayout
-    android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" >
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="58dp"
-            android:src="@drawable/toolbar12"></ImageView>
-
-        <ImageView
-            android:id="@+id/upload"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="185dp"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/add"></ImageView>
-
-        <ImageView
-            android:id="@+id/upload123"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="260dp"
-            android:layout_width="60dp"
-            android:layout_height="50dp"
-            android:src="@drawable/chat"></ImageView>
-        <ImageView
-            android:id="@+id/Logout_1"
-            android:layout_marginTop="5dp"
-            android:layout_marginLeft="325dp"
-            android:layout_width="70dp"
-            android:layout_height="48dp"
-            android:src="@drawable/logout"></ImageView>
-
-    </FrameLayout>
-
-</LinearLayout>
     <ProgressBar
         android:id="@+id/progress_circle"
         android:layout_width="wrap_content"
@@ -57,7 +16,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
-        android:layout_marginTop="59dp"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
 

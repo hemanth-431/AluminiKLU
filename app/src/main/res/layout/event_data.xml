@@ -88,10 +88,10 @@ app:boxCornerRadiusBottomEnd="15dp"
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_date"
         android:layout_marginTop="300dp"
-        android:layout_width="395dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
-        android:layout_marginRight="25dp"
+        android:layout_marginRight="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,9 @@ app:boxCornerRadiusBottomEnd="15dp"
         app:boxStrokeColor="#fff"
         android:textColorHint="#fff"
         app:boxCornerRadiusBottomStart="15dp"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_date"
@@ -110,7 +112,9 @@ app:boxCornerRadiusBottomEnd="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/button3"
+
             android:hint="Enter Date..."
+
 
             android:layout_marginStart="16dp"
             ></com.google.android.material.textfield.TextInputEditText>
@@ -119,15 +123,58 @@ app:boxCornerRadiusBottomEnd="15dp"
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/description"
+        android:layout_marginTop="370dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="20dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeColor="#fff"
+        android:textColorHint="#fff"
+        app:boxCornerRadiusBottomStart="15dp"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edit_description"
+            android:maxLines="3"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/button3"
+
+            android:hint="Enter Description.."
+
+
+            android:layout_marginStart="16dp"
+            ></com.google.android.material.textfield.TextInputEditText>
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="380dp"
+        android:layout_marginTop="470dp"
 android:orientation="horizontal">
     <Button
         android:id="@+id/cancel"
 
-        android:layout_marginLeft="70dp"
+        android:layout_marginLeft="50dp"
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -136,7 +183,7 @@ android:orientation="horizontal">
         <Button
             android:id="@+id/ok"
 
-            android:layout_marginLeft="100dp"
+            android:layout_marginLeft="70dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="ok"></Button>
