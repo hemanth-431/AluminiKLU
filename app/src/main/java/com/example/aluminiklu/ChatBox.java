@@ -12,8 +12,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -65,10 +63,9 @@ Intent i=new Intent(getActivity(),Login.class);
         super.onCreate(savedInstanceState);
         View view=inflater.inflate(R.layout.activity_chat_box,container,false);
 
+   //     Toolbar toolbar=view.findViewById(R.id.toolbar);
+  //      ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
-        Toolbar toolbar=view.findViewById(R.id.toolbar);
-        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
-        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle("");
 
 
 
@@ -135,8 +132,8 @@ Intent i=new Intent(getActivity(),Login.class);
                 viewPagerAdapter.addFragment(new UsersFragment(),"Users");
                 viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
                 viewPager.setAdapter(viewPagerAdapter);
-                tabLayout.setupWithViewPager(viewPager);}catch (Exception e){
 
+                tabLayout.setupWithViewPager(viewPager);}catch (Exception e){
          }
 
             }
@@ -207,7 +204,9 @@ ViewPagerAdapter(FragmentManager fm)
     @Override
     public void onResume() {
         super.onResume();
+
         status("online");
+
     }
 
     @Override
@@ -215,4 +214,25 @@ ViewPagerAdapter(FragmentManager fm)
         super.onPause();
         status("offline");
     }
+
+
 }
+/*
+      private Typeface mTypeface= ResourcesCompat.getFont(getActivity(), R.font.doppio_one);
+            private void changeTabsFont() {
+
+                ViewGroup vg = (ViewGroup) tabLayout.getChildAt(0);
+                int tabsCount = vg.getChildCount();
+                for (int j = 0; j < tabsCount; j++) {
+                    ViewGroup vgTab = (ViewGroup) vg.getChildAt(j);
+                    int tabChildsCount = vgTab.getChildCount();
+                    for (int i = 0; i < tabChildsCount; i++) {
+                        View tabViewChild = vgTab.getChildAt(i);
+                        if (tabViewChild instanceof TextView) {
+                            Toast.makeText(getActivity(),"hi",Toast.LENGTH_LONG).show();
+                            ((TextView) tabViewChild).setTypeface(mTypeface, Typeface.NORMAL);
+                        }
+                    }
+                }
+            }
+ */

@@ -3,6 +3,8 @@ package com.example.aluminiklu;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -22,6 +24,16 @@ public class Forget_password extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forget_password);
+        Window window = Forget_password.this.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(Forget_password.this.getResources().getColor(R.color.darkblue));
         mail=findViewById(R.id.mailfor);
         button=findViewById(R.id.buttonfor);
         firebaseAuth=FirebaseAuth.getInstance();
@@ -42,7 +54,7 @@ public class Forget_password extends AppCompatActivity {
                             {
                                 Toast.makeText(Forget_password.this,"Password Reset is Sucessful /n Please Check Your mail",Toast.LENGTH_LONG).show();
                                 finish();
-                                startActivity(new Intent(Forget_password.this,Login.class));
+                                startActivity(new Intent(Forget_password.this,loginexample.class));
                             }
                             else
                             {
@@ -56,7 +68,7 @@ public class Forget_password extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        Intent start=new Intent(Forget_password.this,Login.class);
+        Intent start=new Intent(Forget_password.this,loginexample.class);
         startActivity(start);
         finish();
     }

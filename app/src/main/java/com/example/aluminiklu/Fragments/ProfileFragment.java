@@ -50,7 +50,7 @@ ImageView change;
     TextView username;
 DatabaseReference reference,databaseReference;
 FirebaseUser fuser;
-private TextView a,b,c,d,e,f,g,h;
+private TextView a,b,c,d,e,f,g,h,i;
 StorageReference storageReference;
 private static final int IMAGE_REQUEST=1;
 private Uri imageUri;
@@ -72,7 +72,7 @@ private StorageTask uploadTask;
         g=view.findViewById(R.id.mailid);
         change=view.findViewById(R.id.change);
         h=view.findViewById(R.id.specialization);
-
+i=view.findViewById(R.id.mobileno);
         change.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +104,8 @@ a.setText(a1);
         g.setText(g1);
         String h1=dataSnapshot.child("Specialization").getValue().toString();
         h.setText(h1);
+        String i1=dataSnapshot.child("Call").getValue().toString();
+        i.setText(i1);
     }
 
     @Override
@@ -216,5 +218,7 @@ Toast.makeText(getContext(),"Uploading in progerss",Toast.LENGTH_LONG).show();
             }
         }
     }
+
+
 }
 

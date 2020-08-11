@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aluminiklu">
+    package="com.example.aluminiklu" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,48 +8,56 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
-        <activity
-            android:name=".Side_drawer"
-            android:label="KLU Alumini"
-            
 
-            android:theme="@style/AppTheme.NoActionBar">
+        <activity android:name=".registerexample" >
+        </activity>
+        <activity android:name=".loginexample" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".examplehead" />
+        <activity
+            android:label="Alumini"
+            android:name=".Side_drawer"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
         <activity android:name=".eventRecycler" />
-        <activity android:name=".Events" />
         <activity android:name=".Notifications.changeData" />
         <activity android:name=".Fragments.threeFragment" />
         <activity android:name=".Fragments.twoFragment" />
         <activity android:name=".Fragments.oneFragment" />
-        <activity android:name=".HomeScreen"></activity>
+        <activity android:name=".HomeScreen" />
         <activity android:name=".Comments" />
         <activity android:name=".personal_info" />
         <activity android:name=".information" />
         <activity android:name=".add_discription" />
         <activity android:name=".MessageActivity" />
-        <activity android:name=".ChatBox" />
+        <activity
+            android:name=".ChatBox"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Forget_password" />
         <activity android:name=".Login" />
-        <activity android:name=".ImagesActivity" />
+        <activity
+            android:name=".ImagesActivity"
+            android:label="KLU ALUMINI" />
         <activity android:name=".home" />
         <activity android:name=".MainActivity" />
 
         <service
             android:name=".Notifications.MyFirebaseService"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
@@ -57,11 +65,12 @@
         <service
             android:name=".Notifications.MyFirebaseMessaging"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true" >
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
 
         <meta-data
             android:name="preloaded_fonts"

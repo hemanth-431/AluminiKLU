@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <array name="preloaded_fonts" translatable="false">
+        <item>@font/abel</item>
         <item>@font/bungee_shade</item>
+        <item>@font/cabin_sketch_bold</item>
         <item>@font/crete_round</item>
         <item>@font/doppio_one</item>
+        <item>@font/itim</item>
+        <item>@font/news_cycle</item>
+        <item>@font/open_sans_light</item>
+        <item>@font/roboto</item>
+        <item>@font/roboto_medium</item>
+        <item>@font/roboto_mono</item>
     </array>
 </resources>

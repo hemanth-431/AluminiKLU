@@ -46,12 +46,12 @@ public class home extends Fragment {
 
     private ImageButton mButtonChooseImage;
 private ProgressBar progressBar;
-    private ImageButton mButtonUpload;
+    private ImageView mButtonUpload;
     private TextView mTextViewShowUploads;
     private TextInputEditText mEditTextFileName;
     private ImageView mImageView;
     String sname;
-    private ProgressBar mProgressBar;
+
     private FirebaseAuth mAuth;
     private Uri mImageUri;
 private ImageView imageView;
@@ -64,8 +64,9 @@ private TextView adddis;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
-        View view=inflater.inflate(R.layout.activity_home,container,false);
         super.onCreate(savedInstanceState);
+        View view=inflater.inflate(R.layout.activity_home,container,false);
+
 
         progressBar = view.findViewById(R.id.progress_circle);
         progressBar.setVisibility(View.INVISIBLE);
@@ -74,10 +75,10 @@ private TextView adddis;
         mButtonChooseImage = view.findViewById(R.id.button3);
         mButtonUpload = view.findViewById(R.id.button_upload);
        // mTextViewShowUploads = view.findViewById(R.id.text_view_uploads);
-        mEditTextFileName = view.findViewById(R.id.edit_text);
+
 imageView=view.findViewById(R.id.imageing);
         mImageView = view.findViewById(R.id.image_view);
-        mProgressBar = view.findViewById(R.id.progress_circle);
+
         mAuth = FirebaseAuth.getInstance();
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
@@ -183,7 +184,8 @@ progressBar.setVisibility(View.VISIBLE);
     }
 
     private void uploadFile() {
-        if (mImageUri != null) {
+       if (mImageUri != null ) {
+
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
 
@@ -199,13 +201,13 @@ progressBar.setVisibility(View.VISIBLE);
                         @Override
                         public void onComplete(@NonNull Task<Uri> task) {
                             if (task.isSuccessful()) { Uri downloadUri = task.getResult();
-                            String S="There is noDescription added...";
+                            String S="";
                                 String s1=mAuth.getCurrentUser().getUid();
                                 Toast.makeText(getActivity(),s1,Toast.LENGTH_LONG).show();
                                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                                 String currentDateandTime = sdf.format(new Date());
                                 String s = mDatabaseRef.push().getKey();
-                                upload upload = new upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString(),S,s1,currentDateandTime,s,sname);
+                                upload upload = new upload("", downloadUri.toString(),S,s1,currentDateandTime,s,sname);
 
                                 mDatabaseRef.child(s).setValue(upload);
                                 progressBar.setVisibility(View.GONE);
@@ -229,6 +231,7 @@ progressBar.setVisibility(View.VISIBLE);
                     });
         } else {
             Toast.makeText(getActivity(), "No file selected", Toast.LENGTH_LONG).show();
+            progressBar.setVisibility(View.GONE);
         }
     }
 
@@ -241,6 +244,7 @@ progressBar.setVisibility(View.VISIBLE);
 
         startActivity(intent);
     }
+
 
 
     }

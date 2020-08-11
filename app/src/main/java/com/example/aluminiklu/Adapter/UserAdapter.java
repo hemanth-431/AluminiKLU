@@ -95,6 +95,7 @@ holder.name.setText(user.getUsername());
             public void onClick(View v) {
                 Intent i=new Intent(mcontext, MessageActivity.class);
                 i.putExtra("userid",user.getId());
+
                 mcontext.startActivity(i);
             }
         });

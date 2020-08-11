@@ -5,17 +5,94 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.UsersFragment"
     android:background="#fff">
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:id="@+id/search"
 
-    <EditText
-        android:layout_width="match_parent"
+    android:gravity="center"
+
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+<LinearLayout
+
+    android:layout_gravity="center"
+    android:orientation="vertical"
+    android:layout_marginRight="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="5dp"
+        android:fontFamily="@font/roboto_medium"
+
+        android:text="Name"
+        android:textSize="15dp"></TextView>
+    <EditText
+        android:layout_marginLeft="15dp"
+        android:fontFamily="@font/roboto"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+     android:layout_marginBottom="5dp"
 android:background="#fff"
+
         android:hint="Search..."
         android:id="@+id/search_users"></EditText>
+</LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+android:layout_marginLeft="25dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+
+            android:text="Year"
+            android:textSize="15dp"></TextView>
+    <Spinner
+
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+android:backgroundTint="@color/lightblack"
+        android:spinnerMode="dialog"
+       android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_height="wrap_content">
+    </Spinner>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto_medium"
+
+            android:layout_marginLeft="10dp"
+            android:text="Branch"
+            android:textSize="15dp"></TextView>
+    <Spinner
+
+        android:id="@+id/branch"
+
+        android:layout_width="wrap_content"
+
+        android:layout_height="wrap_content">
+    </Spinner>
+    </LinearLayout>
+</LinearLayout>
 
 <androidx.recyclerview.widget.RecyclerView
-android:layout_below="@+id/search_users"
+android:layout_below="@+id/search"
     android:id="@+id/recycler"
     android:layout_width="match_parent"
     android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>

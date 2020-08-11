@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:gravity="center_horizontal"
+    android:padding="16dp"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/logo1"></de.hdodenhof.circleimageview.CircleImageView>
+    <TextView
+
+        android:layout_marginTop="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="#6A0DAD"
+        android:text="Important Note"></TextView>
+<TextView
+    android:layout_marginTop="16dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="This App is only for the Staff and the Alumini of Koneru Lakshmaiah University(KLU). When you create new account, for confirmation purpose your details are verified. For false registration you will be facing severe consequences and agree to take any action on you, Thanks."
+    ></TextView>
+
+<ImageView
+    android:layout_marginTop="30dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/accept"
+    android:elevation="4dp"
+    android:src="@drawable/accepy"></ImageView>
+
+    <TextView
+        android:layout_marginTop="20dp"
+android:id="@+id/cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CANCEL"></TextView>
+</LinearLayout>

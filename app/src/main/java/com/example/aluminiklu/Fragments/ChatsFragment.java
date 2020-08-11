@@ -95,7 +95,7 @@ updatetoken(FirebaseInstanceId.getInstance().getToken());
         return view;
     }
 
-    private void updatetoken(String token)
+    public void updatetoken(String token)
     {
         DatabaseReference reference=FirebaseDatabase.getInstance().getReference("Tokens");
       token token1=new token(token);
@@ -178,4 +178,6 @@ updatetoken(FirebaseInstanceId.getInstance().getToken());
     });
 }
 */
+
+
 }

@@ -6,7 +6,8 @@
 
 
 
-    <item android:title="Home Screen">
+    <item android:title="Home Screen" android:id="@+id/HomeScreen"
+        >
         <menu>
     <group android:checkableBehavior="single">
 <item android:id="@+id/home123" android:title="Home" android:icon="@drawable/ic_home123" ></item>
@@ -16,13 +17,20 @@
 
         </menu>
     </item>
-    <item android:title="Chat here">
+    <item android:title="Chat here" android:id="@+id/ChatHere">
         <menu>
             <group android:checkableBehavior="single">
             <item android:id="@+id/Chatbox" android:title="Chat Box" android:icon="@drawable/ic_chat_black_24dp" ></item>
             <item android:id="@+id/profile" android:title="Profile" android:icon="@drawable/ic_person_black_24dp"></item>
-            <item android:id="@+id/Logout" android:title="Logout" android:icon="@drawable/ic_exit_to_app_black_24dp"></item>
-                </group>
+                    </group>
+        </menu>
+    </item>
+
+    <item android:title="Logout" android:id="@+id/LogOut">
+        <menu>
+            <group android:checkableBehavior="single">
+                     <item android:id="@+id/Logout" android:title="Logout" android:icon="@drawable/ic_exit_to_app_black_24dp"></item>
+            </group>
         </menu>
     </item>
 

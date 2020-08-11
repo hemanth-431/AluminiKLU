@@ -1,12 +1,15 @@
 package com.example.aluminiklu;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -56,7 +59,7 @@ TextView username;
 private static final int REQUEST_CALL=1;
 private ValueEventListener mdblistener;
 FirebaseUser firebaseUser;
-TextView info;
+ImageView info;
 ImageButton btn_send;
 EditText text_send;
 ImageView phone;
@@ -78,6 +81,17 @@ boolean notify=false;
         phone=findViewById(R.id.image_call);
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        Activity activity=MessageActivity.this;
+        Window window =activity.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(activity.getResources().getColor(R.color.colorPrimaryDark));
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
@@ -92,7 +106,29 @@ phone.setOnClickListener(new View.OnClickListener() {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackStackChanged();
+                String User13="No";
+                try{  User13=intent.getStringExtra("condition");}catch(Exception e){
+
+                }
+              try{  if(User13.equals("Yes")){}}catch (Exception e){
+                  User13="No";
+              }
+                if(User13.equals("Yes"))
+                {
+
+                    Intent i=new Intent(MessageActivity.this,Side_drawer.class);
+                    startActivity(i);}
+                else{
+                    // System.out.println(User13+"--------------------------------");
+                    //   Intent i=new Intent(MessageActivity.this,Side_drawer.class);
+                    //   startActivity(i);
+                    finish();
+                }
+
+
+
+
+              //  onBackStackChanged();
         //        Fragment fragment = new ChatBox();
         //        FragmentManager fragmentManager = getSupportFragmentManager();
         //        fragmentManager.beginTransaction().replace(messageActivity., fragment).commit();
@@ -136,6 +172,7 @@ btn_send.setOnClickListener(new View.OnClickListener() {
         if(!msg.equals("")){
             String userid=intent.getStringExtra("userid");
             sendmessage(firebaseUser.getUid(),userid,msg);
+
         }else {
             Toast.makeText(MessageActivity.this,"You can't send empty message",Toast.LENGTH_LONG).show();
         }
@@ -282,6 +319,7 @@ notify=false;
 
     private void sendNotification(String receiver,String username,String message)
     {
+        System.out.println(receiver+"***----");
         DatabaseReference tokens=FirebaseDatabase.getInstance().getReference("Tokens");
         Query query=tokens.orderByKey().equalTo(receiver);
         query.addValueEventListener(new ValueEventListener() {
@@ -291,6 +329,7 @@ for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren())
 {
     token token1=dataSnapshot1.getValue(token.class);
     String userid=intent.getStringExtra("userid");
+    System.out.println(userid+"-------");
     data data1=new data(firebaseUser.getUid(),R.mipmap.ic_launcher,username+": "+message,"New Message",userid);
     Sender sender=new Sender(data1,token1.getToken());
     apiService.sendNotification(sender)
@@ -324,9 +363,8 @@ for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren())
     private void readmessages(final String myid, final String userid, final String imageurl){
         mchat=new ArrayList<>();
 
-        messageAdapter=new MessageAdapter(MessageActivity.this,mchat,imageurl);
-        recyclerView.setAdapter(messageAdapter);
-        messageAdapter.setOnitemclickListener(MessageActivity.this);
+
+     //   messageAdapter.setOnitemclickListener(MessageActivity.this);
 
 reference=FirebaseDatabase.getInstance().getReference("Chats");
 mdblistener=reference.addValueEventListener(new ValueEventListener() {
@@ -335,12 +373,14 @@ mdblistener=reference.addValueEventListener(new ValueEventListener() {
         mchat.clear();
         for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren())
         {
-            chat chat=dataSnapshot1.getValue(com.example.aluminiklu.Model.chat.class);
+            chat chat=dataSnapshot1.getValue(chat.class);
             if(chat.getReceiver().equals(myid) && chat.getSender().equals(userid)  || chat.getReceiver().equals(userid) && chat.getSender().equals(myid) )
             {
                 chat.setIdkey(dataSnapshot1.getKey());
 mchat.add(chat);
             }
+            messageAdapter=new MessageAdapter(MessageActivity.this,mchat,imageurl);
+            recyclerView.setAdapter(messageAdapter);
 messageAdapter.notifyDataSetChanged();
         }
     }

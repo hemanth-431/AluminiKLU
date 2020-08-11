@@ -27,7 +27,7 @@ public class changeData extends AppCompatActivity {
     private TextInputEditText name,mail,pass,ge,bran,cour,spec;
     AutoCompleteTextView country;
     private ProgressDialog process;
-    private ImageView save;
+    private ImageView save,back;
     private EditText num;
     private FirebaseUser fuser;
     private FirebaseDatabase fstore;
@@ -72,6 +72,7 @@ public class changeData extends AppCompatActivity {
         process = new ProgressDialog(this);
         name = findViewById(R.id.NameUser);
         mail = findViewById(R.id.mail);
+        back=findViewById(R.id.back);
         fstore=FirebaseDatabase.getInstance();
         pass = findViewById(R.id.password);
         country = findViewById(R.id.actv);
@@ -111,11 +112,31 @@ public class changeData extends AppCompatActivity {
         ArrayAdapter<String> adapter5 = new ArrayAdapter(changeData.this, android.R.layout.simple_list_item_1, course1);
         adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_house3.setAdapter(adapter5);
-
+back.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        finish();
+    }
+});
 save.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        if (name.getText().toString() != null || mail.getText().toString() != null || pass.getText().toString()!=null || country.getText().toString() != null || spinner_house4.getSelectedItem().toString() != null || spinner_house3.getSelectedItem().toString() != null || spinner_house2.getSelectedItem().toString() != null || spinner_house1.getSelectedItem().toString() != null || spinner_house.getSelectedItem().toString() != null || num.getText().toString()!=null) {
+        String h=mail.getText().toString();
+        int count=0;
+        if(h.contains("@")) {
+            count++;
+        }
+        if (name.getText().length() == 0)
+        {
+            Toast.makeText(changeData.this,"Please enter your name!",Toast.LENGTH_LONG).show();
+        } else if(h.length() == 0 || count != 1 ) {
+          Toast.makeText(changeData.this,"Please enter a valid email!",Toast.LENGTH_LONG).show();
+        }
+        else if(pass.getText().length() ==0 || pass.getText().length() < 5) {
+            Toast.makeText(changeData.this,"Please enter a strong password!",Toast.LENGTH_LONG).show();
+        }else if(num.getText().length()!=10)
+        {  Toast.makeText(changeData.this,"Please enter a valid number!",Toast.LENGTH_LONG).show();}
+        else {
             final String name1 = name.getText().toString();
             String mail1 = mail.getText().toString();
 
@@ -149,9 +170,7 @@ save.setOnClickListener(new View.OnClickListener() {
 
 
             Toast.makeText(changeData.this,s,Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(changeData.this,"Please fill all the details...",Toast.LENGTH_SHORT).show();
+            finish();
         }
 
 

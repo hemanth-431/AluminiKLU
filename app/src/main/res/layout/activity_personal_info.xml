@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/chat123"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".personal_info">
@@ -11,16 +12,29 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/ARROW_BACK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginLeft="15dp"></ImageView>
 <ImageView
     android:layout_marginTop="10dp"
-    android:layout_marginLeft="55dp"
+    android:layout_marginLeft="15dp"
     android:layout_width="300dp"
     android:layout_height="200dp"
 
     android:id="@+id/profiledp"></ImageView>
+        </LinearLayout>
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_marginLeft="64dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:orientation="vertical">
 
@@ -29,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
+                    android:fontFamily="@font/doppio_one"
 
                     android:text="Branch:"
                     android:layout_marginTop="30dp"
@@ -37,7 +52,7 @@
                     android:layout_height="wrap_content"
                     ></TextView>
                 <TextView
-
+                    android:fontFamily="@font/roboto"
                     android:hint="Branch"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
@@ -50,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Country:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -58,6 +73,7 @@
                     android:layout_height="wrap_content"
                     ></TextView>
                 <TextView
+                    android:fontFamily="@font/roboto"
                     android:hint="country"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
@@ -70,7 +86,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Course:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -79,6 +95,7 @@
                     ></TextView>
                 <TextView
                     android:hint="course"
+                    android:fontFamily="@font/roboto"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
@@ -91,7 +108,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Name:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -100,6 +117,7 @@
                     ></TextView>
                 <TextView
                     android:hint="name"
+                    android:fontFamily="@font/roboto"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
@@ -113,7 +131,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Graduated Year:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -121,6 +139,7 @@
                     android:layout_height="wrap_content"
                     ></TextView>
                 <TextView
+                    android:fontFamily="@font/roboto"
                     android:hint="Graduated Year"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
@@ -134,7 +153,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Join Date:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -142,6 +161,7 @@
                     android:layout_height="wrap_content"
                     ></TextView>
                 <TextView
+                    android:fontFamily="@font/roboto"
                     android:hint="Join Date"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
@@ -156,7 +176,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Mail Id:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -164,6 +184,7 @@
                     android:layout_height="wrap_content"
                     ></TextView>
                 <TextView
+                    android:fontFamily="@font/roboto"
                     android:hint="MailId"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
@@ -178,7 +199,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-
+                    android:fontFamily="@font/doppio_one"
                     android:text="Specilaiztion:"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="70dp"
@@ -186,6 +207,7 @@
                     android:layout_height="wrap_content"
                     ></TextView>
                 <TextView
+                    android:fontFamily="@font/roboto"
                     android:hint="Specilaiztion"
                     android:layout_marginTop="30dp"
                     android:layout_marginLeft="10dp"
@@ -196,6 +218,8 @@
 
 
         </LinearLayout>
+
+
     </LinearLayout>
 
 </RelativeLayout>

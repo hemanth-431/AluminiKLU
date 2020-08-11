@@ -1,13 +1,17 @@
 package com.example.aluminiklu;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -160,12 +164,36 @@ public class MainActivity extends AppCompatActivity {
                 }
                 // Toast.makeText(this, name1 + " " + mail1 + " " + ye + " " + ge + " " + bran + " " + cour + " " + special + " " + country1, Toast.LENGTH_LONG).show();
 
+               // showDialog();
             }
+
+
         });
 
     }
 
+void showDialog(){
 
+    LayoutInflater inflater=LayoutInflater.from(this);
+View view=inflater.inflate(R.layout.alert_dialog,null);
+    AlertDialog alertDialog=new AlertDialog.Builder(this).setView(view).create();
+ImageView accept=view.findViewById(R.id.accept);
+    TextView textView=view.findViewById(R.id.cancel);
+    accept.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            alertDialog.dismiss();
+        }
+    });
+    textView.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            alertDialog.dismiss();
+        }
+    });
+alertDialog.show();
+}
     private void registor(final String name1, final String email, final String password,final String special,final String country,final String cour,final String bran,final String ge,final String ye) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -256,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
+
     }
     @Override
     public void onBackPressed() {
@@ -263,4 +292,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(start);
         finish();
     }
+
+    
 }

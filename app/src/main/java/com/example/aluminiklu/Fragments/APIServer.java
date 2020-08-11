@@ -1,6 +1,7 @@
 package com.example.aluminiklu.Fragments;
 
 import com.example.aluminiklu.Notifications.MyResponse;
+import com.example.aluminiklu.Notifications.NotificationSender;
 import com.example.aluminiklu.Notifications.Sender;
 
 import retrofit2.Call;
@@ -19,4 +20,7 @@ public interface APIServer {
 
     @POST("fcm/send")
     Call<MyResponse> sendNotification(@Body Sender body);
+    @POST("fcm/send")
+    Call<MyResponse> SendNotification(@Body NotificationSender body);
+
 }

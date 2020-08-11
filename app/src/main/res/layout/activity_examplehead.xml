@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:background="@drawable/klu1234"
+    android:layout_height="160dp"
+    tools:context=".examplehead">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_marginTop="20dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:id="@+id/profilepick123"
+        android:layout_centerHorizontal="true"
+
+        android:src="@mipmap/ic_launcher"></de.hdodenhof.circleimageview.CircleImageView>
+
+
+    <TextView
+        android:id="@+id/name1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:fontFamily="@font/roboto_medium"
+        android:hint="B.V.Hemanth"
+        android:textColor="@color/white"
+        android:textSize="16dp"
+        android:textStyle="bold"></TextView>
+
+    <TextView
+        android:id="@+id/mail1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto"
+        android:hint="bandlavhemanth@gmail.com"
+        android:textColor="@color/white"
+
+        android:textStyle="bold"></TextView>
+
+</LinearLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -23,7 +23,7 @@ android:padding="10dp"
                 android:id="@+id/text_view_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/bungee_shade"
+                android:fontFamily="@font/cabin_sketch_bold"
                 android:text="Atif Aslam"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Large" />
 
@@ -31,21 +31,35 @@ android:padding="10dp"
                 android:id="@+id/text_view_genre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/itim"
                 android:text="Genre: Rock"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/itim"
+        android:text="Link: "
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
             <TextView
                 android:id="@+id/text_view_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/itim"
                 android:text="Age: 27"
+                android:textColor="#ABABEA"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
-
+</LinearLayout>
             <TextView
                 android:id="@+id/text_view_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/itim"
                 android:text="Country: India"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
@@ -53,4 +67,4 @@ android:padding="10dp"
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 
-</RelativeLayout>
+</FrameLayout>

@@ -2,8 +2,10 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layout_constraintCircleRadius="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@color/matrl_textinput_default_box_stroke_color">
+    android:background="@drawable/back12">
 
     <TextView
         android:layout_width="wrap_content"
@@ -14,13 +16,14 @@
         android:layout_marginTop="116dp"
         android:text="Add Event"
         android:textStyle="bold"
-
+        android:fontFamily="@font/roboto_medium"
         android:textColor="#fff"
         android:textSize="20dp"></TextView>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_counter"
         android:layout_marginTop="160dp"
         android:layout_width="395dp"
+        android:fontFamily="@font/roboto_medium"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="25dp"
@@ -43,7 +46,8 @@ app:boxCornerRadiusBottomEnd="15dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/button3"
             android:hint="Enter Name..."
-
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto"
             android:layout_marginStart="16dp"
             ></com.google.android.material.textfield.TextInputEditText>
 
@@ -74,48 +78,11 @@ app:boxCornerRadiusBottomEnd="15dp"
             android:id="@+id/link"
             android:maxLines="3"
             android:layout_width="match_parent"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/button3"
-            android:hint="Enter reference link...if any"
-
-            android:layout_marginStart="16dp"
-            ></com.google.android.material.textfield.TextInputEditText>
-
-
-
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textinput_date"
-        android:layout_marginTop="300dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="33dp"
-        android:layout_marginRight="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:boxCornerRadiusBottomEnd="15dp"
-        app:boxCornerRadiusTopStart="15dp"
-        app:boxCornerRadiusTopEnd="15dp"
-        app:boxStrokeColor="#fff"
-        android:textColorHint="#fff"
-        app:boxCornerRadiusBottomStart="15dp"
-
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        >
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edit_date"
-            android:maxLines="3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/button3"
-
-            android:hint="Enter Date..."
-
-
+            android:hint="Enter event link.."
+            android:fontFamily="@font/roboto"
             android:layout_marginStart="16dp"
             ></com.google.android.material.textfield.TextInputEditText>
 
@@ -126,7 +93,7 @@ app:boxCornerRadiusBottomEnd="15dp"
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/description"
-        android:layout_marginTop="370dp"
+        android:layout_marginTop="300dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
@@ -150,9 +117,11 @@ app:boxCornerRadiusBottomEnd="15dp"
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_description"
             android:maxLines="3"
-
+            android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
+
             android:layout_toEndOf="@+id/button3"
 
             android:hint="Enter Description.."
@@ -165,24 +134,57 @@ app:boxCornerRadiusBottomEnd="15dp"
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/description"
 
+        android:layout_height="wrap_content">
+<ImageView
+    android:id="@+id/calen"
+    android:layout_width="wrap_content"
+    android:layout_marginLeft="40dp"
+    android:src="@drawable/ic_date"
+    android:layout_height="wrap_content"></ImageView>
+
+    <TextView
+        android:id="@+id/edit_date"
+        android:layout_marginTop="0dp"
+
+        android:text="dd/mm/yyyy"
+        android:textSize="20dp"
+        android:textColor="@color/white"
+        android:fontFamily="@font/roboto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/button3"
+
+        android:hint="Enter Date..."
+
+
+        android:layout_marginStart="16dp"
+        ></TextView>
+
+
+    </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="470dp"
 android:orientation="horizontal">
     <Button
         android:id="@+id/cancel"
 
         android:layout_marginLeft="50dp"
-
+        android:fontFamily="@font/roboto_medium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Close"
         ></Button>
         <Button
             android:id="@+id/ok"
-
+            android:fontFamily="@font/roboto_medium"
             android:layout_marginLeft="70dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

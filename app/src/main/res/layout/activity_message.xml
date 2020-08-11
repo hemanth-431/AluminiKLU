@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:id="@+id/v"
+    android:background="@drawable/chat123"
     android:layout_height="match_parent"
     tools:context=".MessageActivity">
 
@@ -17,7 +18,7 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/primary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/TextAppearance.AppCompat.Widget.PopupMenu.Small"
             >
@@ -38,22 +39,26 @@
                 android:textColor="#fff"></TextView>
 
 
-
-            <TextView
-                android:id="@+id/information"
-                android:layout_marginLeft="170dp"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:text="info"
-                android:textSize="15dp"
-                android:textColor="#fff"></TextView>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:gravity="right"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="15dp"
+        android:id="@+id/information"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_info_outline_black_24dp"></ImageView>
             <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
                 android:id="@+id/image_call"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_phone"></ImageView>
-
+                android:src="@drawable/ic_phone12"></ImageView>
+</LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
 
@@ -63,13 +68,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/recycler_view"
-
+android:layout_above="@+id/bottom"
         android:layout_below="@+id/bar_layout"
-        android:layout_above="@+id/bottom"></androidx.recyclerview.widget.RecyclerView>
+        
+        ></androidx.recyclerview.widget.RecyclerView>
 
 <RelativeLayout
     android:padding="5dp"
     android:id="@+id/bottom"
+
     android:background="#fff"
     android:layout_alignParentBottom="true"
     android:layout_width="match_parent"

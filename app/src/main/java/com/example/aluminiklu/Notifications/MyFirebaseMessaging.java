@@ -32,7 +32,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
 
         FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
 
-        if(firebaseUser!=null && sented.equals(firebaseUser.getUid()))
+     try{   if(firebaseUser!=null && sented.equals(firebaseUser.getUid()))
             if(!currentUser.equals(user)){
                 {
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -41,7 +41,9 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
                         sendNotification(remoteMessage);
                     }
                 }
-        }
+        }}catch (Exception e){
+
+     }
     }
     private void sendOreoNotification(RemoteMessage remoteMessage){
 
@@ -53,6 +55,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         RemoteMessage.Notification notification=remoteMessage.getNotification();
         int j=Integer.parseInt(user.replaceAll("[\\D]",""));
         Intent intent=new Intent(this, MessageActivity.class);
+        intent.putExtra("condition","Yes");
         Bundle bundle=new Bundle();
         bundle.putString("userid",user);
         intent.putExtras(bundle);
@@ -78,6 +81,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
         RemoteMessage.Notification notification=remoteMessage.getNotification();
         int j=Integer.parseInt(user.replaceAll("[\\D]",""));
         Intent intent=new Intent(this, MessageActivity.class);
+        intent.putExtra("cndition","Yes");
         Bundle bundle=new Bundle();
         bundle.putString("userid",user);
         intent.putExtras(bundle);

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<item
+    android:id="@+id/option_1"
+    android:title="Branch">
+    <menu>
+        <item
+            android:id="@+id/All"
+            android:title="All"></item>
+        <item
+            android:id="@+id/CSE"
+            android:title="CSE"></item>
+        <item
+            android:id="@+id/ECE"
+            android:title="ECE"></item>
+        <item
+            android:id="@+id/BBA"
+            android:title="BBA"></item>
+        <item
+            android:id="@+id/CIVIL"
+            android:title="CIVIL"></item>
+        <item
+            android:id="@+id/MEC"
+            android:title="MEC"></item>
+        <item
+            android:id="@+id/None"
+            android:title="None"></item>
+    </menu>
+</item>
+
+</menu>

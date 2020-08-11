@@ -19,6 +19,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -52,7 +54,7 @@ public class ImagesActivity extends Fragment implements image_adapter.OnItemClic
     private ImageView upload;
     private ImageView uploading;
     Context context;
-
+private RelativeLayout relativeLayout;
     private ProgressBar mProgressCircle;
     private FirebaseAuth firebaseAuth;
     private ImageView imageView;
@@ -62,6 +64,7 @@ public class ImagesActivity extends Fragment implements image_adapter.OnItemClic
     String str,stri="hjnc",path;
     int count=0;
     private List<upload> mUploads;
+    private ImageView notfount;
 
     ArrayList<String> soop=new ArrayList();
 
@@ -72,7 +75,9 @@ public class ImagesActivity extends Fragment implements image_adapter.OnItemClic
         super.onCreate(savedInstanceState);
         View view=inflater.inflate(R.layout.activity_images,container,false);
 
-
+//showSnackbar();
+//Toolbar toolbar=view.findViewById(R.id.toolbar);
+//        ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
 
 
         firebaseAuth=FirebaseAuth.getInstance();
@@ -96,7 +101,7 @@ public class ImagesActivity extends Fragment implements image_adapter.OnItemClic
 
         imageView=view.findViewById(R.id.image_view_up);
 
-
+relativeLayout=view.findViewById(R.id.relative);
         mRecyclerView = view.findViewById(R.id.recycler);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this.getActivity()));
@@ -104,7 +109,7 @@ public class ImagesActivity extends Fragment implements image_adapter.OnItemClic
 
 
         mProgressCircle = view.findViewById(R.id.progress_circle);
-
+notfount=view.findViewById(R.id.notfo);
         mUploads = new ArrayList<>();
 
         mAdapter = new image_adapter(getActivity(), mUploads);
@@ -177,6 +182,11 @@ mAdapter.image_adapter1(mUploads);
 
 
         return  view;
+    }
+
+    private void showSnackbar() {
+        Snackbar snackbar=Snackbar.make(relativeLayout,"LongPress on Image to share (or) delete",Snackbar.LENGTH_INDEFINITE);
+        snackbar.show();
     }
 
 
@@ -322,12 +332,21 @@ mAdapter.image_adapter1(mUploads);
 
 
                        mAdapter.getFilter().filter(newText);
-
+int l=mAdapter.getItemCount();
+//System.out.println(l);
+if(l == 0)
+{
+    notfount.setVisibility(View.VISIBLE);
+}else {
+    notfount.setVisibility(View.INVISIBLE);
+}
                 return false;
             }
         });
 
         super.onCreateOptionsMenu(menu,inflater);
     }
+
+
 }
 

@@ -1,7 +1,11 @@
 package com.example.aluminiklu;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +21,7 @@ import com.squareup.picasso.Picasso;
 
 public class personal_info extends AppCompatActivity {
 TextView a,b,c,d,e,f,g,h;
-ImageView imageView;
+ImageView imageView,arroe;
 Context context;
 DatabaseReference databaseReference,reference;
     @Override
@@ -25,6 +29,7 @@ DatabaseReference databaseReference,reference;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_info);
         a=findViewById(R.id.branch);
+        arroe=findViewById(R.id.ARROW_BACK);
         b=findViewById(R.id.country);
         imageView=findViewById(R.id.profiledp);
         c=findViewById(R.id.course);
@@ -39,6 +44,24 @@ DatabaseReference databaseReference,reference;
        catch (Exception e){
 
        }
+       arroe.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+
+               finish();
+           }
+       });
+        Activity activity=personal_info.this;
+        Window window =activity.getWindow();
+
+// clear FLAG_TRANSLUCENT_STATUS flag:
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+// add FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS flag to the window
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+// finally change the color
+        window.setStatusBarColor(activity.getResources().getColor(R.color.colorPrimaryDark));
         databaseReference= FirebaseDatabase.getInstance().getReference().child("Users").child(path);
       reference=FirebaseDatabase.getInstance().getReference().child("Users1").child(path);
         databaseReference.addValueEventListener(new ValueEventListener() {

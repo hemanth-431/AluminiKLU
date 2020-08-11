@@ -11,17 +11,44 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
-
-
+    <style name="TitleBarTextAppearance" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/doppio_one</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="TitleBarTextAppearanc" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/doppio_one</item>
+        <item name="android:textSize">23sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
     <style name="AppTheme.NoActionBar">
+
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
+    <style name="TextAppearance44" parent="android:TextAppearance">
+        <item name="android:textColor">#FF0000</item>
+        <item name="android:textSize">20sp</item>
 
-    
-    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar"></style>
+    </style>
+    <style name="myTextInputLabel" parent="TextAppearance.AppCompat">
+        <!-- Customize your theme here. -->
+        <item name="android:textColorHint">@android:color/tertiary_text_dark</item>
+        <item name="android:textSize">20sp</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorControlNormal">@android:color/tertiary_text_dark</item>
+        <item name="colorControlActivated">@color/paleblue</item>
+    </style>
+    <style name="NoActionBarTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    </style>
 
+
+    <style name="TabLayoutTextFont" parent="@android:style/TextAppearance.Widget.TabWidget">
+        <item name="fontFamily">@font/doppio_one</item>
+    </style>
 </resources>

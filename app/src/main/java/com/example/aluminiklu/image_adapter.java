@@ -44,7 +44,7 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
     private OnItemClickListener mListener;
     private FirebaseAuth firebaseAuth;
     String boom=null;
-
+public int len=0;
     public    String check="unfill";
 
     public int count=0;
@@ -84,33 +84,35 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
                 String currentDateandTime = sdf.format(new Date());
-                String time=currentDateandTime;
-                String name="no name";
-                String desc="no";
+                String time = currentDateandTime;
+                String name = "no name";
+                String desc = "no";
                 try {
 
                     time = dataSnapshot.child("mtime").getValue().toString();
-                    name=dataSnapshot.child("name").getValue().toString();
-                    desc=dataSnapshot.child("mData").getValue().toString();
-                }
-                catch (Exception e)
-                {
+                    name = dataSnapshot.child("name").getValue().toString();
+                    desc = dataSnapshot.child("mData").getValue().toString();
+                } catch (Exception e) {
 
                 }
-                try{  holder.time.setText(time);
-                    holder.nameofpic.setText(name);}catch (Exception e){
+                try {
+                    holder.time.setText(time);
+              //      holder.nameofpic.setText(name);
+                } catch (Exception e) {
 
                 }
-
-                holder.descrip.setText(desc);
+                if (desc.length() == 0) {
+                    holder.descrip.setVisibility(View.INVISIBLE);
+                    holder.descrip.getLayoutParams().height = 0;
+                }
+                    holder.descrip.setText(desc);
 
                 /////////////////////////////////////////////////////////////////////////////////////////
                 try {
-                    synchronized(this){
+                    synchronized (this) {
                         wait(300);
                     }
-                }
-                catch(InterruptedException ex){
+                } catch (InterruptedException ex) {
                 }
 
                 try {
@@ -120,22 +122,22 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
 
                 }
                 try {
-                    synchronized(this){
+                    synchronized (this) {
                         wait(300);
                     }
-                }
-                catch(InterruptedException ex){
+                } catch (InterruptedException ex) {
                 }
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-
-                holder.nameofpic.setOnClickListener(new View.OnClickListener() {
+            /*    holder.nameofpic.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(v.getContext(),boom,Toast.LENGTH_LONG).show();
+                        Toast.makeText(v.getContext(), boom, Toast.LENGTH_LONG).show();
                     }
                 });
+
+             */
 
 
 
@@ -185,8 +187,6 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
             */
 
 
-
-
                 getnam = FirebaseDatabase.getInstance().getReference().child("Users1").child(boom);
                 getnam.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -205,7 +205,6 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                 });
 
 
-
                 holder.textView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -213,34 +212,33 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                         intent.putExtra("STRING_I_NEED", boom);
                         mContext.startActivity(intent);
 
-                            int len = getmUploads.size();
-                            String s22 = String.valueOf(len);
-                            if (s22 == null) {
-                                Toast.makeText(v.getContext(), "No", Toast.LENGTH_LONG).show();
-                            } else {
-                                Toast.makeText(v.getContext(), s22, Toast.LENGTH_LONG).show();
-                            }
-
+                        int len = getmUploads.size();
+                        String s22 = String.valueOf(len);
+                        if (s22 == null) {
+                            Toast.makeText(v.getContext(), "No", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(v.getContext(), s22, Toast.LENGTH_LONG).show();
                         }
+
+                    }
 
                 });
 
                 holder.circleImageView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        Toast.makeText(v.getContext(),boom,Toast.LENGTH_LONG).show();
-                        Intent intent=new Intent(mContext, personal_info.class);
-                        intent.putExtra("STRING_I_NEED",boom);
+                        Toast.makeText(v.getContext(), boom, Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(mContext, personal_info.class);
+                        intent.putExtra("STRING_I_NEED", boom);
                         mContext.startActivity(intent);
                     }
                 });
 
 
-
-
-
-
             }
+
+
+
 
 
 
@@ -345,12 +343,16 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                         filteredList.add(item);
                     }
                 }
+                 len=filteredList.size();
+
             }
             FilterResults results=new FilterResults();
             results.values=filteredList;
             return results;
         }
-
+public int count(){
+            return len;
+}
         @Override
         protected void publishResults(CharSequence constraint, FilterResults results) {
             mUploads.clear();
@@ -366,7 +368,7 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
         public TextView textViewName,likes,comments,time,nameofpic,descrip;
-        public ImageView imageView,like,comment;
+        public ImageView imageView,like,comment,notfound;
         public CircleImageView circleImageView;
         private TextView textView;
         public ImageViewHolder(View itemView) {
@@ -377,7 +379,7 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
             comments=itemView.findViewById(R.id.comments);
             likes=itemView.findViewById(R.id.likes);
             time=itemView.findViewById(R.id.time);
-            nameofpic=itemView.findViewById(R.id.name_of_profile);
+         //   nameofpic=itemView.findViewById(R.id.name_of_profile);
             descrip=itemView.findViewById(R.id.paragraph1);
             textViewName = itemView.findViewById(R.id.username);
             imageView = itemView.findViewById(R.id.image_view_up);
@@ -470,7 +472,7 @@ public class image_adapter extends RecyclerView.Adapter<image_adapter.ImageViewH
                         imageView.setImageResource(R.drawable.fillred);
                         imageView.setTag("Liked");
                     } else {
-                        imageView.setImageResource(R.drawable.unfillheart);
+                        imageView.setImageResource(R.drawable.heartunfill);
                         imageView.setTag("Like");
                     }
 
