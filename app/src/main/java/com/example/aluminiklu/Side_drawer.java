@@ -174,6 +174,15 @@ if(savedInstanceState == null) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
                 setName("Profile");
                 break;
+            case R.id.vips:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new benefitygiven()).commit();
+                setName("Alumini benefits");
+                break;
+            case R.id.jobs:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new jobsactivity()).commit();
+                setName("Jobs");
+                break;
+
             case R.id.Logout:
                // getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ProfileFragment()).commit();
                 firebaseAuth.signOut();

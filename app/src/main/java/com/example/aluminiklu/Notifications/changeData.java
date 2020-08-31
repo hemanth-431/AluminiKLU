@@ -22,6 +22,9 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+
+import jp.gr.java_conf.androtaku.countrylist.CountryList;
 
 public class changeData extends AppCompatActivity {
     private TextInputEditText name,mail,pass,ge,bran,cour,spec;
@@ -36,9 +39,7 @@ public class changeData extends AppCompatActivity {
     private DatabaseReference database,database1;
     private FirebaseAuth mAuth;
     private Spinner branch,course,specialisation,date,date1;
-    private static final String[] COUNTRIES = new String[]{
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola"
-    };
+
 
     ArrayList<Integer> Entry1 = new ArrayList<Integer>();
     ArrayList<String>graduation1 = new ArrayList<String>();
@@ -58,6 +59,11 @@ public class changeData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_data);
 
+        List<String> countryNames = CountryList.getCountryNames(changeData.this);
+        String[] COUNTRIES=new String[countryNames.size()];
+        for(int i=0;i<(int)countryNames.size();i++){
+            COUNTRIES[i]=countryNames.get(i).toString();
+        }
         int s= Calendar.getInstance().get(Calendar.YEAR);
         for (int i = 1990; i <= s; i++) {
             Entry1.add(i);
@@ -71,10 +77,10 @@ public class changeData extends AppCompatActivity {
 
         process = new ProgressDialog(this);
         name = findViewById(R.id.NameUser);
-        mail = findViewById(R.id.mail);
+    //    mail = findViewById(R.id.mail);
         back=findViewById(R.id.back);
         fstore=FirebaseDatabase.getInstance();
-        pass = findViewById(R.id.password);
+    //    pass = findViewById(R.id.password);
         country = findViewById(R.id.actv);
         final Spinner spinner_house4 = (Spinner) findViewById(R.id.specialisation);
         final Spinner spinner_house = (Spinner) findViewById(R.id.date);
@@ -121,24 +127,20 @@ back.setOnClickListener(new View.OnClickListener() {
 save.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        String h=mail.getText().toString();
-        int count=0;
-        if(h.contains("@")) {
-            count++;
-        }
+    //    String h=mail.getText().toString();
+  //      int count=0;
+      //  if(h.contains("@")) {
+    //        count++;
+   //     }
         if (name.getText().length() == 0)
         {
             Toast.makeText(changeData.this,"Please enter your name!",Toast.LENGTH_LONG).show();
-        } else if(h.length() == 0 || count != 1 ) {
-          Toast.makeText(changeData.this,"Please enter a valid email!",Toast.LENGTH_LONG).show();
         }
-        else if(pass.getText().length() ==0 || pass.getText().length() < 5) {
-            Toast.makeText(changeData.this,"Please enter a strong password!",Toast.LENGTH_LONG).show();
-        }else if(num.getText().length()!=10)
+       else if(num.getText().length()!=10)
         {  Toast.makeText(changeData.this,"Please enter a valid number!",Toast.LENGTH_LONG).show();}
         else {
             final String name1 = name.getText().toString();
-            String mail1 = mail.getText().toString();
+         //   String mail1 = mail.getText().toString();
 
             String special = spinner_house4.getSelectedItem().toString();
             String country1 = country.getText().toString();
@@ -149,6 +151,8 @@ save.setOnClickListener(new View.OnClickListener() {
             String number1=num.getText().toString();
             mAuth=FirebaseAuth.getInstance();
             String s=mAuth.getCurrentUser().getUid();
+            database=FirebaseDatabase.getInstance().getReference().child("Users1").child(s);
+database.child("username").setValue(name1);
 
             databaseReference=FirebaseDatabase.getInstance().getReference("Users").child(s).child("Branch").setValue(bran);
             if(number1.trim().length() == 10) {
@@ -164,7 +168,7 @@ save.setOnClickListener(new View.OnClickListener() {
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(s).child("FullName").setValue(name1);
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(s).child("Graduation Year").setValue(ge);
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(s).child("Join Date").setValue(ye);
-            databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(s).child("MailId").setValue(mail1);
+        //    databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(s).child("MailId").setValue(mail1);
             databaseReference = FirebaseDatabase.getInstance().getReference("Users").child(s).child("Specialization").setValue(special);
 
 

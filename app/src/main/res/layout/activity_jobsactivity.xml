@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/chat123"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".jobsactivity">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/notfor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/nofound"></ImageView>
+    <ProgressBar
+        android:id="@+id/progress_circle1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:layout_width="wrap_content"
+
+        android:layout_marginLeft="320dp"
+        android:layout_marginTop="630dp"
+        android:src="@drawable/ic_add_black"
+        app:fabSize="normal"
+
+        app:backgroundTint="@color/primary"
+        android:layout_height="wrap_content"
+        android:id="@+id/add_event"
+        android:elevation="8dp">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
+
+</RelativeLayout>

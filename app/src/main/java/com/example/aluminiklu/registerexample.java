@@ -33,23 +33,25 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import jp.gr.java_conf.androtaku.countrylist.CountryList;
 
 public class registerexample extends AppCompatActivity {
     private TextInputEditText name,mail,pass,ge,bran,cour,spec,number;
     AutoCompleteTextView country;
     CheckBox checkBox;
     private ProgressDialog process;
-    private TextView button,logintext,forgetpass;
-
+    private TextView logintext,forgetpass;
+ImageView button;
     private FirebaseDatabase fstore;
     String user;
     private DatabaseReference database,database1;
     private FirebaseAuth mAuth;
     private Spinner branch,date,date1;
-    private static final String[] COUNTRIES = new String[]{
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola"
-    };
+
+
     ArrayList<Integer> Entry1 = new ArrayList<Integer>();
     ArrayList<String>graduation1 = new ArrayList<String>();
 
@@ -66,6 +68,12 @@ public class registerexample extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registerexample);
+
+        List<String> countryNames = CountryList.getCountryNames(registerexample.this);
+        String[] COUNTRIES=new String[countryNames.size()];
+        for(int i=0;i<(int)countryNames.size();i++){
+            COUNTRIES[i]=countryNames.get(i).toString();
+        }
         checkBox=findViewById(R.id.checkBox);
         Window window = registerexample.this.getWindow();
         ChatsFragment c=new ChatsFragment();
@@ -91,7 +99,7 @@ number=findViewById(R.id.phone);
         name = findViewById(R.id.NameUser);
         mail = findViewById(R.id.mail);
         logintext=findViewById(R.id.login);
-        forgetpass=findViewById(R.id.forgetpass);
+       // forgetpass=findViewById(R.id.forgetpass);
         logintext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,13 +107,15 @@ number=findViewById(R.id.phone);
                 startActivity(i);
             }
         });
-        forgetpass.setOnClickListener(new View.OnClickListener() {
+    /*    forgetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i=new Intent(registerexample.this,Forget_password.class);
                 startActivity(i);
             }
         });
+
+     */
         fstore=FirebaseDatabase.getInstance();
         pass = findViewById(R.id.password);
         country = findViewById(R.id.actv);

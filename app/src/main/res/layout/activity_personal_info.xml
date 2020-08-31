@@ -47,7 +47,7 @@
 
                     android:text="Branch:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -68,7 +68,7 @@
                     android:fontFamily="@font/doppio_one"
                     android:text="Country:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -89,7 +89,7 @@
                     android:fontFamily="@font/doppio_one"
                     android:text="Course:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -111,7 +111,7 @@
                     android:fontFamily="@font/doppio_one"
                     android:text="Name:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -134,7 +134,7 @@
                     android:fontFamily="@font/doppio_one"
                     android:text="Graduated Year:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -156,7 +156,7 @@
                     android:fontFamily="@font/doppio_one"
                     android:text="Join Date:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -179,7 +179,7 @@
                     android:fontFamily="@font/doppio_one"
                     android:text="Mail Id:"
                     android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     ></TextView>
@@ -198,22 +198,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="30dp"
                     android:fontFamily="@font/doppio_one"
-                    android:text="Specilaiztion:"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="70dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    ></TextView>
+                    android:text="Specilaiztion:"></TextView>
+
                 <TextView
-                    android:fontFamily="@font/roboto"
-                    android:hint="Specilaiztion"
-                    android:layout_marginTop="30dp"
-                    android:layout_marginLeft="10dp"
+                    android:id="@+id/specialization"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/specialization"></TextView>
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="30dp"
+                    android:fontFamily="@font/roboto"
+                    android:hint="Specilaiztion"></TextView>
             </LinearLayout>
 
 

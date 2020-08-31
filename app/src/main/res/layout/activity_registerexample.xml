@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/registerback"
+
     tools:context=".registerexample">
 <LinearLayout
+    android:id="@+id/lopq"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -163,6 +164,38 @@ android:theme="@style/myTextInputLabel"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="11dp"
+        android:layout_marginTop="10dp"
+        android:layout_gravity="center">
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="5dp"
+
+            android:src="@drawable/ic_work_black_24dp"
+
+            android:layout_marginRight="3dp"></ImageView>
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/working"
+            android:layout_width="330dp"
+
+            android:textSize="20dp"
+            android:layout_height="44dp"
+            android:hint="Working Company"
+            android:theme="@style/myTextInputLabel"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
+
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -289,43 +322,27 @@ android:textColor="@color/paleblue"
 
 </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/login"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="22dp"
-        android:layout_marginLeft="20dp"
-        android:orientation="horizontal">
-        <TextView
-            android:id="@+id/login"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/paleblue"
-            android:text="Login"
-            android:textSize="15dp"></TextView>
-        <TextView
-            android:id="@+id/forgetpass"
-            android:layout_marginLeft="210dp"
+        android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/paleblue"
+       android:padding="10dp"
+        android:layout_gravity="end"
+        android:text="Login"
+        android:textSize="15dp"></TextView>
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_medium"
-            android:textColor="@color/paleblue"
-            android:text="forget Password"
-            android:textSize="15dp"></TextView>
-    </LinearLayout>
 </LinearLayout>
-
-    <TextView
+    <ImageView
+        android:layout_below="@+id/lopq"
         android:id="@+id/button3"
-        android:fontFamily="@font/roboto"
-        android:textColor="#24ffffff  "
-        android:layout_width="110dp"
-        android:layout_height="35dp"
-        android:textSize="29dp"
-        android:layout_marginLeft="171dp"
-        android:layout_marginTop="610dp"
-        android:background="@drawable/rectangle2"
-        android:text="Sign up"></TextView>
+        android:layout_centerHorizontal="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:src="@drawable/sinup"></ImageView>
+
 
 </RelativeLayout>

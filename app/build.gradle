@@ -57,12 +57,13 @@ dependencies {
 
 
     repositories {
-
+        maven { url "https://raw.github.com/takuseno/android-countrylist/master/repository"}
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         maven { url "https://oss.sonatype.org/content/repositories/releases" }
 
     }
     dependencies {
+        implementation 'jp.gr.java_conf.androtaku.countrylist:countrylist:1.1.0'
         implementation 'androidx.recyclerview:recyclerview:1.0.0'
         implementation 'com.github.captain-miao:optroundcardview:1.0.0'
         implementation 'com.github.shrikanth7698:Custom-Navigation-Drawer:v0.0.1'

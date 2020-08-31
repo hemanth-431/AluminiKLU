@@ -38,8 +38,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aluminiklu.Fragments.APIServer;
-import com.example.aluminiklu.Model.Artist;
-import com.example.aluminiklu.Model.user;
+import com.example.aluminiklu.Model.jobs;
 import com.example.aluminiklu.Notifications.Client;
 import com.example.aluminiklu.Notifications.MyResponse;
 import com.example.aluminiklu.Notifications.Sender;
@@ -74,16 +73,17 @@ import static androidx.constraintlayout.widget.Constraints.TAG;
 import static com.example.aluminiklu.App.CHANNEL_1_ID;
 import static com.example.aluminiklu.App.CHANNEL_2_ID;
 
-public class eventRecycler extends Fragment {
+public class jobsactivity extends Fragment {
+
     private RecyclerView recyclerView;
-    private ArtistsAdapter adapter;
-    private List<Artist> artistList;
+    private jobsAdapter adapter;
+    private List<jobs> artistList;
     Button ok,close;
     ImageView notf;
     String user;
     APIServer apiService;
     private FirebaseUser fuser;
-     APIServer services;
+    APIServer services;
     private ProgressBar mProgressCircle;
     private FirebaseAuth mAuth;
     private NotificationManagerCompat notificationManager;
@@ -92,46 +92,45 @@ public class eventRecycler extends Fragment {
     List<String> listView=new ArrayList<>();
     private DatePickerDialog.OnDateSetListener onDateSetListener;
     DatabaseReference databaseReference,getDatabaseReference;
-    EditText name,link,description;
+    EditText name,link,description,jobtype;
 
     TextView setdate12;
     ImageView cal;
     boolean notify=false;
     DatabaseReference dbArtists,reference,mreference ;
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         setHasOptionsMenu(true);
         super.onCreate(savedInstanceState);
 
-tkn= FirebaseInstanceId.getInstance().getToken();
-notificationManager= NotificationManagerCompat.from(getContext());
-apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.class);
-        View view=inflater.inflate(R.layout.activity_event_recycler,container,false);
+        tkn= FirebaseInstanceId.getInstance().getToken();
+        notificationManager= NotificationManagerCompat.from(getContext());
+        apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.class);
+        View view=inflater.inflate(R.layout.activity_jobsactivity,container,false);
         mAuth = FirebaseAuth.getInstance();
         FloatingActionButton floatingActionButton=view.findViewById(R.id.add_event);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               showDialog();
-           //     new Notify().execute();
-         //       sendOnChannel1(v);
+                showDialog();
+                //     new Notify().execute();
+                //       sendOnChannel1(v);
                 //notify=true;
                 UpdateToken();
+                int leng=adapter.getItemNo();
 
-
-          //      String sop=String.valueOf(leng);
-         //       Toast.makeText(getActivity(),sop,Toast.LENGTH_LONG).show();
+                //      String sop=String.valueOf(leng);
+                //       Toast.makeText(getActivity(),sop,Toast.LENGTH_LONG).show();
             }
 
             private void UpdateToken(){
 
                 String refreshToken= FirebaseInstanceId.getInstance().getToken();
-               token token= new token(refreshToken);
+                token token= new token(refreshToken);
                 FirebaseDatabase.getInstance().getReference("Tokens").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(token);
             }
         });
-    //    apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.class);
+        //    apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.class);
         mProgressCircle = view.findViewById(R.id.progress_circle1);
         notf=view.findViewById(R.id.notfor);
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -139,7 +138,7 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         artistList = new ArrayList<>();
         fuser= FirebaseAuth.getInstance().getCurrentUser();
-        adapter = new ArtistsAdapter(getActivity(), artistList);
+        adapter = new jobsAdapter(getActivity(), artistList);
 
         recyclerView.setAdapter(adapter);
 
@@ -171,7 +170,7 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
                         alertDialog.dismiss();
 
                         adapter.deleteItem(viewHolder.getAdapterPosition());
-                        dbArtists = FirebaseDatabase.getInstance().getReference("Events");
+                        dbArtists = FirebaseDatabase.getInstance().getReference("Jobs");
                         dbArtists.addListenerForSingleValueEvent(valueEventListener);
 
                     }
@@ -180,7 +179,7 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
-                        dbArtists = FirebaseDatabase.getInstance().getReference("Events");
+                        dbArtists = FirebaseDatabase.getInstance().getReference("Jobs");
                         dbArtists.addListenerForSingleValueEvent(valueEventListener);
                     }
                 });
@@ -189,7 +188,7 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
         }).attachToRecyclerView(recyclerView);
 
 
-        dbArtists = FirebaseDatabase.getInstance().getReference("Events");
+        dbArtists = FirebaseDatabase.getInstance().getReference("Jobs");
         dbArtists.addListenerForSingleValueEvent(valueEventListener);
 
         return view;
@@ -204,7 +203,7 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
             artistList.clear();
             if (dataSnapshot.exists()) {
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Artist artist = snapshot.getValue(Artist.class);
+                    jobs artist = snapshot.getValue(jobs.class);
                     artistList.add(artist);
                 }
 
@@ -232,10 +231,11 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
         }
         LayoutInflater inflater = getLayoutInflater();
 
-        View view = inflater.inflate(R.layout.event_data, null);
+        View view = inflater.inflate(R.layout.jobs_data, null);
         name = view.findViewById(R.id.edit_text);
+        jobtype=view.findViewById(R.id.jobtyp);
         // fstore=FirebaseDatabase.getInstance();
-//databaseReference=fstore.getReference("Events");
+//databaseReference=fstore.getReference("Jobs");
         ok = view.findViewById(R.id.ok);
         close = view.findViewById(R.id.cancel);
         link = view.findViewById(R.id.link);
@@ -280,19 +280,19 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
             @Override
             public void onClick(View v) {
 
-             //   new Notify().execute();
+                //   new Notify().execute();
                 notify=true;
-                databaseReference = FirebaseDatabase.getInstance().getReference("Events");
+                databaseReference = FirebaseDatabase.getInstance().getReference("Jobs");
                 user = mAuth.getCurrentUser().getUid();
                 String path = databaseReference.push().getKey();
-String url=link.getText().toString();
+                String url=link.getText().toString();
 
                 String des = description.getText().toString();
                 if (des.trim().length() < 30) {
                     Toast.makeText(getActivity(), "description must contain atleast 30 characters...", Toast.LENGTH_LONG).show();
                 } else if (url != null && (url.startsWith("http://") || url.startsWith("https://")))
                 {
-                    Artist helperclass = new Artist(name.getText().toString(), setdate12.getText().toString(), link.getText().toString(), user, des, path);
+                    jobs helperclass = new jobs(name.getText().toString(),jobtype.getText().toString(), setdate12.getText().toString(), link.getText().toString(), user, des, path);
                     String s = name.getText().toString() + " " + setdate12.getText().toString() + " " + link.getText().toString();
 
 
@@ -305,7 +305,7 @@ String url=link.getText().toString();
 
 
                     dialog.dismiss();
-                    dbArtists = FirebaseDatabase.getInstance().getReference("Events");
+                    dbArtists = FirebaseDatabase.getInstance().getReference("Jobs");
                     dbArtists.addListenerForSingleValueEvent(valueEventListener);
 
 
@@ -314,76 +314,76 @@ String url=link.getText().toString();
                     reference.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            com.example.aluminiklu.Model.user user=dataSnapshot.getValue(user.class);
+                            com.example.aluminiklu.Model.user user=dataSnapshot.getValue(com.example.aluminiklu.Model.user.class);
 
-                                mreference=FirebaseDatabase.getInstance().getReference().child("Users1");
-                                mreference.addValueEventListener(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot snapshot : dataSnapshot.getChildren()){
-                                            // System.out.println(snapshot.getKey()+"****(*)");
-                                            String user1=fuser.getUid();
-                                            if(snapshot.getKey().equals(user1))
-                                            { System.out.println(snapshot.getKey()+"------------------------"+user1);
-                                              }
-                                            else
-                                            {
-                                                System.out.println(snapshot.getKey()+"*************************"+user1);
-                                                if(notify) {
-                                                    sendNotification1(snapshot.getKey().toString(), user.getUsername(), hem);
-                                                }
-                                                    }
+                            mreference=FirebaseDatabase.getInstance().getReference().child("Users1");
+                            mreference.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    for (DataSnapshot snapshot : dataSnapshot.getChildren()){
+                                        // System.out.println(snapshot.getKey()+"****(*)");
+                                        String user1=fuser.getUid();
+                                        if(snapshot.getKey().equals(user1))
+                                        { System.out.println(snapshot.getKey()+"------------------------"+user1);
                                         }
-                                        notify=false;
+                                        else
+                                        {
+                                            System.out.println(snapshot.getKey()+"*************************"+user1);
+                                            if(notify) {
+                                                sendNotification1(snapshot.getKey().toString(), user.getUsername(), hem);
+                                            }
+                                        }
                                     }
+                                    notify=false;
+                                }
 
-                                    @Override
-                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                    }
+                                }
 
-                                    private void sendNotification1(String receiver,String username,String message){
-                                        DatabaseReference tokens=FirebaseDatabase.getInstance().getReference("Tokens");
-                                        Query query=tokens.orderByKey().equalTo(receiver);
-                                        query.addValueEventListener(new ValueEventListener() {
-                                            @Override
-                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()) {
-                                                    token token1 = dataSnapshot1.getValue(token.class);
+                                private void sendNotification1(String receiver,String username,String message){
+                                    DatabaseReference tokens=FirebaseDatabase.getInstance().getReference("Tokens");
+                                    Query query=tokens.orderByKey().equalTo(receiver);
+                                    query.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            for(DataSnapshot dataSnapshot1 :dataSnapshot.getChildren()) {
+                                                token token1 = dataSnapshot1.getValue(token.class);
 
 
-                                                    data data1 = new data(fuser.getUid(), R.mipmap.ic_launcher, username + ": " + message, "New Message", receiver);
-                                                    Sender sender = new Sender(data1, token1.getToken());
-                                                    apiService.sendNotification(sender)
-                                                            .enqueue(new Callback<MyResponse>() {
-                                                                @Override
-                                                                public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
-                                                                    if (response.code() == 200) {
-                                                                        if (response.body().success != 1) {
-                                                                                System.out.println(response.body().success);
-                                                                          try{  Toast.makeText(getActivity(), "Failed not!", Toast.LENGTH_LONG).show();}catch(Exception e){
+                                                data data1 = new data(fuser.getUid(), R.mipmap.ic_launcher, username + ": " + message, "New Message", receiver);
+                                                Sender sender = new Sender(data1, token1.getToken());
+                                                apiService.sendNotification(sender)
+                                                        .enqueue(new Callback<MyResponse>() {
+                                                            @Override
+                                                            public void onResponse(Call<MyResponse> call, Response<MyResponse> response) {
+                                                                if (response.code() == 200) {
+                                                                    if (response.body().success != 1) {
+                                                                        System.out.println(response.body().success);
+                                                                        try{  Toast.makeText(getActivity(), "Failed not!", Toast.LENGTH_LONG).show();}catch(Exception e){
 
-                                                                          }
                                                                         }
                                                                     }
                                                                 }
+                                                            }
 
-                                                                @Override
-                                                                public void onFailure(Call<MyResponse> call, Throwable t) {
+                                                            @Override
+                                                            public void onFailure(Call<MyResponse> call, Throwable t) {
 
-                                                                }
-                                                            });
-                                                }
+                                                            }
+                                                        });
                                             }
+                                        }
 
-                                            @Override
-                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                        @Override
+                                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                                            }
-                                        });
-                                    }
-                                });
-                                //sendNotification("3RUoJsr2KUhuA1Uk3HF7xXA3wEZ2", user.getUsername(), hem);
+                                        }
+                                    });
+                                }
+                            });
+                            //sendNotification("3RUoJsr2KUhuA1Uk3HF7xXA3wEZ2", user.getUsername(), hem);
 
 
                         }
@@ -462,36 +462,36 @@ String url=link.getText().toString();
         @Override
         protected Void doInBackground(Void... voids) {
 
-try{
-            URL url = new URL("https://fcm.googleapis.com/fcm/send");
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            try{
+                URL url = new URL("https://fcm.googleapis.com/fcm/send");
+                HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-            conn.setUseCaches(false);
-            conn.setDoInput(true);
-            conn.setDoOutput(true);
+                conn.setUseCaches(false);
+                conn.setDoInput(true);
+                conn.setDoOutput(true);
 
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Authorization","key=AAAAuUHW_fQ:APA91bFgHsf97Vzoi8CW5QpAC0I9AQ94Fvog-NcVOgYq6xX7luEJrp4At6OKuba1BTtDFryVKxwcw9-Ej4PC5MhXorMbD_JQsX9BLQVC9kVzPfhNR7t-krn4nmLcYEJwAZWZ_8-n2ndh");
-            conn.setRequestProperty("Content-Type", "application/json");
+                conn.setRequestMethod("POST");
+                conn.setRequestProperty("Authorization","key=AAAAuUHW_fQ:APA91bFgHsf97Vzoi8CW5QpAC0I9AQ94Fvog-NcVOgYq6xX7luEJrp4At6OKuba1BTtDFryVKxwcw9-Ej4PC5MhXorMbD_JQsX9BLQVC9kVzPfhNR7t-krn4nmLcYEJwAZWZ_8-n2ndh");
+                conn.setRequestProperty("Content-Type", "application/json");
 
-            JSONObject json = new JSONObject();
+                JSONObject json = new JSONObject();
 
-            json.put("to", tkn);
+                json.put("to", tkn);
 
 
-            JSONObject info = new JSONObject();
-            info.put("title", "TechnoWeb");   // Notification title
-            info.put("body", "Hello Test notification"); // Notification body
+                JSONObject info = new JSONObject();
+                info.put("title", "TechnoWeb");   // Notification title
+                info.put("body", "Hello Test notification"); // Notification body
 
-            json.put("notification", info);
+                json.put("notification", info);
 
-            OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-            wr.write(json.toString());
-            wr.flush();
-            conn.getInputStream();
+                OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
+                wr.write(json.toString());
+                wr.flush();
+                conn.getInputStream();
 
-}catch (Exception e){
-    Log.d("Error",""+e);
+            }catch (Exception e){
+                Log.d("Error",""+e);
             }
 
             return null;
@@ -525,5 +525,3 @@ try{
     }
 
 }
-
-

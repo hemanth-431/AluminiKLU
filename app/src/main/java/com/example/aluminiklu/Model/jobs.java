@@ -1,16 +1,16 @@
 package com.example.aluminiklu.Model;
 
-public class Artist {
-
-    public String id, date, des;
+public class jobs {
+    public String id, date, des,jobs;
     public String link;
     public String name,user;
 
-    public Artist() {
+    public jobs() {
     }
-    public Artist(String name, String date, String link,String user,String des,String id) {
+    public jobs(String name,String jobs, String date, String link,String user,String des,String id) {
         this.name = name;
         this.date = date;
+        this.jobs=jobs;
         this.link = link;
         this.user=user;
         this.des=des;
@@ -20,6 +20,13 @@ public class Artist {
         return id;
     }
 
+    public String getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(String jobs) {
+        this.jobs = jobs;
+    }
 
     public void setId(String id) {
         this.id = id;
@@ -65,3 +72,5 @@ public class Artist {
         this.user = user;
     }
 }
+
+

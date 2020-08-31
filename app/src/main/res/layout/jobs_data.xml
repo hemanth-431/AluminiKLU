@@ -14,7 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="116dp"
-        android:text="Add Event"
+        android:text="Add Job"
         android:textStyle="bold"
         android:fontFamily="@font/roboto_medium"
         android:textColor="#fff"
@@ -31,11 +31,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusBottomEnd="15dp"
         app:boxCornerRadiusTopStart="15dp"
         app:boxCornerRadiusTopEnd="15dp"
-    app:boxStrokeColor="#fff"
-       android:textColorHint="#fff"
+        app:boxStrokeColor="#fff"
+        android:textColorHint="#fff"
         app:boxCornerRadiusBottomStart="15dp"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
@@ -45,7 +45,7 @@ app:boxCornerRadiusBottomEnd="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/button3"
-            android:hint="Enter Name..."
+            android:hint="Company Name..."
             android:textColor="@color/white"
             android:fontFamily="@font/roboto"
             android:layout_marginStart="16dp"
@@ -56,9 +56,45 @@ app:boxCornerRadiusBottomEnd="15dp"
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textinput_link"
+        android:id="@+id/jobtypeone"
+        android:layout_marginTop="5dp"
         android:layout_below="@+id/textinput_counter"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeColor="#fff"
+        android:textColorHint="#fff"
+        app:boxCornerRadiusBottomStart="15dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/jobtyp"
+            android:maxLines="3"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/button3"
+            android:hint="Job Type..."
+            android:fontFamily="@font/roboto"
+            android:layout_marginStart="16dp"
+            ></com.google.android.material.textfield.TextInputEditText>
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textinput_link"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/jobtypeone"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
@@ -82,7 +118,7 @@ app:boxCornerRadiusBottomEnd="15dp"
             android:textColor="@color/white"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/button3"
-            android:hint="Enter event link.."
+            android:hint="Enter Job link.."
             android:fontFamily="@font/roboto"
             android:layout_marginStart="16dp"
             ></com.google.android.material.textfield.TextInputEditText>
@@ -94,13 +130,13 @@ app:boxCornerRadiusBottomEnd="15dp"
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/description"
-        android:layout_below="@+id/textinput_link"
+        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
         android:layout_marginRight="20dp"
 
-
+android:layout_below="@+id/textinput_link"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +154,7 @@ app:boxCornerRadiusBottomEnd="15dp"
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edit_description"
             android:maxLines="3"
+            android:layout_marginRight="5dp"
             android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -143,30 +180,30 @@ app:boxCornerRadiusBottomEnd="15dp"
         android:layout_below="@+id/description"
 
         android:layout_height="wrap_content">
-<ImageView
-    android:id="@+id/calen"
-    android:layout_width="wrap_content"
-    android:layout_marginLeft="40dp"
-    android:src="@drawable/ic_date"
-    android:layout_height="wrap_content"></ImageView>
+        <ImageView
+            android:id="@+id/calen"
+            android:layout_width="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:src="@drawable/ic_date"
+            android:layout_height="wrap_content"></ImageView>
 
-    <TextView
-        android:id="@+id/edit_date"
-        android:layout_marginTop="0dp"
+        <TextView
+            android:id="@+id/edit_date"
+            android:layout_marginTop="0dp"
 
-        android:text="dd/mm/yyyy"
-        android:textSize="20dp"
-        android:textColor="@color/white"
-        android:fontFamily="@font/roboto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/button3"
+            android:text="dd/mm/yyyy"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/roboto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/button3"
 
-        android:hint="Enter Date..."
+            android:hint="Enter Date..."
 
 
-        android:layout_marginStart="16dp"
-        ></TextView>
+            android:layout_marginStart="16dp"
+            ></TextView>
 
 
     </LinearLayout>
@@ -176,15 +213,15 @@ app:boxCornerRadiusBottomEnd="15dp"
         android:layout_marginTop="60dp"
         android:layout_below="@+id/lioi"
         android:gravity="center"
-android:orientation="horizontal">
-    <Button
-        android:id="@+id/cancel"
+        android:orientation="horizontal">
+        <Button
+            android:id="@+id/cancel"
 
-        android:fontFamily="@font/roboto_medium"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Close"
-        ></Button>
+            android:fontFamily="@font/roboto_medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Close"
+            ></Button>
         <Button
             android:id="@+id/ok"
             android:fontFamily="@font/roboto_medium"
