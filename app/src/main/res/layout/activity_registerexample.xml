@@ -335,13 +335,15 @@ android:textColor="@color/paleblue"
         android:textSize="15dp"></TextView>
 
 </LinearLayout>
+
     <ImageView
-        android:layout_below="@+id/lopq"
         android:id="@+id/button3"
-        android:layout_centerHorizontal="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="191dp"
+        android:layout_height="70dp"
+        android:layout_below="@+id/lopq"
         android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="36dp"
         android:src="@drawable/sinup"></ImageView>
 
 
