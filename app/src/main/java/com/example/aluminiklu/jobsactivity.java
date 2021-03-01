@@ -168,8 +168,12 @@ public class jobsactivity extends Fragment {
                     public void onClick(View v) {
 
                         alertDialog.dismiss();
-
-                        adapter.deleteItem(viewHolder.getAdapterPosition());
+                        String s=mAuth.getCurrentUser().getUid();
+                        String flag=adapter.deleteItem(viewHolder.getAdapterPosition(),s);
+                        Toast.makeText(getActivity(), flag, Toast.LENGTH_LONG).show();
+                        if(flag.equals("false")){
+                            Toast.makeText(getActivity(), "You can't delete this Job.", Toast.LENGTH_LONG).show();
+                        }
                         dbArtists = FirebaseDatabase.getInstance().getReference("Jobs");
                         dbArtists.addListenerForSingleValueEvent(valueEventListener);
 

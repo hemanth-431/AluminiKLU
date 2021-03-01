@@ -133,7 +133,7 @@ progressBar.setVisibility(View.VISIBLE);
             @Override
             public void onClick(View v) {
 
-
+    a  '
              //   Toast.makeText(home.this,c,Toast.LENGTH_LONG).show();
 
                 openImagesActivity();

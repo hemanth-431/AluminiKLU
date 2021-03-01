@@ -97,7 +97,7 @@ public class eventRecycler extends Fragment {
     TextView setdate12;
     ImageView cal;
     boolean notify=false;
-    DatabaseReference dbArtists,reference,mreference ;
+    DatabaseReference dbArtists,reference,mreference,abc ;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -170,8 +170,19 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
 
                         alertDialog.dismiss();
 
-                        adapter.deleteItem(viewHolder.getAdapterPosition());
+                   //     Toast.makeText(getActivity(), ""+viewHolder.getAdapterPosition(), Toast.LENGTH_LONG).show();
+                        String s=mAuth.getCurrentUser().getUid();
+                        String flag=adapter.deleteItem(viewHolder.getAdapterPosition(),s);
+                        Toast.makeText(getActivity(), flag, Toast.LENGTH_LONG).show();
+                       if(flag.equals("false")){
+                            Toast.makeText(getActivity(), "You can't delete this Image.", Toast.LENGTH_LONG).show();
+                        }
+
+
+
                         dbArtists = FirebaseDatabase.getInstance().getReference("Events");
+
+                       // Toast.makeText(getActivity(), abc., Toast.LENGTH_LONG).show();
                         dbArtists.addListenerForSingleValueEvent(valueEventListener);
 
                     }
@@ -180,6 +191,7 @@ apiService= Client.getClient("https://fcm.googleapis.com/").create(APIServer.cla
                     @Override
                     public void onClick(View v) {
                         alertDialog.dismiss();
+
                         dbArtists = FirebaseDatabase.getInstance().getReference("Events");
                         dbArtists.addListenerForSingleValueEvent(valueEventListener);
                     }

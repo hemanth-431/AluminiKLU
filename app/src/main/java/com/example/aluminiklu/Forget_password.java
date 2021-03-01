@@ -18,7 +18,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class Forget_password extends AppCompatActivity {
     private EditText mail;
-    private Button button;
+    private Button button,login;
     private FirebaseAuth firebaseAuth;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +36,15 @@ public class Forget_password extends AppCompatActivity {
         window.setStatusBarColor(Forget_password.this.getResources().getColor(R.color.darkblue));
         mail=findViewById(R.id.mailfor);
         button=findViewById(R.id.buttonfor);
+        login=findViewById(R.id.Loginpage);
         firebaseAuth=FirebaseAuth.getInstance();
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i=new Intent(Forget_password.this,loginexample.class);
+                startActivity(i);
+            }
+        });
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

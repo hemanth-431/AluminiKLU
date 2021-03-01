@@ -6,11 +6,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,12 +22,14 @@ import com.google.firebase.database.ValueEventListener;
 public class addaluminiben extends AppCompatActivity {
 ImageView imageView,canel;
 EditText editText;
-DatabaseReference databaseReference,getDatabaseReference;
+FirebaseAuth mAuth;
+DatabaseReference databaseReference,getDatabaseReference,abc;
 FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addaluminiben);
+        mAuth = FirebaseAuth.getInstance();
 floatingActionButton=findViewById(R.id.add_event);
 editText=findViewById(R.id.adddata);
         Window window = addaluminiben.this.getWindow();
@@ -79,9 +83,13 @@ imageView.setOnClickListener(new View.OnClickListener() {
 floatingActionButton.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
-        databaseReference= FirebaseDatabase.getInstance().getReference("Benfits");
+        String s=mAuth.getCurrentUser().getUid();
+        if(s.equals("3RUoJsr2KUhuA1Uk3HF7xXA3wEZ2"))
+        {databaseReference= FirebaseDatabase.getInstance().getReference("Benfits");
 
-        databaseReference.setValue(editText.getText().toString());
+        databaseReference.setValue(editText.getText().toString());}else {
+            Toast.makeText(addaluminiben.this,"You can't edit it.",Toast.LENGTH_LONG).show();
+        }
 
         finish();
     }

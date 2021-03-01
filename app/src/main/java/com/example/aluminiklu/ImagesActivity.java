@@ -59,7 +59,7 @@ private RelativeLayout relativeLayout;
     private FirebaseAuth firebaseAuth;
     private ImageView imageView;
     private FirebaseStorage mStorage;
-    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef,reference;
     private ValueEventListener mDBListener;
     String str,stri="hjnc",path;
     int count=0;
@@ -282,18 +282,38 @@ mAdapter.image_adapter1(mUploads);
 
     @Override
     public void onDeleteClick(int position) {
+
         Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
         upload selectedItem = mUploads.get(position);
         final String selectedKey = selectedItem.getKey();
-
-        StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
-        imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+        reference= FirebaseDatabase.getInstance().getReference().child("uploads").child(selectedKey).child("key");
+        reference.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onSuccess(Void aVoid) {
-                mDatabaseRef.child(selectedKey).removeValue();
-                Toast.makeText(getActivity(), "Item deleted", Toast.LENGTH_SHORT).show();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                firebaseAuth=FirebaseAuth.getInstance();
+                String s=firebaseAuth.getCurrentUser().getUid();
+                String s1="";
+try{               s1=dataSnapshot.getValue().toString();}catch(Exception e){}
+                if(s.equals(s1)){
+                    StorageReference imageRef = mStorage.getReferenceFromUrl(selectedItem.getImageUrl());
+                    imageRef.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            mDatabaseRef.child(selectedKey).removeValue();
+                            Toast.makeText(getActivity(), selectedKey, Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }else {
+                    Toast.makeText(getActivity(),"You can't delete this image",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
+
     }
 
 

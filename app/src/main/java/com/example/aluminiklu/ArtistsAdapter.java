@@ -14,18 +14,22 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aluminiklu.Model.Artist;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ArtistsAdapter extends RecyclerView.Adapter<ArtistsAdapter.ArtistViewHolder> implements Filterable {
-
+ private FirebaseUser fuser;
     private Context mCtx;
     private List<Artist> artistList;
     private List<Artist> artistsnew;
-private DatabaseReference mDatabaseRef;
+private DatabaseReference mDatabaseRef,abc;
     public ArtistsAdapter(Context mCtx, List<Artist> artistList) {
         this.mCtx = mCtx;
         this.artistList = artistList;
@@ -98,13 +102,35 @@ private DatabaseReference mDatabaseRef;
             notifyDataSetChanged();
         }
     };
-    public void deleteItem(int position){
+    static String flag="";
+    public String deleteItem(int position,String s1){
+
             Artist selectedItem = artistList.get(position);
             final String selectedKey = selectedItem.getId();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Events");
+        abc = FirebaseDatabase.getInstance().getReference("Events").child(selectedKey).child("user");
+        abc.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String s="";
+                try{s=dataSnapshot.getValue().toString();}catch (Exception e){}
+                if(s.equals(s1))
+                { mDatabaseRef.child(selectedKey).removeValue();
+                flag="true";}else{
+                    flag="false";
+                }
 
-        mDatabaseRef.child(selectedKey).removeValue();
+            }
 
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+return flag;
 
 
         }

@@ -14,8 +14,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.aluminiklu.Model.jobs;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +27,7 @@ public class jobsAdapter extends RecyclerView.Adapter<jobsAdapter.ArtistViewHold
     private Context mCtx;
     private List<jobs> artistList;
     private List<jobs> artistsnew;
-    private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatabaseRef,abc;
     public jobsAdapter(Context mCtx, List<jobs> artistList) {
         this.mCtx = mCtx;
         this.artistList = artistList;
@@ -100,13 +103,32 @@ public class jobsAdapter extends RecyclerView.Adapter<jobsAdapter.ArtistViewHold
             notifyDataSetChanged();
         }
     };
-    public void deleteItem(int position){
+    static String flag="";
+    public String deleteItem(int position,String s1){
         jobs selectedItem = artistList.get(position);
         final String selectedKey = selectedItem.getId();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Jobs");
+        abc = FirebaseDatabase.getInstance().getReference("Jobs").child(selectedKey).child("user");
+        abc.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String s="";
+                try{s=dataSnapshot.getValue().toString();}catch (Exception e){}
+                if(s.equals(s1))
+                {  mDatabaseRef.child(selectedKey).removeValue();
+                    flag="true";}else{
+                    flag="false";
+                }
+            }
 
-        mDatabaseRef.child(selectedKey).removeValue();
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+
+        return flag;
 
 
     }
