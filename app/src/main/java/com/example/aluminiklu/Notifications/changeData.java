@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,8 +30,9 @@ public class changeData extends AppCompatActivity {
     private TextInputEditText name,mail,pass,ge,bran,cour,spec;
     AutoCompleteTextView country;
     private ProgressDialog process;
-    private ImageView save,back;
-    private EditText num;
+    private ImageView back;
+    Button save;
+    private TextInputEditText num;
     private FirebaseUser fuser;
     private FirebaseDatabase fstore;
     private Task<Void> databaseReference;
@@ -58,7 +59,7 @@ public class changeData extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_data);
-
+save=findViewById(R.id.update);
         List<String> countryNames = CountryList.getCountryNames(changeData.this);
         String[] COUNTRIES=new String[countryNames.size()];
         for(int i=0;i<(int)countryNames.size();i++){
@@ -71,20 +72,20 @@ public class changeData extends AppCompatActivity {
         }
         graduation1.add("On Going");
         mAuth = FirebaseAuth.getInstance();
-        save = findViewById(R.id.save);
-        num=findViewById(R.id.number);
+
+        num=findViewById(R.id.mobileNo);
         specialisation = findViewById(R.id.specialisation);
 
         process = new ProgressDialog(this);
-        name = findViewById(R.id.NameUser);
+        name = findViewById(R.id.userName);
     //    mail = findViewById(R.id.mail);
-        back=findViewById(R.id.back);
+      //  back=findViewById(R.id.back);
         fstore=FirebaseDatabase.getInstance();
     //    pass = findViewById(R.id.password);
         country = findViewById(R.id.actv);
-        final Spinner spinner_house4 = (Spinner) findViewById(R.id.specialisation);
+        final Spinner spinner_house4 = (Spinner) findViewById(R.id.specilization);
         final Spinner spinner_house = (Spinner) findViewById(R.id.date);
-        final Spinner spinner_house1 = (Spinner) findViewById(R.id.date1);
+        final Spinner spinner_house1 = (Spinner) findViewById(R.id.year);
         final Spinner spinner_house2 = (Spinner) findViewById(R.id.branch);
         final Spinner spinner_house3 = (Spinner) findViewById(R.id.course);
         final String ye = "", ge = "", bran = "", cour = "", special = "", name1 = "", mail1 = "", country1 = "",pass1="",number1="";
@@ -118,12 +119,14 @@ public class changeData extends AppCompatActivity {
         ArrayAdapter<String> adapter5 = new ArrayAdapter(changeData.this, android.R.layout.simple_list_item_1, course1);
         adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_house3.setAdapter(adapter5);
-back.setOnClickListener(new View.OnClickListener() {
+/* back.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {
         finish();
     }
 });
+
+ */
 save.setOnClickListener(new View.OnClickListener() {
     @Override
     public void onClick(View v) {

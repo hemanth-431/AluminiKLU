@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -39,6 +40,8 @@ public class UsersFragment extends Fragment  {
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     ImageView up,down;
+private ProgressBar progressBar;
+    private DatabaseReference database;
     private Spinner branch,date;
     ArrayList<String> Entry1 = new ArrayList<>();
     int count=0;
@@ -58,7 +61,8 @@ private HashSet<user> hashSet;
         //   up=view.findViewById(R.id.up);
         //  down=view.findViewById(R.id.down);
         branch=view.findViewById(R.id.branch);
-
+        progressBar = view.findViewById(R.id.progress_circle);
+        progressBar.setVisibility(View.VISIBLE);
         date=view.findViewById(R.id.date);
         Spinner date=view.findViewById(R.id.date);
         Spinner branch=view.findViewById(R.id.branch);
@@ -198,42 +202,6 @@ searchby.setOnClickListener(new View.OnClickListener() {
         return view;
     }
 
- /*
-   @Override
-    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-        super.onCreateContextMenu(menu, v, menuInfo);
-        up.setVisibility(View.INVISIBLE);
-        down.setVisibility(View.VISIBLE);
-        menu.setHeaderTitle("Choose your option");
-        getActivity().getMenuInflater().inflate(R.menu.searchmenu,menu);
-    }
-    @Override
-    public boolean onContextItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.option_1:
-                Toast.makeText(getActivity(),"one",Toast.LENGTH_LONG).show();
-                up.setVisibility(View.VISIBLE);
-                down.setVisibility(View.INVISIBLE);
-                return true;
-            case R.id.option_2:
-                Toast.makeText(getActivity(),"two",Toast.LENGTH_LONG).show();
-                up.setVisibility(View.VISIBLE);
-                down.setVisibility(View.INVISIBLE);
-                return true;
-            case R.id.option_3:
-                Toast.makeText(getActivity(),"three",Toast.LENGTH_LONG).show();
-                up.setVisibility(View.VISIBLE);
-                down.setVisibility(View.INVISIBLE);
-                return true;
-            case R.id.option_4:
-                Toast.makeText(getActivity(),"four",Toast.LENGTH_LONG).show();
-                up.setVisibility(View.VISIBLE);
-                down.setVisibility(View.INVISIBLE);
-                return true;
-        }
-        return super.onContextItemSelected(item);
-    }
-    */
 
 
     public void searchusers(String s)
@@ -252,10 +220,13 @@ searchby.setOnClickListener(new View.OnClickListener() {
                     user user=dataSnapshot1.getValue(com.example.aluminiklu.Model.user.class);
                     assert fuser != null;
                     assert user != null;
-                    if(!user.getId().equals(fuser.getUid())){
+
+
+                    if(!user.getId().equals(fuser.getUid())){    /////
                         musers.add(user);
 
                     }
+
                 }
 
 
@@ -291,10 +262,12 @@ searchby.setOnClickListener(new View.OnClickListener() {
  reference1.addValueEventListener(new ValueEventListener() {
      @Override
      public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-         String Branch1=dataSnapshot.child("Branch").getValue().toString();
-         String Year1=dataSnapshot.child("Join Date").getValue().toString();
+         String Year1="",Branch1="";
+try{        Branch1=dataSnapshot.child("Branch").getValue().toString();
+          Year1=dataSnapshot.child("Join Date").getValue().toString();}catch (Exception e){}
          String branch1=branch.getSelectedItem().toString();
          String date1=date.getSelectedItem().toString();
+
          assert user != null;
 
 
@@ -343,11 +316,17 @@ searchby.setOnClickListener(new View.OnClickListener() {
              }
              else {
                  if(i==0){
-                     if (!user.getId().equals(firebaseUser.getUid())) {
-                         musers.add(user);
 
 
-                     }
+                             if ((!user.getId().equals(firebaseUser.getUid()))) {
+                                 musers.add(user);
+                               //  Toast.makeText(getActivity(),String.valueOf(sq),Toast.LENGTH_LONG).show();
+
+
+                             }
+
+
+
                  }
 
              }
@@ -357,6 +336,7 @@ searchby.setOnClickListener(new View.OnClickListener() {
 
          userAdapter = new UserAdapter(getContext(), musers,false);
          recyclerView.setAdapter(userAdapter);
+         progressBar.setVisibility(View.GONE);
      }
 
      @Override

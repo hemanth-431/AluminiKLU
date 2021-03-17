@@ -5,6 +5,11 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.UsersFragment"
     android:background="#fff">
+    <ProgressBar
+        android:id="@+id/progress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 <LinearLayout
     android:layout_width="wrap_content"
     android:id="@+id/search"
@@ -90,6 +95,7 @@ android:layout_marginLeft="25dp"
     </Spinner>
     </LinearLayout>
 </LinearLayout>
+
 
 <androidx.recyclerview.widget.RecyclerView
 android:layout_below="@+id/search"

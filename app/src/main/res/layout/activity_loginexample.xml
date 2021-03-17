@@ -1,120 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="@drawable/loginback"
     android:layout_height="match_parent"
+    android:background="#253A4B"
     tools:context=".loginexample">
 
-<ImageView
-    android:padding="10dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
 
-    android:src="@drawable/klu"
-    ></ImageView>
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/maillog"
+    <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_height="44dp"
-        android:hint="Email Id"
-        android:textAlignment="center"
-
-        android:layout_marginTop="180dp"
-        android:inputType="textEmailAddress"
-        android:background="@drawable/maillo"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="16dp"
+        android:letterSpacing="0.4"
+        android:text="ALUMNI KLU"
+        android:textColor="@color/white"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
-
-    <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/passwordlog"
-        android:layout_width="wrap_content"
-        android:layout_height="44dp"
-        android:hint="Password"
-
-        android:inputType="textPassword"
-        android:textAlignment="center"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="260dp"
-android:layout_marginRight="20dp"
-        android:background="@drawable/maillo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.358" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/passwordlog"
-        android:orientation="horizontal">
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        android:layout_margin="16dp"
+        android:background="@drawable/layback"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/signUpPage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        android:elevation="20dp">
 
-        <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="30dp"
-            android:layout_height="15dp"
-
-            android:layout_marginLeft="250dp"
-            android:layout_marginTop="22dp"
-            android:buttonTint="@color/white"
-            android:textColor="@drawable/circle" />
-        <TextView
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/loginAnimation"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
             android:layout_marginTop="20dp"
-            android:text="Remember me."
-            android:textSize="16dp"
-            android:fontFamily="@font/roboto"
-            android:layout_width="wrap_content"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/loginpage1" />
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/maillog"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginTop="20dp"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:layout_marginBottom="8dp"-->
+        <!--            android:background="@drawable/loginex"-->
+        <!--            android:hint="Email ID"-->
+        <!--            android:padding="16dp">-->
+        <!--        </EditText>-->
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="#F23B5F"></TextView>
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="5dp"
+            android:hint="Email ID">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/maillog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--        <EditText-->
+        <!--            android:id="@+id/passwordlog"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="24dp"-->
+        <!--            android:layout_marginTop="8dp"-->
+        <!--            android:layout_marginEnd="24dp"-->
+        <!--            android:layout_marginBottom="16dp"-->
+        <!--            android:background="@drawable/loginex"-->
+        <!--            android:hint="Password"-->
+        <!--            android:padding="16dp"></EditText>-->
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="16dp"
+            app:passwordToggleEnabled="true"
+            android:layout_marginBottom="8dp"
+            android:hint="Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/passwordlog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="Remember Me"
+                android:textColor="@color/Black" />
+
+            <TextView
+                android:id="@+id/forgotPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="end"
+                android:text="Forgot Password?"
+                android:textColor="@color/Black"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/buttonlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:background="@drawable/loginexbut"
+            android:elevation="8dp"
+            android:text="Login"
+            android:textAllCaps="false" />
+
     </LinearLayout>
-    <Button
-        android:id="@+id/buttonlog"
-        android:layout_width="180dp"
-        android:layout_height="60dp"
-        android:layout_marginLeft="110dp"
-        android:layout_marginTop="380dp"
-        android:background="@drawable/loginbutton"></Button>
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="710dp"
-    android:orientation="horizontal">
+
     <TextView
+        android:id="@+id/signUpPage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:layout_marginRight="2dp"
-        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="48dp"
+        android:text="Don't have an account? Create new one"
+        android:textAlignment="center"
+        android:textColor="@color/white"
         android:textSize="16dp"
-        android:text="You are not a member?"></TextView>
-    <TextView
-        android:id="@+id/button4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="Register."
-        android:textSize="16dp"
-        android:textColor="#F23B5F"></TextView>
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:fontFamily="@font/abel"
-        android:text="forget Password."
-android:id="@+id/button2"
-        android:textSize="16dp"></TextView>
-
-
-</LinearLayout>
-</RelativeLayout>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

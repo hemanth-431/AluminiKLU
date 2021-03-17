@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,13 +23,21 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class loginexample extends AppCompatActivity {
+
     private TextInputEditText mail;
     private TextInputEditText pass;
-    private TextView button2;
-    private TextView button4;
+    private TextView signUp;
+    private TextView forgotPass;
     private Button button;
     private CheckBox rem_use;
     private SharedPreferences sharedPreferences;
@@ -44,6 +51,9 @@ public class loginexample extends AppCompatActivity {
     String s;
     public String str;
     private FirebaseDatabase firebaseFirestore;
+    private DatabaseReference database,database1,databaseReference;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,33 +76,115 @@ public class loginexample extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         if(user!=null && user.isEmailVerified()) {
+
+            String s=mAuth.getCurrentUser().getUid();
+
+            database=FirebaseDatabase.getInstance().getReference().child("Users").child(s).child("flag");
+            database.setValue(1);
+
+            databaseReference =FirebaseDatabase.getInstance().getReference("Users1").child(s);
+            databaseReference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    if(!dataSnapshot.exists()){
+                        database1=FirebaseDatabase.getInstance().getReference().child("Users").child(s);
+                        database1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                String e1=dataSnapshot.child("FullName").getValue().toString();
+
+                                Map<String,Object> users1=new HashMap<>();
+                                users1.put("id",s);
+                                users1.put("imageUrl","default");
+                                users1.put("username",e1);
+                                users1.put("status","offline");
+                                users1.put("search",e1.toLowerCase());
+                                //     uploadnew uploadnew=new uploadnew(a1,b1,c1,d1,e1,i1,j1);
+                                  databaseReference.setValue(users1);
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
             finish();
-       //     Toast.makeText(loginexample.this,user.getUid(),Toast.LENGTH_LONG).show();
             startActivity(new Intent(loginexample.this, Side_drawer.class));
+
         }
         else {
-         try{   if(user.isEmailVerified())
-            { }else {Toast.makeText(loginexample.this,"Please verify your mail",Toast.LENGTH_LONG).show();}}catch (Exception e){
+            try{   if(user.isEmailVerified())
+            {
+                String s=mAuth.getCurrentUser().getUid();
+                database=FirebaseDatabase.getInstance().getReference().child("Users").child(s).child("flag");
+                database.setValue(1);
 
-         }
+                databaseReference =FirebaseDatabase.getInstance().getReference("Users1").child(s);
+                databaseReference.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(!dataSnapshot.exists()){
+                            database1=FirebaseDatabase.getInstance().getReference().child("Users").child(s);
+                            database1.addValueEventListener(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                    String e1=dataSnapshot.child("FullName").getValue().toString();
+
+                                    Map<String,Object> users1=new HashMap<>();
+                                    users1.put("id",s);
+                                    users1.put("imageUrl","default");
+                                    users1.put("username",e1);
+                                    users1.put("status","offline");
+                                    users1.put("search",e1.toLowerCase());
+                                    //     uploadnew uploadnew=new uploadnew(a1,b1,c1,d1,e1,i1,j1);
+                                      databaseReference.setValue(users1);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+
+            }else {
+                Toast.makeText(loginexample.this,"Please verify your mail",Toast.LENGTH_LONG).show();}}catch (Exception e){
+
+            }
         }
-        button2=findViewById(R.id.button2);
-        button4=findViewById(R.id.button4);
+        signUp=findViewById(R.id.signUpPage);
+        forgotPass = findViewById(R.id.forgotPass);
         mail=(TextInputEditText)findViewById(R.id.maillog);
         rem_use=findViewById(R.id.checkBox);
         pass=(TextInputEditText)findViewById(R.id.passwordlog);
-
+//
         getPreferencesData();
-        button4.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-showDialog();
-            //    Intent i=new Intent(loginexample.this,registerexample.class);
-           //     startActivity(i);
+                showDialog();
             }
 
         });
-        button2.setOnClickListener(new View.OnClickListener() {
+        forgotPass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(loginexample.this,Forget_password.class);
@@ -124,7 +216,7 @@ showDialog();
         LayoutInflater inflater=LayoutInflater.from(this);
         View view=inflater.inflate(R.layout.alert_dialog,null);
         AlertDialog alertDialog=new AlertDialog.Builder(this).setView(view).create();
-        ImageView accept=view.findViewById(R.id.accept);
+        Button accept=view.findViewById(R.id.accept);
         TextView textView=view.findViewById(R.id.cancel);
         accept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -171,6 +263,44 @@ showDialog();
                             if(mAuth.getCurrentUser().isEmailVerified())
                             {
                                 process.dismiss();
+                                String s=mAuth.getCurrentUser().getUid();
+
+                                databaseReference =FirebaseDatabase.getInstance().getReference("Users1").child(s);
+                                databaseReference.addValueEventListener(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        if(!dataSnapshot.exists()){
+                                            database1=FirebaseDatabase.getInstance().getReference().child("Users").child(s);
+                                            database1.addValueEventListener(new ValueEventListener() {
+                                                @Override
+                                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                                    String e1=dataSnapshot.child("FullName").getValue().toString();
+
+                                                    Map<String,Object> users1=new HashMap<>();
+                                                    users1.put("id",s);
+                                                    users1.put("imageUrl","default");
+                                                    users1.put("username",e1);
+                                                    users1.put("status","offline");
+                                                    users1.put("search",e1.toLowerCase());
+                                                    //     uploadnew uploadnew=new uploadnew(a1,b1,c1,d1,e1,i1,j1);
+                                                      databaseReference.setValue(users1);
+                                                }
+
+                                                @Override
+                                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                                }
+                                            });
+                                        }
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
 
                                 Intent intent = new Intent(loginexample.this, Side_drawer.class);
 
@@ -219,7 +349,7 @@ showDialog();
                                     Toast.LENGTH_LONG).show();
 
                         }
-process.dismiss();
+                        process.dismiss();
                         // ...
                     }
                 });

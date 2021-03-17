@@ -89,12 +89,13 @@ startActivity(i);
 
       }
        try {
+           System.out.print(fuser.getUid()+" ************ ");
            reference = FirebaseDatabase.getInstance().getReference("Users1").child(fuser.getUid());
            reference.addValueEventListener(new ValueEventListener() {
                @Override
                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                    user user = dataSnapshot.getValue(com.example.aluminiklu.Model.user.class);
-                   imageurl = dataSnapshot.child("imageUrl").getValue().toString();
+try{         imageurl = dataSnapshot.child("imageUrl").getValue().toString();
                    a.setText(user.getUsername());
 
                    if (imageurl.equals("default")) {
@@ -105,6 +106,7 @@ startActivity(i);
                        Picasso.with(Side_drawer.this).load(imageurl).into(profile);
 
                    }
+}catch (Exception e){}
 
                }
 

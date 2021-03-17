@@ -67,14 +67,14 @@ DatabaseReference databaseReference,reference;
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String data=dataSnapshot.child("Branch").getValue().toString();
+try{                String data=dataSnapshot.child("Branch").getValue().toString();
                 a.setText(data);
                 String data1=dataSnapshot.child("Country").getValue().toString();
                 b.setText(data1);
                 String data2=dataSnapshot.child("Course").getValue().toString();
                 c.setText(data2);
                 String data3=dataSnapshot.child("FullName").getValue().toString();
-                d.setText(data3);
+                d.setText(data3);}catch(Exception e){}
                 String data4=dataSnapshot.child("Graduation Year").getValue().toString();
                 e.setText(data4);
                 String data5=dataSnapshot.child("Join Date").getValue().toString();

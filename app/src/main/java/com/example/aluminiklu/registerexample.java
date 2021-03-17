@@ -10,6 +10,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -21,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.aluminiklu.Fragments.ChatsFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
@@ -39,20 +39,19 @@ import java.util.Map;
 import jp.gr.java_conf.androtaku.countrylist.CountryList;
 
 public class registerexample extends AppCompatActivity {
-    private TextInputEditText name,mail,pass,ge,bran,cour,spec,number;
+    private TextInputEditText userName,email,pass,work,number;
     AutoCompleteTextView country;
     CheckBox checkBox;
     private ProgressDialog process;
-    private TextView logintext,forgetpass;
-ImageView button;
+    //    private TextView logintext,forgetpass;
+    Button signUp;
     private FirebaseDatabase fstore;
     String user;
     private DatabaseReference database,database1;
     private FirebaseAuth mAuth;
-    private Spinner branch,date,date1;
 
 
-    ArrayList<Integer> Entry1 = new ArrayList<Integer>();
+    ArrayList<String> Entry1 = new ArrayList<String>();
     ArrayList<String>graduation1 = new ArrayList<String>();
 
     private static final String[] Branch1= new String[]{
@@ -62,7 +61,7 @@ ImageView button;
             "Faculty","B.Tech", "B.Arch", "M.B.A", "M.Tech", "Diploma"
     };
     private static final String[] specialization1 = new String[]{
-            "ComputerNetworks", "I.O.T", "AI", "Ds", "BigData","None"
+            "Specialization","ComputerNetworks", "I.O.T", "AI", "Ds", "BigData","None"
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,27 +85,22 @@ ImageView button;
 // finally change the color
         window.setStatusBarColor(registerexample.this.getResources().getColor(R.color.darkblue));
         int s= Calendar.getInstance().get(Calendar.YEAR);
+        Entry1.add("Joining Year");
+        graduation1.add("Graduation Year");
         for (int i = 1990; i <= s; i++) {
-            Entry1.add(i);
+            Entry1.add(String.valueOf(i));
             graduation1.add(String.valueOf(i));
         }
         graduation1.add("On Going");
         mAuth = FirebaseAuth.getInstance();
-        button = findViewById(R.id.button3);
-     //   specialisation = findViewById(R.id.specialisation);
-number=findViewById(R.id.phone);
+        //   specialisation = findViewById(R.id.specialisation);
+        number=findViewById(R.id.mobileNo);
         process = new ProgressDialog(this);
-        name = findViewById(R.id.NameUser);
-        mail = findViewById(R.id.mail);
-        logintext=findViewById(R.id.login);
-       // forgetpass=findViewById(R.id.forgetpass);
-        logintext.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i=new Intent(registerexample.this,loginexample.class);
-                startActivity(i);
-            }
-        });
+        userName = findViewById(R.id.userName);
+        email = findViewById(R.id.emailId);
+        work = findViewById(R.id.workCom);
+        signUp = findViewById(R.id.signUp);
+        // forgetpass=findViewById(R.id.forgetpass);
     /*    forgetpass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -117,14 +111,13 @@ number=findViewById(R.id.phone);
 
      */
         fstore=FirebaseDatabase.getInstance();
-        pass = findViewById(R.id.password);
-        country = findViewById(R.id.actv);
-     //   final Spinner spinner_house4 = (Spinner) findViewById(R.id.specialisation);
+        pass = findViewById(R.id.Password);
+        //   final Spinner spinner_house4 = (Spinner) findViewById(R.id.specialisation);
         final Spinner spinner_house = (Spinner) findViewById(R.id.date);
-        final Spinner spinner_house1 = (Spinner) findViewById(R.id.date1);
+        final Spinner spinner_house1 = (Spinner) findViewById(R.id.year);
         final Spinner spinner_house2 = (Spinner) findViewById(R.id.branch);
-       // final Spinner spinner_house3 = (Spinner) findViewById(R.id.course);
-        final String ye = "", ge = "", bran = "", cour = "", special = "", name1 = "", mail1 = "", country1 = "",pass1="";
+        final Spinner spinner_house3 = (Spinner) findViewById(R.id.specilization);
+//        final String ye = "", ge = "", bran = "", cour = "", special = "", name1 = "", mail1 = "", country1 = "",pass1="";
 
    /*     if (!TextUtils.isEmpty(name1) || !TextUtils.isEmpty(mail1) || !TextUtils.isEmpty(ye) || !TextUtils.isEmpty(ge) || !TextUtils.isEmpty(bran) || !TextUtils.isEmpty(cour) || !TextUtils.isEmpty(special) || !TextUtils.isEmpty(country1))  {
             process.setTitle("Registoring User");
@@ -138,7 +131,7 @@ number=findViewById(R.id.phone);
         }*/
 
 
-        String[] countries = getResources().getStringArray(R.array.countries);
+        //String[] countries = getResources().getStringArray(R.array.countries);
         AutoCompleteTextView editText = findViewById(R.id.actv);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 R.layout.custom_list_item, R.id.text_view_list_item, COUNTRIES);
@@ -155,22 +148,22 @@ number=findViewById(R.id.phone);
         ArrayAdapter<String> adapter6 = new ArrayAdapter(registerexample.this, android.R.layout.simple_list_item_1, Entry1);
         adapter6.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_house.setAdapter(adapter6);
-
+//
         ArrayAdapter<String> adapter7 = new ArrayAdapter(registerexample.this, android.R.layout.simple_list_item_1, graduation1);
         adapter7.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_house1.setAdapter(adapter7);
-
+//
         ArrayAdapter<String> adapter4 = new ArrayAdapter(registerexample.this, android.R.layout.simple_list_item_1, Branch1);
         adapter4.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_house2.setAdapter(adapter4);
 
 
-    /*    ArrayAdapter<String> adapter5 = new ArrayAdapter(registerexample.this, android.R.layout.simple_list_item_1, course1);
+        ArrayAdapter<String> adapter5 = new ArrayAdapter(registerexample.this, android.R.layout.simple_list_item_1, specialization1);
         adapter5.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner_house3.setAdapter(adapter5);
 
 
-     */
+
 
     /*    button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -182,45 +175,53 @@ number=findViewById(R.id.phone);
     */
 
 
-        button.setOnClickListener(new View.OnClickListener() {
+        signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //|| spinner_house3.getSelectedItem().toString() != null
                 //|| spinner_house4.getSelectedItem().toString() != null
 
-                if (name.getText().toString() == null || name.getText().length() == 0 ) {
+                if (userName.getText().toString() == null || userName.getText().length() == 0 ) {
                     Toast.makeText(registerexample.this,"Please enter your Name",Toast.LENGTH_LONG).show();
-                }else if(mail.getText().toString() == null || mail.getText().toString().length() == 0 ){
+                }else if(email.getText().toString() == null || email.getText().toString().length() == 0 ){
                     Toast.makeText(registerexample.this,"Please enter a valid MailId",Toast.LENGTH_LONG).show();
                 }  else if(pass.getText().toString().length() < 6)
-                    {
-                        Toast.makeText(registerexample.this,"Please enter a Strong Password",Toast.LENGTH_LONG).show();
-                    }
-                else if(country.getText().toString().length() == 0 || country.getText().toString() == null){
+                {
+                    Toast.makeText(registerexample.this,"Please enter a Strong Password",Toast.LENGTH_LONG).show();
+                }
+                else if(editText.getText().toString().length() == 0 || editText.getText().toString() == null){
                     Toast.makeText(registerexample.this,"Please select a Country",Toast.LENGTH_LONG).show();
 
                 }
-                    else if (number.getText().length() != 10){
-                        Toast.makeText(registerexample.this,"Please enter a Valid Number",Toast.LENGTH_LONG).show();
-                    }else if(checkBox.isChecked()){
+                else if (number.getText().length() != 10){
+                    Toast.makeText(registerexample.this,"Please enter a Valid Number",Toast.LENGTH_LONG).show();
+                }
+                else if (spinner_house.getSelectedItem().toString().equals("Joining Year")){
+                    Toast.makeText(registerexample.this, "Select Joining Year", Toast.LENGTH_SHORT).show();
+                }else if (spinner_house1.getSelectedItem().toString().equals("Graduation Year")){
+                    Toast.makeText(registerexample.this, "Select Graduation Year", Toast.LENGTH_SHORT).show();
+                }else if (spinner_house3.getSelectedItem().toString().equals("Specialization")){
+                    Toast.makeText(registerexample.this, "Select Specialization", Toast.LENGTH_SHORT).show();
+                }
+                else if(checkBox.isChecked()){
 
-                        final String name1 = name.getText().toString();
-                        String mail1 = mail.getText().toString();
-                        String pass1 = pass.getText().toString();
-                        String num1 = number.getText().toString();
-                        //    String special = spinner_house4.getSelectedItem().toString();
-                        String country1 = country.getText().toString();
-                        //     String cour = spinner_house3.getSelectedItem().toString();
-                        String bran = spinner_house2.getSelectedItem().toString();
-                        String ge = spinner_house1.getSelectedItem().toString();
-                        String ye = spinner_house.getSelectedItem().toString();
-                        registor(name1, mail1, pass1, special, country1, cour, bran, ge, ye, num1);
+                    final String name1 = userName.getText().toString();
+                    String mail1 = email.getText().toString();
+                    String pass1 = pass.getText().toString();
+                    String num1 = number.getText().toString();
+                    String special = spinner_house3.getSelectedItem().toString();
+                    String country1 = editText.getText().toString();
+                    //String cour = spinner_house3.getSelectedItem().toString();
+                    String bran = spinner_house2.getSelectedItem().toString();
+                    String ge = spinner_house1.getSelectedItem().toString();
+                    String ye = spinner_house.getSelectedItem().toString();
+                    registor(name1, mail1, pass1, country1, bran, ge, ye, num1, special);
 
 
-                    }else {
-                        Toast.makeText(registerexample.this,"Please check the Box",Toast.LENGTH_LONG).show();
-                    }
-                    //  Toast.makeText(MainActivity.this,name1+" "+mail1+" "+country1+" "+special+" "+cour+" "+bran+" "+ge+" "+ye, Toast.LENGTH_LONG).show();
+                }else {
+                    Toast.makeText(registerexample.this,"Please check the Box",Toast.LENGTH_LONG).show();
+                }
+                //  Toast.makeText(MainActivity.this,name1+" "+mail1+" "+country1+" "+special+" "+cour+" "+bran+" "+ge+" "+ye, Toast.LENGTH_LONG).show();
 
                 // Toast.makeText(this, name1 + " " + mail1 + " " + ye + " " + ge + " " + bran + " " + cour + " " + special + " " + country1, Toast.LENGTH_LONG).show();
 
@@ -254,7 +255,7 @@ number=findViewById(R.id.phone);
         });
         alertDialog.show();
     }
-    private void registor(final String name1, final String email, final String password,final String special,final String country,final String cour,final String bran,final String ge,final String ye,final String number) {
+    private void registor(final String name1, final String email, final String password,final String country,final String bran,final String ge,final String ye,final String number,final String special) {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
@@ -272,35 +273,20 @@ number=findViewById(R.id.phone);
                             //hashMap.put("search",username.toLowerCase());
                             //hashMap.put("status","offline");
                             users.put("Call",number);
+                            users.put("flag",0);
                             users.put("Specialization",special);
                             users.put("Country",country);
-                            users.put("Course",cour);
+                            users.put("Course","No Data");
                             users.put("Branch",bran);
                             users.put("Graduation Year",ge);
                             users.put("Join Date",ye);
-                            database.setValue(users).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-
-                                    database1=fstore.getReference("Users1").child(user);
-                                    Map<String,Object> users1=new HashMap<>();
-                                    users1.put("id",user);
-                                    users1.put("imageUrl","default");
-                                    users1.put("username",name1);
-                                    users1.put("status","offline");
-                                    users1.put("search",name1.toLowerCase());
-                                    database1.setValue(users1);
-
-                                    Toast.makeText(registerexample.this, "Success.", Toast.LENGTH_LONG).show();
-                                }
-                            });
-
+                            database.setValue(users);
                             process.dismiss();
                             checkemail();
 
 
 
-                        } else {
+                        }else {
                             // If sign in fails, display a message to the user.
                             process.hide();
                             Toast.makeText(registerexample.this, "Authentication failed.",

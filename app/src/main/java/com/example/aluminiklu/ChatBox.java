@@ -18,7 +18,6 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.aluminiklu.Fragments.ChatsFragment;
-import com.example.aluminiklu.Fragments.ProfileFragment;
 import com.example.aluminiklu.Fragments.UsersFragment;
 import com.example.aluminiklu.Model.chat;
 import com.example.aluminiklu.Model.user;
@@ -130,7 +129,7 @@ Intent i=new Intent(getActivity(),Login.class);
                 }
 
                 viewPagerAdapter.addFragment(new UsersFragment(),"Users");
-                viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
+              //  viewPagerAdapter.addFragment(new ProfileFragment(),"Profile");
                 viewPager.setAdapter(viewPagerAdapter);
 
                 tabLayout.setupWithViewPager(viewPager);}catch (Exception e){

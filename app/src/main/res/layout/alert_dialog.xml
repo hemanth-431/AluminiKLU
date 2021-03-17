@@ -1,42 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
-    android:orientation="vertical">
+    android:gravity="center_horizontal">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="70dp"
-        android:layout_height="70dp"
-        android:src="@drawable/logo1"></de.hdodenhof.circleimageview.CircleImageView>
-    <TextView
-
-        android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#6A0DAD"
-        android:text="Important Note"></TextView>
-<TextView
-    android:layout_marginTop="16dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="This App is only for the Staff and the Alumini of Koneru Lakshmaiah University(KLU). When you create new account, for confirmation purpose your details are verified. For false registration you will be facing severe consequences and agree to take any action on you, Thanks."
-    ></TextView>
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="24dp"
+        android:background="@drawable/layback"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-<ImageView
-    android:layout_marginTop="30dp"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:id="@+id/accept"
-    android:elevation="4dp"
-    android:src="@drawable/accepy"></ImageView>
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/circleImageView"
+            android:layout_width="163dp"
+            android:layout_height="133dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/logo1">
+        </de.hdodenhof.circleimageview.CircleImageView>
 
-    <TextView
-        android:layout_marginTop="20dp"
-android:id="@+id/cancel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="CANCEL"></TextView>
-</LinearLayout>
+        <TextView
+
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="16dp"
+            android:text="Important Note"
+            android:textColor="#E91E63"
+            android:layout_marginTop="20dp"
+            android:textSize="18sp"
+            android:textStyle="bold">
+        </TextView>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="48dp"
+            android:text="This App is only for the Staff and the Alumini of Koneru Lakshmaiah University(KLU). When you create new account, for confirmation purpose your details are verified. For false registration you will be facing severe consequences and agree to take any action on you, Thanks."
+            android:textSize="16sp">
+        </TextView>
+
+        <!--        <ImageView-->
+        <!--            android:id="@+id/accept"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_gravity="center"-->
+        <!--            android:layout_marginStart="16dp"-->
+        <!--            android:layout_marginEnd="16dp"-->
+        <!--            android:layout_marginBottom="24dp"-->
+        <!--            android:elevation="4dp"-->
+        <!--            android:src="@drawable/accepy">-->
+        <!--        </ImageView>-->
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Accept"
+            android:id="@+id/accept"
+            android:background="@drawable/loginexbut"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
+            android:textColor="#253A4B"
+            android:textAllCaps="false"/>
+
+        <TextView
+            android:id="@+id/cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            android:text="Cancel"
+            android:textSize="16sp">
+        </TextView>
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
