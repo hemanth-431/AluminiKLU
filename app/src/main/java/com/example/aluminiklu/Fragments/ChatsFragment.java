@@ -108,6 +108,7 @@ updatetoken(FirebaseInstanceId.getInstance().getToken());
   private void readchats(){
             musers=new ArrayList<>();
             reference=FirebaseDatabase.getInstance().getReference("Users1");
+            reference.keepSynced(true);
             reference.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

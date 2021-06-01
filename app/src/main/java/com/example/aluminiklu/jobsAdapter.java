@@ -51,6 +51,7 @@ public class jobsAdapter extends RecyclerView.Adapter<jobsAdapter.ArtistViewHold
         holder.textViewName.setText(artist.name);
         holder.jobtype.setText("Job-type: "+artist.jobs);
         holder.textViewGenre.setText("Date: " + artist.date);
+        holder.salary.setText("Salary: "+artist.salary);
         holder.textViewAge.setText(artist.link);
         holder.textViewCountry.setText("Description: " + artist.des);
     }
@@ -137,13 +138,14 @@ public class jobsAdapter extends RecyclerView.Adapter<jobsAdapter.ArtistViewHold
 
     class ArtistViewHolder extends RecyclerView.ViewHolder {
 
-        TextView textViewName, textViewGenre, textViewAge, textViewCountry,jobtype;
+        TextView textViewName, textViewGenre, textViewAge, textViewCountry,jobtype,salary;
 
         public ArtistViewHolder(@NonNull View itemView) {
             super(itemView);
 jobtype=itemView.findViewById(R.id.jobsType);
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewGenre = itemView.findViewById(R.id.text_view_genre);
+            salary=itemView.findViewById(R.id.salary);
             textViewAge = itemView.findViewById(R.id.text_view_age);
             textViewAge.setOnClickListener(new View.OnClickListener() {
                 @Override

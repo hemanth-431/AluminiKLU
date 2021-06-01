@@ -158,7 +158,7 @@ if(savedInstanceState == null) {
         switch(menuItem.getItemId()){
             case R.id.home123:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new ImagesActivity()).commit();
-                setName("Alumini");
+                setName("Alumni");
                 break;
             case R.id.Addnew:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new home()).commit();
@@ -178,7 +178,7 @@ if(savedInstanceState == null) {
                 break;
             case R.id.vips:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new benefitygiven()).commit();
-                setName("Alumini benefits");
+                setName("Alumni benefits");
                 break;
             case R.id.jobs:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new jobsactivity()).commit();

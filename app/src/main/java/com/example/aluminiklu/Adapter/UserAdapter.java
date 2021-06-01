@@ -23,6 +23,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -59,7 +61,17 @@ holder.name.setText(user.getUsername());
             holder.ImageUrl.setImageResource(R.mipmap.ic_launcher);
 
         } else {
-            Picasso.with(mcontext).load(user.getImageUrl()).into(holder.ImageUrl);
+            Picasso.with(mcontext).load(user.getImageUrl()).networkPolicy(NetworkPolicy.OFFLINE).into(holder.ImageUrl, new Callback() {
+                @Override
+                public void onSuccess() {
+
+                }
+
+                @Override
+                public void onError() {
+                    Picasso.with(mcontext).load(user.getImageUrl()).into(holder.ImageUrl);
+                }
+            });
           //  holder.ImageUrl.setImageURI(Uri.parse(user.getImageUrl()));
         }
     }

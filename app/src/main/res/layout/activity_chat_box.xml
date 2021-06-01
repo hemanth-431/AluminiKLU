@@ -7,50 +7,50 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ChatBox"
     android:orientation="vertical">
-<com.google.android.material.appbar.AppBarLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark"
-        >
+        android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-android:layout_marginTop="10dp"
-            android:layout_width="50dp"
-            android:layout_centerHorizontal="true"
 
-            android:src="@mipmap/ic_launcher"
-            android:layout_height="50dp"></de.hdodenhof.circleimageview.CircleImageView>
-
-        <TextView
-            android:id="@+id/user"
-            android:layout_marginTop="25dp"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="UserName"
-            android:textColor="#fff"
-            android:layout_marginStart="25dp"></TextView>
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@color/colorPrimaryDark">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_marginTop="10dp"
+                android:layout_width="50dp"
+                android:layout_centerHorizontal="true"
+
+                android:src="@mipmap/ic_launcher"
+                android:layout_height="50dp"></de.hdodenhof.circleimageview.CircleImageView>
+
+            <TextView
+                android:id="@+id/user"
+                android:layout_marginTop="25dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="UserName"
+                android:textColor="#fff"
+                android:layout_marginStart="25dp"></TextView>
 
 
 
-    </androidx.appcompat.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-    <com.google.android.material.tabs.TabLayout
-        android:id="@+id/tab_layout"
-        android:background="@color/colorPrimaryDark"
-        app:tabSelectedTextColor="@color/white"
-        app:tabIndicatorColor="@color/white"
-        app:tabTextColor="@color/white"
-        android:layout_width="match_parent"
-        app:tabTextAppearance="@style/TabLayoutTextFont"
-        android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
-</com.google.android.material.appbar.AppBarLayout>
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab_layout"
+            android:background="@color/darkgray"
+            app:tabSelectedTextColor="@color/white"
+            app:tabIndicatorColor="@color/white"
+            app:tabTextColor="@color/white"
+            android:layout_width="match_parent"
+            app:tabTextAppearance="@style/TabLayoutTextFont"
+            android:layout_height="wrap_content"></com.google.android.material.tabs.TabLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
 
     <androidx.viewpager.widget.ViewPager

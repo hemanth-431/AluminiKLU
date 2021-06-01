@@ -26,6 +26,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Callback;
+import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -194,7 +196,17 @@ public int len=0;
                         String data1 = dataSnapshot.child("username").getValue().toString();
                         holder.textView.setText(data1);
                         String data2 = dataSnapshot.child("imageUrl").getValue().toString();
-                        Picasso.with(mContext).load(data2).into(holder.circleImageView);
+                        Picasso.with(mContext).load(data2).networkPolicy(NetworkPolicy.OFFLINE).into(holder.circleImageView, new Callback() {
+                            @Override
+                            public void onSuccess() {
+
+                            }
+
+                            @Override
+                            public void onError() {
+Picasso.with(mContext).load(data2).into(holder.circleImageView);
+                            }
+                        });
 
                     }
 
@@ -273,10 +285,28 @@ public int len=0;
 
         Picasso.with(mContext)
                 .load(uploadCurrent.getImageUrl())
+                .networkPolicy(NetworkPolicy.OFFLINE)
                 .placeholder(R.mipmap.ic_launcher)
                 .fit()
                 .centerCrop()
-                .into(holder.imageView);
+                .into(holder.imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+
+                    }
+
+                    @Override
+                    public void onError() {
+                        Picasso.with(mContext)
+                                .load(uploadCurrent.getImageUrl())
+                                .placeholder(R.mipmap.ic_launcher)
+                                .fit()
+                                .centerCrop()
+                                .into(holder.imageView);
+                    }
+                });
+
+
         islikes(uploadCurrent.getKey(),holder.like);
         nrLikes(holder.likes,uploadCurrent.getKey());
         getComments(uploadCurrent.getKey(),holder.comments);

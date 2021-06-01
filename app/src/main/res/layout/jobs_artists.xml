@@ -43,6 +43,13 @@
                 android:fontFamily="@font/roboto_medium"
                 android:text="Job-type: Developer"
                 android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
+            <TextView
+                android:id="@+id/salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Genre: Rock"
+                android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

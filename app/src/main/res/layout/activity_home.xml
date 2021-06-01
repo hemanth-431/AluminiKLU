@@ -1,52 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
+    android:orientation="vertical"
     tools:context=".home">
 
-  <ImageButton
-      android:id="@+id/button3"
+  <!--  <ImageButton-->
+  <!--      android:id="@+id/button3"-->
 
-      android:layout_width="40dp"
-      android:background="#f8fbf8"
-      android:layout_height="40dp"
-    android:src="@drawable/gallery1"></ImageButton>
-  
+  <!--      android:layout_width="40dp"-->
+  <!--      android:background="#f8fbf8"-->
+  <!--      android:layout_height="40dp"-->
+  <!--    android:src="@drawable/gallery1"></ImageButton>-->
+  <!--  -->
 
 
-  <FrameLayout
+  <!--  <FrameLayout-->
+  <!--      android:layout_width="match_parent"-->
+  <!--      android:layout_below="@+id/textinput_counter"-->
+  <!--      android:layout_above="@+id/progress_circle"-->
+  <!--      android:layout_alignParentTop="true"-->
+  <!--      android:layout_centerHorizontal="true"-->
+  <!--      android:layout_height="match_parent">-->
+
+  <!--    <ImageView-->
+  <!--        android:id="@+id/imageing"-->
+  <!--        android:layout_width="300dp"-->
+  <!--        android:layout_marginLeft="38dp"-->
+  <!--        android:layout_height="300dp"-->
+  <!--        android:layout_above="@id/progress_circle"-->
+
+  <!--        android:background="@drawable/klulogo"-->
+
+  <!--        android:layout_marginTop="160dp" />-->
+
+  <!--    <ImageView-->
+  <!--        android:id="@+id/image_view"-->
+
+  <!--        android:layout_width="match_parent"-->
+  <!--        android:layout_height="match_parent"-->
+  <!--        android:layout_above="@id/progress_circle"-->
+  <!--        android:layout_below="@id/button3"-->
+  <!--android:layout_marginBottom="10dp"-->
+
+  <!--        android:layout_marginTop="50dp" />-->
+  <!--  </FrameLayout>-->
+
+
+
+  <!--  <ImageView-->
+  <!--      android:id="@+id/button_upload"-->
+
+  <!--      android:layout_width="50dp"-->
+  <!--    android:src="@drawable/ic_upload"-->
+
+  <!--      android:layout_centerHorizontal="true"-->
+  <!--      android:layout_alignParentBottom="true"-->
+  <!--      android:layout_height="40dp"-->
+  <!--     ></ImageView>-->
+
+  <TextView
       android:layout_width="match_parent"
-      android:layout_below="@+id/textinput_counter"
-      android:layout_above="@+id/progress_circle"
-      android:layout_alignParentTop="true"
-      android:layout_centerHorizontal="true"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content"
+      android:text="Upload Image"
+      android:textSize="24sp"
+      android:layout_marginTop="20dp"
+      android:textAlignment="center"
+      android:textColor="@color/Black"/>
 
-    <ImageView
-        android:id="@+id/imageing"
-        android:layout_width="300dp"
-        android:layout_marginLeft="38dp"
-        android:layout_height="300dp"
-        android:layout_above="@id/progress_circle"
-
-        android:background="@drawable/klulogo"
-
-        android:layout_marginTop="160dp" />
-
-    <ImageView
-        android:id="@+id/image_view"
-
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/progress_circle"
-        android:layout_below="@id/button3"
-android:layout_marginBottom="10dp"
-
-        android:layout_marginTop="50dp" />
-  </FrameLayout>
+  <com.airbnb.lottie.LottieAnimationView
+      android:layout_width="match_parent"
+      android:layout_height="450dp"
+      android:id="@+id/image_view"
+      android:layout_marginTop="30dp"
+      app:lottie_rawRes="@raw/upload"
+      app:lottie_loop="true"
+      app:lottie_autoPlay="true"/>
 
 
   <ProgressBar
@@ -54,25 +86,37 @@ android:layout_marginBottom="10dp"
       style="@style/Widget.AppCompat.ProgressBar.Horizontal"
       android:layout_width="match_parent"
       android:indeterminate="true"
-
       android:progressTint="@color/colorAccent"
       android:secondaryProgressTint="@android:color/primary_text_dark"
       android:layout_height="wrap_content"
-      android:layout_above="@+id/button_upload"
-      android:layout_alignParentStart="true"
-      android:layout_marginBottom="15dp" />
+      android:layout_marginTop="20dp"/>
 
+  <LinearLayout
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="20dp">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Select"
+        android:id="@+id/button3"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_margin="20dp"
+        android:background="@drawable/loginexbut"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload"
+        android:id="@+id/button_upload"
+        android:textColor="@color/white"
+        android:textAllCaps="false"
+        android:layout_margin="20dp"
+        android:background="@drawable/loginexbut"/>
 
-  <ImageView
-      android:id="@+id/button_upload"
+  </LinearLayout>
 
-      android:layout_width="50dp"
-    android:src="@drawable/ic_upload"
-
-      android:layout_centerHorizontal="true"
-      android:layout_alignParentBottom="true"
-      android:layout_height="40dp"
-     ></ImageView>
-
-</RelativeLayout>
+</LinearLayout>

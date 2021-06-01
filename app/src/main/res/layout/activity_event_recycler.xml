@@ -9,9 +9,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
     <ImageView
         android:id="@+id/notfor"
         android:layout_width="wrap_content"
@@ -19,26 +19,29 @@
         android:visibility="gone"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@drawable/nofound"></ImageView>
+        android:src="@drawable/nofound">
+    </ImageView>
     <ProgressBar
         android:id="@+id/progress_circle1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
+
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
-        android:onClick="sendOnChannel1"
-        android:layout_marginLeft="320dp"
-        android:layout_marginTop="630dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginBottom="30dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:src="@drawable/ic_add_black"
         app:fabSize="normal"
-
+        android:onClick="sendOnChannel1"
         app:backgroundTint="@color/primary"
         android:layout_height="wrap_content"
         android:id="@+id/add_event"
         android:elevation="8dp">
 
     </com.google.android.material.floatingactionbutton.FloatingActionButton>
-
-
 </RelativeLayout>

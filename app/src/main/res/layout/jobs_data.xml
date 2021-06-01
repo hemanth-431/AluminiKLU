@@ -8,20 +8,19 @@
     android:background="@drawable/back12">
 
     <TextView
+        android:id="@+id/tv_login"
+        android:padding="30dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/tv_login"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="116dp"
-        android:text="Add Job"
-        android:textStyle="bold"
         android:fontFamily="@font/roboto_medium"
+        android:text="Add Job"
         android:textColor="#fff"
-        android:textSize="20dp"></TextView>
+        android:textSize="20dp"
+        android:textStyle="bold"></TextView>
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textinput_counter"
-        android:layout_marginTop="160dp"
+        android:layout_below="@+id/tv_login"
         android:layout_width="395dp"
         android:fontFamily="@font/roboto_medium"
         android:layout_height="wrap_content"
@@ -92,9 +91,53 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textinput_link"
+        android:id="@+id/salaryone"
         android:layout_marginTop="5dp"
         android:layout_below="@+id/jobtypeone"
+        android:layout_width="395dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginRight="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:boxCornerRadiusBottomEnd="15dp"
+        app:boxCornerRadiusTopStart="15dp"
+        app:boxCornerRadiusTopEnd="15dp"
+        app:boxStrokeColor="#fff"
+        android:textColorHint="#fff"
+        app:boxCornerRadiusBottomStart="15dp"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/salary"
+            android:maxLines="3"
+            android:layout_width="match_parent"
+            android:textColor="@color/white"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/button3"
+            android:hint="Salary"
+            android:fontFamily="@font/roboto"
+            android:layout_marginStart="16dp"
+            ></com.google.android.material.textfield.TextInputEditText>
+
+
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+
+
+
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textinput_link"
+        android:layout_marginTop="5dp"
+        android:layout_below="@+id/salaryone"
         android:layout_width="395dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="33dp"
@@ -155,6 +198,7 @@ android:layout_below="@+id/textinput_link"
             android:id="@+id/edit_description"
             android:maxLines="3"
             android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"
             android:fontFamily="@font/roboto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

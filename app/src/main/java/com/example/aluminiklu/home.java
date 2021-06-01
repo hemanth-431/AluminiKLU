@@ -8,8 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
-import android.widget.ImageButton;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -17,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -44,17 +44,17 @@ import static android.app.Activity.RESULT_OK;
 public class home extends Fragment {
     private static final int PICK_IMAGE_REQUEST = 1;
 
-    private ImageButton mButtonChooseImage;
+    private Button mButtonChooseImage;
 private ProgressBar progressBar;
-    private ImageView mButtonUpload;
+    private Button mButtonUpload;
     private TextView mTextViewShowUploads;
     private TextInputEditText mEditTextFileName;
-    private ImageView mImageView;
+    private LottieAnimationView mImageView;
     String sname;
 
     private FirebaseAuth mAuth;
     private Uri mImageUri;
-private ImageView imageView;
+//private ImageView imageView;
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef,nameDta;
 private TextView adddis;
@@ -76,7 +76,7 @@ private TextView adddis;
         mButtonUpload = view.findViewById(R.id.button_upload);
        // mTextViewShowUploads = view.findViewById(R.id.text_view_uploads);
 
-imageView=view.findViewById(R.id.imageing);
+//imageView=view.findViewById(R.id.imageing);
         mImageView = view.findViewById(R.id.image_view);
 
         mAuth = FirebaseAuth.getInstance();
@@ -111,7 +111,7 @@ imageView=view.findViewById(R.id.imageing);
             @Override
             public void onClick(View v) {
 //Toast.makeText(getActivity(),s,Toast.LENGTH_LONG).show();
-               imageView.setVisibility(View.GONE);
+            //   imageView.setVisibility(View.GONE);
                 openFileChooser();
             }
         });

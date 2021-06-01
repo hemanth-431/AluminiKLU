@@ -108,7 +108,9 @@ private DatabaseReference mDatabaseRef,abc;
             Artist selectedItem = artistList.get(position);
             final String selectedKey = selectedItem.getId();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("Events");
+        mDatabaseRef.keepSynced(true);
         abc = FirebaseDatabase.getInstance().getReference("Events").child(selectedKey).child("user");
+        abc.keepSynced(true);
         abc.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

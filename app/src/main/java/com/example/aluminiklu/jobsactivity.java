@@ -92,7 +92,7 @@ public class jobsactivity extends Fragment {
     List<String> listView=new ArrayList<>();
     private DatePickerDialog.OnDateSetListener onDateSetListener;
     DatabaseReference databaseReference,getDatabaseReference;
-    EditText name,link,description,jobtype;
+    EditText name,link,description,jobtype,salary;
 
     TextView setdate12;
     ImageView cal;
@@ -238,6 +238,7 @@ public class jobsactivity extends Fragment {
         View view = inflater.inflate(R.layout.jobs_data, null);
         name = view.findViewById(R.id.edit_text);
         jobtype=view.findViewById(R.id.jobtyp);
+        salary=view.findViewById(R.id.salary);
         // fstore=FirebaseDatabase.getInstance();
 //databaseReference=fstore.getReference("Jobs");
         ok = view.findViewById(R.id.ok);
@@ -296,7 +297,7 @@ public class jobsactivity extends Fragment {
                     Toast.makeText(getActivity(), "description must contain atleast 30 characters...", Toast.LENGTH_LONG).show();
                 } else if (url != null && (url.startsWith("http://") || url.startsWith("https://")))
                 {
-                    jobs helperclass = new jobs(name.getText().toString(),jobtype.getText().toString(), setdate12.getText().toString(), link.getText().toString(), user, des, path);
+                    jobs helperclass = new jobs(name.getText().toString(),jobtype.getText().toString(), setdate12.getText().toString(), link.getText().toString(), user, des, path,salary.getText().toString());
                     String s = name.getText().toString() + " " + setdate12.getText().toString() + " " + link.getText().toString();
 
 

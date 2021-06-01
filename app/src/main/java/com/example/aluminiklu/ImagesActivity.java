@@ -120,8 +120,7 @@ notfount=view.findViewById(R.id.notfo);
 
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
-
-
+        mDatabaseRef.keepSynced(true);
 
 
  /*  try {
