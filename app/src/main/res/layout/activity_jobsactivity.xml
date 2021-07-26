@@ -5,7 +5,7 @@
     android:background="@drawable/chat123"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".jobsactivity">
+    tools:context="my.alumni.klu.jobsactivity">
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
 

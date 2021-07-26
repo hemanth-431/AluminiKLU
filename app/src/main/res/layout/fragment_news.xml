@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ff6767"
-    tools:context=".NewsFragment">
+    tools:context="my.alumni.klu.NewsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:795673558516:android:02714a93f34afe912a4da1",
+        "mobilesdk_app_id": "1:795673558516:android:fb490775984c5ca82a4da1",
         "android_client_info": {
-          "package_name": "com.example.aluminiklu"
+          "package_name": "my.alumni.klu"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "795673558516-nokfkpsoqaqntfchjuolrio16eedd8mc.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.aluminiklu",
-            "certificate_hash": "a5f85f0b6238296b9e41eb3d862884ab32033aac"
-          }
-        },
         {
           "client_id": "795673558516-6sqe2eftjavtrk5ns0i774nbiv3ep5ri.apps.googleusercontent.com",
           "client_type": 3

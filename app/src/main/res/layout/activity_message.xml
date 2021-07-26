@@ -6,7 +6,7 @@
     android:id="@+id/v"
     android:background="@drawable/chat123"
     android:layout_height="match_parent"
-    tools:context=".MessageActivity">
+    tools:context="my.alumni.klu.MessageActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"

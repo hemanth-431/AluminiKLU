@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.aluminiklu">
+    package="my.alumni.klu">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -8,54 +8,54 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
-        android:name=".App"
+        android:name="my.alumni.klu.App"
         android:allowBackup="true"
-        android:icon="@drawable/logo"
+        android:icon="@drawable/logo1"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".addaluminiben"></activity>
-        <activity android:name=".benefitygiven" />
-        <activity android:name=".jobsactivity" />
-        <activity android:name=".registerexample" />
-        <activity android:name=".loginexample">
+        <activity android:name="my.alumni.klu.addaluminiben"></activity>
+        <activity android:name="my.alumni.klu.benefitygiven" />
+        <activity android:name="my.alumni.klu.jobsactivity" />
+        <activity android:name="my.alumni.klu.registerexample" />
+        <activity android:name="my.alumni.klu.loginexample">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".examplehead" />
+        <activity android:name="my.alumni.klu.examplehead" />
         <activity
-            android:name=".Side_drawer"
+            android:name="my.alumni.klu.Side_drawer"
             android:label="Alumni"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".eventRecycler" />
-        <activity android:name=".Notifications.changeData" />
-        <activity android:name=".Fragments.threeFragment" />
-        <activity android:name=".Fragments.twoFragment" />
-        <activity android:name=".Fragments.oneFragment" />
-        <activity android:name=".HomeScreen" />
-        <activity android:name=".AluminiKLU" />
-        <activity android:name=".Comments" />
-        <activity android:name=".personal_info" />
-        <activity android:name=".information" />
-        <activity android:name=".add_discription" />
-        <activity android:name=".MessageActivity" />
+        <activity android:name="my.alumni.klu.eventRecycler" />
+        <activity android:name="my.alumni.klu.Notifications.changeData" />
+        <activity android:name="my.alumni.klu.Fragments.threeFragment" />
+        <activity android:name="my.alumni.klu.Fragments.twoFragment" />
+        <activity android:name="my.alumni.klu.Fragments.oneFragment" />
+        <activity android:name="my.alumni.klu.HomeScreen" />
+        <activity android:name="my.alumni.klu.AluminiKLU" />
+        <activity android:name="my.alumni.klu.Comments" />
+        <activity android:name="my.alumni.klu.personal_info" />
+        <activity android:name="my.alumni.klu.information" />
+        <activity android:name="my.alumni.klu.add_discription" />
+        <activity android:name="my.alumni.klu.MessageActivity" />
         <activity
-            android:name=".ChatBox"
+            android:name="my.alumni.klu.ChatBox"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Forget_password" />
-        <activity android:name=".Login" />
+        <activity android:name="my.alumni.klu.Forget_password" />
+        <activity android:name="my.alumni.klu.Login" />
         <activity
-            android:name=".ImagesActivity"
+            android:name="my.alumni.klu.ImagesActivity"
             android:label="KLU ALUMINI" />
-        <activity android:name=".home" />
-        <activity android:name=".MainActivity" />
+        <activity android:name="my.alumni.klu.home" />
+        <activity android:name="my.alumni.klu.MainActivity" />
 
         <service
-            android:name=".Notifications.MyFirebaseService"
+            android:name="my.alumni.klu.Notifications.MyFirebaseService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -63,7 +63,7 @@
             </intent-filter>
         </service>
         <service
-            android:name=".Notifications.MyFirebaseMessaging"
+            android:name="my.alumni.klu.Notifications.MyFirebaseMessaging"
             android:enabled="true"
             android:exported="true">
             <intent-filter>

@@ -6,7 +6,13 @@
     app:layout_constraintCircleRadius="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/back12">
-
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <TextView
         android:id="@+id/tv_login"
         android:padding="30dp"
@@ -179,7 +185,7 @@
         android:layout_marginLeft="33dp"
         android:layout_marginRight="20dp"
 
-android:layout_below="@+id/textinput_link"
+        android:layout_below="@+id/textinput_link"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -275,4 +281,6 @@ android:layout_below="@+id/textinput_link"
             android:text="ok"></Button>
 
     </LinearLayout>
+    </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>

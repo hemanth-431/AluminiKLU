@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.UsersFragment"
+    tools:context="my.alumni.klu.Fragments.UsersFragment"
     android:background="#fff">
     <ProgressBar
         android:id="@+id/progress_circle"
@@ -21,17 +21,17 @@
     android:layout_height="wrap_content">
 <LinearLayout
 
-    android:layout_gravity="center"
+    android:layout_gravity="center_horizontal"
     android:orientation="vertical"
     android:layout_marginRight="10dp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
     <TextView
-        android:layout_marginLeft="20dp"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_medium"
-
+          android:layout_gravity="center_horizontal"
         android:text="Name"
         android:textSize="15dp"></TextView>
     <EditText
@@ -48,12 +48,14 @@ android:background="#fff"
         android:id="@+id/search_users"></EditText>
 </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
         <TextView
 android:layout_marginLeft="25dp"
+            android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_medium"
@@ -72,6 +74,7 @@ android:layout_marginLeft="25dp"
     </Spinner>
     </LinearLayout>
     <LinearLayout
+        android:visibility="gone"
         android:layout_gravity="center"
         android:orientation="vertical"
         android:layout_width="wrap_content"

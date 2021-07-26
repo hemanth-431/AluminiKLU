@@ -9,7 +9,7 @@ android:fitsSystemWindows="true"
 tools:openDrawer="start"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Side_drawer">
+    tools:context="my.alumni.klu.Side_drawer">
 
   <LinearLayout
       android:layout_width="match_parent"

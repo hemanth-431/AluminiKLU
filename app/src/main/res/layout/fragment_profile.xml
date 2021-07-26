@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="8dp"
-    tools:context=".Fragments.ProfileFragment">
+    tools:context="my.alumni.klu.Fragments.ProfileFragment">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -47,6 +47,12 @@
         </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -269,4 +275,6 @@ android:fontFamily="@font/roboto"
 
 
 </LinearLayout>
+
+    </ScrollView>
 </RelativeLayout>

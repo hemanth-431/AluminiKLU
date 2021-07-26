@@ -8,7 +8,7 @@
     android:padding="10dp"
     android:background="@drawable/klu1234"
     android:layout_height="160dp"
-    tools:context=".examplehead">
+    tools:context="my.alumni.klu.examplehead">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_marginTop="20dp"

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Notifications.changeData"
+    tools:context="my.alumni.klu.Notifications.changeData"
     android:background="#253A4B">
 
     <TextView

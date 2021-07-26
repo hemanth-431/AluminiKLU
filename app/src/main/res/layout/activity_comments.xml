@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:background="@drawable/chat123"
     android:layout_height="match_parent"
-    tools:context=".Comments">
+    tools:context="my.alumni.klu.Comments">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"

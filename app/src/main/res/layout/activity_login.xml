@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/group8"
 
-    tools:context=".Login">
+    tools:context="my.alumni.klu.Login">
 
     <LinearLayout
         android:layout_width="match_parent"

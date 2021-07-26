@@ -52,13 +52,13 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="450dp"
+                android:layout_height="415dp"
                 android:src="#000"
                 android:id="@+id/image_view_up"/>
 
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="wrap_content"
                 android:id="@+id/paragraph1"
                 android:layout_margin="5dp"/>
 
